@@ -7,7 +7,7 @@ class NotificationHandler {
         let content = UNMutableNotificationContent()
         content.title = "newGifTitle".localized
         content.subtitle = "newGifSubtitle".localized
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         content.categoryIdentifier = LocalNotification.Category.newGif
         content.userInfo = ["gifUrl": gifUrl.absoluteString]
         

@@ -1,7 +1,7 @@
 import AppKit
 
 class WindowListViewController: NSViewController {
-    static let videoPlayerSegue = NSStoryboard.SegueIdentifier("showVideoPlayer")
+    static let videoPlayerSegue = "showVideoPlayer"
 
     @IBOutlet private weak var collectionView: NSCollectionView!
     @IBOutlet private weak var recordingButton: RecordingButton!
@@ -23,7 +23,7 @@ class WindowListViewController: NSViewController {
     }
 
     private func setupCollectionView() {
-        collectionView.register(NSNib(nibNamed: NSNib.Name(rawValue: "CollectionViewItem"), bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem"))
+        collectionView.register(NSNib(nibNamed: "CollectionViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem"))
         collectionView.collectionViewLayout = CollectionViewLayoutFactory.createGridLayout()
         collectionView.delegate = self
         refresh()

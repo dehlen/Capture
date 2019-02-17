@@ -78,7 +78,7 @@ class VideoPlayerViewController: NSViewController {
 
         let startTime = playerItem.reversePlaybackEndTime
         let endTime = playerItem.forwardPlaybackEndTime
-        let timeRange = CMTimeRangeFromTimeToTime(startTime, endTime)
+        let timeRange = CMTimeRangeFromTimeToTime(start: startTime, end: endTime)
         exportSession.timeRange = timeRange
 
         exportSession.exportAsynchronously {

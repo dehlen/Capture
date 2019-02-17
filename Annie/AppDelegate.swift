@@ -2,12 +2,10 @@ import Cocoa
 import UserNotifications
 import AVFoundation
 
-#warning("show crop on screen during recording")
-#warning("app icon")
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var preferencesWindowController: NSWindowController? = {
-        let storyboard = NSStoryboard(name: NSStoryboard.Name("Preferences"), bundle: nil)
+        let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
         return storyboard.instantiateInitialController() as? NSWindowController
     }()
     

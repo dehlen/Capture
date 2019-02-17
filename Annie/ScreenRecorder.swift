@@ -25,14 +25,16 @@ public class Recorder: NSObject {
         self.destination = destination
         session = AVCaptureSession()
 
-        let input = AVCaptureScreenInput.init(displayID: displayId)
+        guard let input = AVCaptureScreenInput.init(displayID: displayId) else {
+            throw RecorderError.invalidDisplay
+        }
 
         if let cropRect = cropRect {
             input.cropRect = cropRect
         }
 
         output = AVCaptureMovieFileOutput()
-        output.movieFragmentInterval = kCMTimeInvalid
+        output.movieFragmentInterval = CMTime.invalid
 
         if let audioDevice = audioDevice {
             if !audioDevice.hasMediaType(AVMediaType.audio) {

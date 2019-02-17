@@ -153,7 +153,10 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bND-Lh-4Bp">
-                                <rect key="frame" x="114" y="219" width="77" height="25"/>
+                                <rect key="frame" x="114" y="219" width="93" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" placeholder="YES" id="WlN-Sx-ySc"/>
+                                </constraints>
                                 <popUpButtonCell key="cell" type="push" title="480p" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="yPz-Dq-LgN" id="1hy-SA-S82">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
