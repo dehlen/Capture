@@ -111,6 +111,129 @@
 			path = "third-party";
 			sourceTree = "<group>";
 		};
+		0BC83202221A07E600FD8CF4 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				0BC83204221A080200FD8CF4 /* View */,
+				0BC83203221A07FB00FD8CF4 /* Model */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		0BC83203221A07FB00FD8CF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B3276CB2219DAA30028F007 /* Preferences.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0BC83204221A080200FD8CF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B4309AC22198FAA00766DB0 /* Preferences.storyboard */,
+				0B4309AE22198FAA00766DB0 /* PreferencesViewController.swift */,
+				0B3276CF2219E6810028F007 /* AdvancedPreferencesViewController.swift */,
+				0B4309AD22198FAA00766DB0 /* PreferencesWindowController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0BC83205221A080B00FD8CF4 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				0B64CD9E2218E20F004F6321 /* LocalNotification.swift */,
+				0B64CD9D2218E20F004F6321 /* NotificationHandler.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		0BC83206221A082F00FD8CF4 /* WindowList */ = {
+			isa = PBXGroup;
+			children = (
+				0BC83207221A083F00FD8CF4 /* Model */,
+				0BC83208221A084600FD8CF4 /* View */,
+			);
+			path = WindowList;
+			sourceTree = "<group>";
+		};
+		0BC83207221A083F00FD8CF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B64CD8A2218D215004F6321 /* WindowInfoManager.swift */,
+				0B64CD8C2218D2B5004F6321 /* WindowInfo.swift */,
+				0B64CD842218BE38004F6321 /* CollectionViewDataSource.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0BC83208221A084600FD8CF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6BE514B22126A4E60068337E /* CollectionViewItem.swift */,
+				6BE514B32126A4E60068337E /* CollectionViewItem.xib */,
+				0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */,
+				0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */,
+				0B64CD822218BD51004F6321 /* WindowListViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0BC83209221A085200FD8CF4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0B4309A8221926C500766DB0 /* BundleExtension.swift */,
+				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
+				0B64CD9B2218DE1B004F6321 /* Result.swift */,
+				0B64CD942218DA7D004F6321 /* StringExtension.swift */,
+				0B3276D62219F1590028F007 /* Sugar.swift */,
+				0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */,
+				0B64CD902218D9E1004F6321 /* World.swift */,
+				0BC8320B221A087700FD8CF4 /* Error */,
+				0BC8320A221A086E00FD8CF4 /* ValueTransformer */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0BC8320A221A086E00FD8CF4 /* ValueTransformer */ = {
+			isa = PBXGroup;
+			children = (
+				0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */,
+				0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */,
+				0B3276DA2219F7360028F007 /* ValueTransformerFactory.swift */,
+			);
+			path = ValueTransformer;
+			sourceTree = "<group>";
+		};
+		0BC8320B221A087700FD8CF4 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				0BD239EA2219A43B003AF068 /* UserInterfaceError.swift */,
+				0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */,
+				0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		0BC8320C221A08CE00FD8CF4 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B64CD882218C936004F6321 /* RecordingButton.swift */,
+				0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		0BC8320D221A08EB00FD8CF4 /* VideoHandling */ = {
+			isa = PBXGroup;
+			children = (
+				0B64CD962218DD5A004F6321 /* ConvertGif.swift */,
+				0B64CD8E2218D4B3004F6321 /* ScreenRecorder.swift */,
+				0B4309A6221916C500766DB0 /* VideoPlayerViewController.swift */,
+			);
+			path = VideoHandling;
+			sourceTree = "<group>";
+		};
 		0BD239E722199E09003AF068 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,46 +262,19 @@
 		6BE514A32126A2410068337E /* Annie */ = {
 			isa = PBXGroup;
 			children = (
-				0B3276D12219E94C0028F007 /* Annie.entitlements */,
-				6BE514A42126A2410068337E /* AppDelegate.swift */,
-				0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */,
-				0B3276D62219F1590028F007 /* Sugar.swift */,
-				0B64CD8A2218D215004F6321 /* WindowInfoManager.swift */,
-				0B64CD8C2218D2B5004F6321 /* WindowInfo.swift */,
-				6BE514B22126A4E60068337E /* CollectionViewItem.swift */,
-				6BE514B32126A4E60068337E /* CollectionViewItem.xib */,
-				0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */,
-				0B64CD9E2218E20F004F6321 /* LocalNotification.swift */,
-				0B64CD9D2218E20F004F6321 /* NotificationHandler.swift */,
-				0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */,
-				0BD239EA2219A43B003AF068 /* UserInterfaceError.swift */,
-				0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */,
-				0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */,
-				0B64CD822218BD51004F6321 /* WindowListViewModel.swift */,
-				0B64CD842218BE38004F6321 /* CollectionViewDataSource.swift */,
-				0B4309A6221916C500766DB0 /* VideoPlayerViewController.swift */,
 				0B64CD7C2218BA98004F6321 /* Main.storyboard */,
-				0B64CD882218C936004F6321 /* RecordingButton.swift */,
-				0B64CD8E2218D4B3004F6321 /* ScreenRecorder.swift */,
-				0B64CD902218D9E1004F6321 /* World.swift */,
-				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
-				0B64CD942218DA7D004F6321 /* StringExtension.swift */,
-				0B64CD9B2218DE1B004F6321 /* Result.swift */,
-				0B4309A8221926C500766DB0 /* BundleExtension.swift */,
-				0B64CD962218DD5A004F6321 /* ConvertGif.swift */,
-				0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */,
-				0B4309AC22198FAA00766DB0 /* Preferences.storyboard */,
-				0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */,
-				0B3276DA2219F7360028F007 /* ValueTransformerFactory.swift */,
-				0B4309AE22198FAA00766DB0 /* PreferencesViewController.swift */,
-				0B3276CF2219E6810028F007 /* AdvancedPreferencesViewController.swift */,
-				0B4309AD22198FAA00766DB0 /* PreferencesWindowController.swift */,
-				0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */,
-				0B3276CB2219DAA30028F007 /* Preferences.swift */,
-				0B64CDA52218E42C004F6321 /* Localizable.strings */,
+				6BE514A42126A2410068337E /* AppDelegate.swift */,
+				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
+				0BC83205221A080B00FD8CF4 /* Notifications */,
+				0BC83202221A07E600FD8CF4 /* Preferences */,
 				0B64CD9A2218DD69004F6321 /* third-party */,
-				6BE514A62126A2430068337E /* Assets.xcassets */,
+				0BC83209221A085200FD8CF4 /* Utilities */,
+				0BC8320D221A08EB00FD8CF4 /* VideoHandling */,
+				0BC83206221A082F00FD8CF4 /* WindowList */,
+				0B3276D12219E94C0028F007 /* Annie.entitlements */,
 				6BE514AB2126A2440068337E /* Info.plist */,
+				6BE514A62126A2430068337E /* Assets.xcassets */,
+				0B64CDA52218E42C004F6321 /* Localizable.strings */,
 			);
 			path = Annie;
 			sourceTree = "<group>";
