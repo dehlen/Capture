@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  SimPR
+
+  Created by Ehlen, David on 15.02.19.
+  Copyright © 2019 David Ehlen. All rights reserved.
+*/
+"newGifTitle" = "GIF successfully created";
+"newGifSubtitle" = "The recording was saved as an GIF on your desktop.";
+"Open" = "Open";
+"selectWindowError" = "Please select a window before starting a screen recording. Simply select a window by left-clicking on it.";

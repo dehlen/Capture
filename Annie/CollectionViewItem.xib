@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CollectionViewItem" customModule="AllWindows" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="202"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5M-d4-Zsr">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="202"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oQd-dH-lG8">
+                            <rect key="frame" x="0.0" y="37" width="240" height="155"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="eFP-hK-9be"/>
+                        </imageView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bxv-Gm-Yvi">
+                            <rect key="frame" x="116" y="10" width="8" height="17"/>
+                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" id="8oc-B4-IKa">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <edgeInsets key="edgeInsets" left="10" right="10" top="10" bottom="10"/>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="K5M-d4-Zsr" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="0JQ-VB-zhC"/>
+                <constraint firstItem="K5M-d4-Zsr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Edl-RG-E1J"/>
+                <constraint firstAttribute="bottom" secondItem="K5M-d4-Zsr" secondAttribute="bottom" id="JYL-gX-ucc"/>
+                <constraint firstAttribute="trailing" secondItem="K5M-d4-Zsr" secondAttribute="trailing" id="d35-eA-H5P"/>
+            </constraints>
+            <point key="canvasLocation" x="20" y="122"/>
+        </customView>
+        <collectionViewItem id="gQD-Xw-fl6" customClass="CollectionViewItem" customModule="AllWindows" customModuleProvider="target">
+            <connections>
+                <outlet property="iconImageView" destination="oQd-dH-lG8" id="pFl-2S-ccV"/>
+                <outlet property="titleLabel" destination="Bxv-Gm-Yvi" id="klb-0D-XP6"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="38v-3U-lAS"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+</document>

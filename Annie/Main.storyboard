@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rh4-9D-6WT">
+    <dependencies>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="iQW-7y-rJs">
+            <objects>
+                <windowController id="rh4-9D-6WT" sceneMemberID="viewController">
+                    <window key="window" title="Annie" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="rag-Ei-UYb">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="245" y="301" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="rh4-9D-6WT" id="shW-R6-qZf"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="uaI-qh-UhH" kind="relationship" relationship="window.shadowedContentViewController" id="pse-aJ-EtB"/>
+                    </connections>
+                </windowController>
+                <customObject id="Dbl-Ud-I7m" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="151"/>
+        </scene>
+        <!--Window List View Controller-->
+        <scene sceneID="n8E-Bl-pDs">
+            <objects>
+                <viewController id="uaI-qh-UhH" customClass="WindowListViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="R5p-jo-UKs">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzB-mQ-fYD">
+                                <rect key="frame" x="0.0" y="44" width="450" height="256"/>
+                                <clipView key="contentView" id="czh-MK-3W5">
+                                    <rect key="frame" x="1" y="1" width="448" height="254"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView selectable="YES" id="II8-pA-cSp">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="158"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <collectionViewGridLayout key="collectionViewLayout" id="8nu-T2-IeG">
+                                                <size key="minimumItemSize" width="120" height="90"/>
+                                                <size key="maximumItemSize" width="240" height="0.0"/>
+                                            </collectionViewGridLayout>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="xEl-gG-b3u">
+                                    <rect key="frame" x="1" y="239" width="448" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="7Rn-dN-foW">
+                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="SE2-gW-bkq">
+                                <rect key="frame" x="404" y="8" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="OPS-CZ-Ncs"/>
+                                    <constraint firstAttribute="width" constant="26" id="s1R-NY-NlI"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="7PI-aB-Lwo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="refreshWindowList:" target="uaI-qh-UhH" id="D60-iq-jKW"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HSQ-T7-A50" customClass="RecordingButton" customModule="Annie" customModuleProvider="target">
+                                <rect key="frame" x="211" y="8" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HSQ-T7-A50" secondAttribute="height" multiplier="1:1" id="CZ6-kL-217"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="tlz-LC-MVh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="toggleRecording:" target="uaI-qh-UhH" id="xUX-Ns-cbt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SE2-gW-bkq" secondAttribute="trailing" constant="20" id="5lg-rM-Zx3"/>
+                            <constraint firstItem="HSQ-T7-A50" firstAttribute="top" secondItem="zzB-mQ-fYD" secondAttribute="bottom" constant="8" id="LbL-aY-AH9"/>
+                            <constraint firstAttribute="bottom" secondItem="zzB-mQ-fYD" secondAttribute="bottom" constant="44" id="MTJ-a2-0R5"/>
+                            <constraint firstAttribute="bottom" secondItem="SE2-gW-bkq" secondAttribute="bottom" constant="8" id="Ykl-Qw-iIO"/>
+                            <constraint firstItem="zzB-mQ-fYD" firstAttribute="leading" secondItem="R5p-jo-UKs" secondAttribute="leading" id="bK8-4a-1C9"/>
+                            <constraint firstAttribute="bottom" secondItem="HSQ-T7-A50" secondAttribute="bottom" constant="8" id="hW6-qc-oJf"/>
+                            <constraint firstItem="zzB-mQ-fYD" firstAttribute="top" secondItem="R5p-jo-UKs" secondAttribute="top" id="kqg-CO-qJj"/>
+                            <constraint firstAttribute="trailing" secondItem="zzB-mQ-fYD" secondAttribute="trailing" id="vJf-Wi-TJH"/>
+                            <constraint firstItem="HSQ-T7-A50" firstAttribute="centerX" secondItem="R5p-jo-UKs" secondAttribute="centerX" id="zvo-eJ-Nzt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="II8-pA-cSp" id="EW0-rL-dVg"/>
+                        <outlet property="recordingButton" destination="HSQ-T7-A50" id="Z9o-9d-wYq"/>
+                        <segue destination="Raw-un-GZ5" kind="sheet" identifier="showVideoPlayer" id="QPr-lg-Pnd"/>
+                    </connections>
+                </viewController>
+                <customObject id="IA5-T1-rcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="588"/>
+        </scene>
+        <!--Video Player View Controller-->
+        <scene sceneID="LWX-B3-LhJ">
+            <objects>
+                <viewController id="Raw-un-GZ5" customClass="VideoPlayerViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="yaj-3C-oUP">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4U6-sz-664">
+                                <rect key="frame" x="308" y="13" width="128" height="32"/>
+                                <buttonCell key="cell" type="push" title="Convert to GIF" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lfy-ru-Bk1">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="convertToGif:" target="Raw-un-GZ5" id="eoT-rA-dGt"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GdR-vN-xeG">
+                                <rect key="frame" x="228" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EgI-mT-M8H">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="Raw-un-GZ5" id="T35-Y3-4QN"/>
+                                </connections>
+                            </button>
+                            <avPlayerView showsFrameSteppingButtons="YES" showsFullScreenToggleButton="YES" showsSharingServiceButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Fj-RHV">
+                                <rect key="frame" x="0.0" y="61" width="450" height="239"/>
+                            </avPlayerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="GdR-vN-xeG" firstAttribute="centerY" secondItem="4U6-sz-664" secondAttribute="centerY" id="8Jq-sz-Fqp"/>
+                            <constraint firstAttribute="bottom" secondItem="4U6-sz-664" secondAttribute="bottom" constant="20" id="EHb-t2-Puo"/>
+                            <constraint firstItem="4U6-sz-664" firstAttribute="top" secondItem="OHV-Fj-RHV" secondAttribute="bottom" constant="20" id="QGD-td-kZA"/>
+                            <constraint firstItem="OHV-Fj-RHV" firstAttribute="top" secondItem="yaj-3C-oUP" secondAttribute="top" id="Qvf-v7-EWE"/>
+                            <constraint firstAttribute="trailing" secondItem="4U6-sz-664" secondAttribute="trailing" constant="20" id="SdF-XB-F2v"/>
+                            <constraint firstItem="OHV-Fj-RHV" firstAttribute="leading" secondItem="yaj-3C-oUP" secondAttribute="leading" id="W0M-ZZ-25w"/>
+                            <constraint firstAttribute="trailing" secondItem="OHV-Fj-RHV" secondAttribute="trailing" id="rOI-1j-3EI"/>
+                            <constraint firstItem="4U6-sz-664" firstAttribute="leading" secondItem="GdR-vN-xeG" secondAttribute="trailing" constant="10" id="vKh-Sh-EfK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playerView" destination="OHV-Fj-RHV" id="W6l-I9-ZQZ"/>
+                    </connections>
+                </viewController>
+                <customObject id="gFj-7p-2R0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="399" y="588"/>
+        </scene>
+        <!--Application-->
+        <scene sceneID="LVC-wt-En8">
+            <objects>
+                <application id="iH8-aY-bXd" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="C4c-dg-tAJ">
+                        <items>
+                            <menuItem title="Annie" id="4Jb-Uh-BN2">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Annie" systemMenu="apple" id="0Eq-Zz-TOr">
+                                    <items>
+                                        <menuItem title="About Annie" id="psl-us-pmZ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="ItY-BJ-7uN" id="Gqh-xU-ehK"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="o35-Bz-ZzH"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="Www-Cw-COa">
+                                            <connections>
+                                                <action selector="showPreferences:" target="JCF-qm-ehu" id="XJE-pd-MRi"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="lYe-C4-SZp"/>
+                                        <menuItem title="Services" id="7OG-8R-IX1">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Services" systemMenu="services" id="rtt-LS-iHm"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="znk-z6-0qD"/>
+                                        <menuItem title="Hide Annie" keyEquivalent="h" id="hmO-yS-Sxu">
+                                            <connections>
+                                                <action selector="hide:" target="ItY-BJ-7uN" id="Dfa-jH-be2"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Others" keyEquivalent="h" id="S0q-XA-DxF">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="hideOtherApplications:" target="ItY-BJ-7uN" id="fS9-UH-UdI"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show All" id="nXN-fc-dOJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="unhideAllApplications:" target="ItY-BJ-7uN" id="N9k-Vh-FWU"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Lun-vk-Zbm"/>
+                                        <menuItem title="Quit Annie" keyEquivalent="q" id="76e-uy-okh">
+                                            <connections>
+                                                <action selector="terminate:" target="ItY-BJ-7uN" id="VL6-5j-3JW"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="File" id="6mj-H3-QK2">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="File" id="ASk-7q-Iqz">
+                                    <items>
+                                        <menuItem title="New" keyEquivalent="n" id="H0R-rE-gmQ"/>
+                                        <menuItem isSeparatorItem="YES" id="b8h-hW-Hb9"/>
+                                        <menuItem title="Close" keyEquivalent="w" id="dOI-Th-Lu5">
+                                            <connections>
+                                                <action selector="performClose:" target="ItY-BJ-7uN" id="gIQ-5A-asj"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="View" id="Ecs-Tn-BFz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="2rV-2p-jSR">
+                                    <items>
+                                        <menuItem title="Show Toolbar" keyEquivalent="t" id="xZY-Kl-gGx">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleToolbarShown:" target="ItY-BJ-7uN" id="MVE-wb-H8J"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Customize Toolbar…" id="wad-hK-XGR">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="runToolbarCustomizationPalette:" target="ItY-BJ-7uN" id="jBV-24-jYZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Xkf-3p-5A2"/>
+                                        <menuItem title="Show Sidebar" keyEquivalent="s" id="E1c-ym-GJp">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleSidebar:" target="ItY-BJ-7uN" id="Tiy-FG-FgE"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="QqN-1Y-IJW">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleFullScreen:" target="ItY-BJ-7uN" id="unL-Iu-O2J"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Window" id="uVf-Xn-vf7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="7Hp-MN-n8i">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="yxl-jd-GWj">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="ItY-BJ-7uN" id="CDT-0W-JfJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="7Y6-0n-gil">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="ItY-BJ-7uN" id="mpB-Qd-omr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="q8G-lm-az3"/>
+                                        <menuItem title="Bring All to Front" id="RXn-F3-hnH">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="ItY-BJ-7uN" id="dOK-zJ-NJo"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Help" id="d0h-JI-rfx">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Help" systemMenu="help" id="PX6-rc-wCS">
+                                    <items>
+                                        <menuItem title="Annie Help" keyEquivalent="?" id="GJo-j4-FqK">
+                                            <connections>
+                                                <action selector="showHelp:" target="ItY-BJ-7uN" id="ILe-RU-PsQ"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="JCF-qm-ehu" id="CP0-JD-iQ0"/>
+                    </connections>
+                </application>
+                <customObject id="ItY-BJ-7uN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="JCF-qm-ehu" customClass="AppDelegate" customModule="Annie" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-115" y="-132"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+    </resources>
+</document>
