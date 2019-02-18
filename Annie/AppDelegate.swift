@@ -25,7 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
             .gifFrameRate: 20,
             .gifHeight: 720,
-            .bitBucketApiEndpoint: bitbucketBaseURL
+            .bitBucketApiEndpoint: bitbucketBaseURL,
+            .showMouseCursor: true,
+            .showMouseClicks: true
         ])
     }
 

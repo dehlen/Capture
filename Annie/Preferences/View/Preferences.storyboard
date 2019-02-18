@@ -62,11 +62,11 @@
             <objects>
                 <viewController title="General" id="CbG-uA-UXG" customClass="PreferencesViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4Ei-kU-JuY">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="81"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="225"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <pathControl focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xix-mN-5C6" customClass="PopUpButtonLikePathControl" customModule="Annie" customModuleProvider="target">
-                                <rect key="frame" x="118" y="40" width="136" height="25"/>
+                                <rect key="frame" x="118" y="184" width="136" height="25"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" focusRingType="none" alignment="left" pathStyle="popUp" id="fAZ-H5-ScI">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Applications/"/>
@@ -83,7 +83,7 @@
                                 </connections>
                             </pathControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="btq-nd-DrW">
-                                <rect key="frame" x="18" y="20" width="601" height="14"/>
+                                <rect key="frame" x="18" y="164" width="601" height="14"/>
                                 <textFieldCell key="cell" selectable="YES" title="Choose the directory the generated GIFs should be exported to. By default the GIF will be moved to your desktop." id="ePr-4A-nsB">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -91,29 +91,75 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-1b-v6d">
-                                <rect key="frame" x="18" y="44" width="95" height="17"/>
+                                <rect key="frame" x="18" y="188" width="95" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Export GIFs to:" id="312-bw-BIU">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZIb-RS-dNM">
+                                <rect key="frame" x="18" y="92" width="414" height="28"/>
+                                <textFieldCell key="cell" selectable="YES" title="When selected the mouse cursor will be visible in the exported GIF. Else the mouse cursor will be hidden." id="zse-5O-SAA">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zLP-bJ-Kcs">
+                                <rect key="frame" x="18" y="128" width="144" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show Mouse Cursor" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qd6-fW-y9h">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="TAK-31-KNl" name="value" keyPath="values.ShowMouseCursor" id="X6H-zN-xKw"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eyF-fs-hWw">
+                                <rect key="frame" x="18" y="20" width="414" height="28"/>
+                                <textFieldCell key="cell" selectable="YES" title="When selected the mouse clicks made during the video will be visible in the exported GIF. Else the clicks will be hidden." id="S6R-AW-B81">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d5D-8b-Xin">
+                                <rect key="frame" x="18" y="56" width="140" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show Mouse Clicks" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NLb-mj-jDp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="TAK-31-KNl" name="value" keyPath="values.ShowMouseClicks" id="oDM-cA-tkG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="xix-mN-5C6" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="trailing" constant="10" id="3UI-KT-DWK"/>
+                            <constraint firstItem="ZIb-RS-dNM" firstAttribute="leading" secondItem="zLP-bJ-Kcs" secondAttribute="leading" id="3s4-GX-kOo"/>
+                            <constraint firstAttribute="trailing" secondItem="eyF-fs-hWw" secondAttribute="trailing" constant="20" id="5w5-2e-VRN"/>
                             <constraint firstItem="btq-nd-DrW" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="leading" id="8Cv-GA-lj2"/>
+                            <constraint firstItem="eyF-fs-hWw" firstAttribute="leading" secondItem="d5D-8b-Xin" secondAttribute="leading" id="Ard-4W-Hi6"/>
                             <constraint firstItem="IDG-1b-v6d" firstAttribute="top" secondItem="4Ei-kU-JuY" secondAttribute="top" constant="20" id="Exg-sT-rCA"/>
+                            <constraint firstItem="d5D-8b-Xin" firstAttribute="top" secondItem="ZIb-RS-dNM" secondAttribute="bottom" constant="20" id="Knf-jl-g2P"/>
+                            <constraint firstItem="zLP-bJ-Kcs" firstAttribute="top" secondItem="btq-nd-DrW" secondAttribute="bottom" constant="20" id="LC1-vC-FBv"/>
+                            <constraint firstItem="d5D-8b-Xin" firstAttribute="leading" secondItem="zLP-bJ-Kcs" secondAttribute="leading" id="Opd-oq-cdE"/>
                             <constraint firstItem="xix-mN-5C6" firstAttribute="bottom" secondItem="IDG-1b-v6d" secondAttribute="bottom" id="TWm-Uv-LMv"/>
+                            <constraint firstAttribute="trailing" secondItem="ZIb-RS-dNM" secondAttribute="trailing" constant="20" id="YAL-0v-LJp"/>
                             <constraint firstItem="IDG-1b-v6d" firstAttribute="leading" secondItem="4Ei-kU-JuY" secondAttribute="leading" constant="20" id="YCS-ir-ksJ"/>
-                            <constraint firstAttribute="bottom" secondItem="btq-nd-DrW" secondAttribute="bottom" constant="20" id="cM9-eu-284"/>
+                            <constraint firstItem="zLP-bJ-Kcs" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="leading" id="bdc-eV-dQd"/>
+                            <constraint firstItem="eyF-fs-hWw" firstAttribute="top" secondItem="d5D-8b-Xin" secondAttribute="bottom" constant="10" id="oQ3-Nm-agH"/>
+                            <constraint firstAttribute="bottom" secondItem="eyF-fs-hWw" secondAttribute="bottom" constant="20" id="pY6-ke-6Lm"/>
                             <constraint firstItem="btq-nd-DrW" firstAttribute="top" secondItem="IDG-1b-v6d" secondAttribute="bottom" constant="10" id="tkw-xm-Os6"/>
+                            <constraint firstItem="ZIb-RS-dNM" firstAttribute="top" secondItem="zLP-bJ-Kcs" secondAttribute="bottom" constant="10" id="tuJ-O1-jrF"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="FvE-cN-eWk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="TAK-31-KNl"/>
             </objects>
-            <point key="canvasLocation" x="551" y="209.5"/>
+            <point key="canvasLocation" x="551" y="243"/>
         </scene>
         <!--Advanced-->
         <scene sceneID="qGp-4b-l0U">
