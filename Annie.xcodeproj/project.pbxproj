@@ -16,6 +16,7 @@
 		0B202B30221B615100435657 /* MarkdownWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B2F221B615100435657 /* MarkdownWriter.swift */; };
 		0B202B32221B640500435657 /* NoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B31221B640500435657 /* NoResponse.swift */; };
 		0B202B34221B645800435657 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B33221B645800435657 /* NetworkError.swift */; };
+		0B202B36221B70E100435657 /* JSONPostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B35221B70E100435657 /* JSONPostRouter.swift */; };
 		0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */; };
 		0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CB2219DAA30028F007 /* Preferences.swift */; };
 		0B3276CE2219E47A0028F007 /* NumberValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */; };
@@ -79,6 +80,7 @@
 		0B202B2F221B615100435657 /* MarkdownWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownWriter.swift; sourceTree = "<group>"; };
 		0B202B31221B640500435657 /* NoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResponse.swift; sourceTree = "<group>"; };
 		0B202B33221B645800435657 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		0B202B35221B70E100435657 /* JSONPostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPostRouter.swift; sourceTree = "<group>"; };
 		0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		0B3276CB2219DAA30028F007 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberValueTransformer.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				0BA26214221AAB7B0068D387 /* Extensions */,
 				0BA2620A221A9E4A0068D387 /* Router.swift */,
 				0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */,
+				0B202B35221B70E100435657 /* JSONPostRouter.swift */,
 				0BA2620C221A9F9B0068D387 /* RequestKitSession.swift */,
 				0B202B31221B640500435657 /* NoResponse.swift */,
 				0B202B33221B645800435657 /* NetworkError.swift */,
@@ -541,6 +544,7 @@
 				0BA26204221A9DA10068D387 /* BitBucketIntegration.swift in Sources */,
 				0BA26206221A9DA10068D387 /* NSURL+URLParameters.swift in Sources */,
 				0B4309B122198FAA00766DB0 /* PreferencesViewController.swift in Sources */,
+				0B202B36221B70E100435657 /* JSONPostRouter.swift in Sources */,
 				0B202B2E221B5D7100435657 /* BitBucketIntegrationError.swift in Sources */,
 				0B202B1D221B11CE00435657 /* FinishViewController.swift in Sources */,
 			);

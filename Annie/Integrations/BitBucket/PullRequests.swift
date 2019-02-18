@@ -96,7 +96,7 @@ extension BitBucketIntegration {
     func comment(on pullRequest: PullRequest, with attachment: Attachment, completion: @escaping (_ response: Result<Void>) -> Void) -> URLSessionDataTaskProtocol? {
         let router = CommentRouter.comment(configuration, attachment, pullRequest)
 
-        return router.load(expectedResultType: NoResponse.self, completion: { (response, error) in
+        return router.post(expectedResultType: NoResponse.self, completion: { (response, error) in
             if let error = error {
                 completion(.failure(error))
             }
@@ -107,7 +107,7 @@ extension BitBucketIntegration {
 
 // MARK: Router
 #warning("todo: comment does not work")
-enum CommentRouter: Router {
+enum CommentRouter: JSONPostRouter {
     case comment(Configuration, Attachment, PullRequest)
 
     var configuration: Configuration {
