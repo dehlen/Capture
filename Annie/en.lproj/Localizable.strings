@@ -17,3 +17,4 @@
 "missingFile" = "We're sorry but it looks like there is no file we could upload to BitBucket. You might try again later.";
 "uploadFailed" = "We're sorry but it seems like the upload of your GIF to BitBucket Server failed. You might try again later.";
 "notAuthorized" = "We're sorry but it seems like you are not authorized to add an attachment to BitBucket. Please check your entered BitBucket Server host and personal access token to continue.";
+"missingResponse" = "We could not execute your requested action because the server returned with no response.";

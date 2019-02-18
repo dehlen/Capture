@@ -13,6 +13,9 @@
 		0B202B2A221B532B00435657 /* MulitpartFormDataPostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */; };
 		0B202B2C221B590400435657 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B2B221B590400435657 /* MimeType.swift */; };
 		0B202B2E221B5D7100435657 /* BitBucketIntegrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B2D221B5D7100435657 /* BitBucketIntegrationError.swift */; };
+		0B202B30221B615100435657 /* MarkdownWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B2F221B615100435657 /* MarkdownWriter.swift */; };
+		0B202B32221B640500435657 /* NoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B31221B640500435657 /* NoResponse.swift */; };
+		0B202B34221B645800435657 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B33221B645800435657 /* NetworkError.swift */; };
 		0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */; };
 		0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CB2219DAA30028F007 /* Preferences.swift */; };
 		0B3276CE2219E47A0028F007 /* NumberValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */; };
@@ -73,6 +76,9 @@
 		0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulitpartFormDataPostRouter.swift; sourceTree = "<group>"; };
 		0B202B2B221B590400435657 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		0B202B2D221B5D7100435657 /* BitBucketIntegrationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBucketIntegrationError.swift; sourceTree = "<group>"; };
+		0B202B2F221B615100435657 /* MarkdownWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownWriter.swift; sourceTree = "<group>"; };
+		0B202B31221B640500435657 /* NoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResponse.swift; sourceTree = "<group>"; };
+		0B202B33221B645800435657 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		0B3276CB2219DAA30028F007 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberValueTransformer.swift; sourceTree = "<group>"; };
@@ -217,6 +223,8 @@
 				0BA2620A221A9E4A0068D387 /* Router.swift */,
 				0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */,
 				0BA2620C221A9F9B0068D387 /* RequestKitSession.swift */,
+				0B202B31221B640500435657 /* NoResponse.swift */,
+				0B202B33221B645800435657 /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -294,6 +302,8 @@
 		0BC83209221A085200FD8CF4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0B202B2B221B590400435657 /* MimeType.swift */,
+				0B202B2F221B615100435657 /* MarkdownWriter.swift */,
 				0B4309A8221926C500766DB0 /* BundleExtension.swift */,
 				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
 				0B64CD9B2218DE1B004F6321 /* Result.swift */,
@@ -380,7 +390,6 @@
 				0B64CD7C2218BA98004F6321 /* Main.storyboard */,
 				6BE514A42126A2410068337E /* AppDelegate.swift */,
 				0BE418B4221AE59600B8E85D /* AnnieApplication.swift */,
-				0B202B2B221B590400435657 /* MimeType.swift */,
 				0B202B23221B27DC00435657 /* BitBucketIntegration */,
 				0B202B22221B27D300435657 /* Container */,
 				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
@@ -503,6 +512,7 @@
 				0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */,
 				0B3276D02219E6810028F007 /* AdvancedPreferencesViewController.swift in Sources */,
 				6BE514B42126A4E60068337E /* CollectionViewItem.swift in Sources */,
+				0B202B30221B615100435657 /* MarkdownWriter.swift in Sources */,
 				0BD239EB2219A43B003AF068 /* UserInterfaceError.swift in Sources */,
 				0BE418B5221AE59600B8E85D /* AnnieApplication.swift in Sources */,
 				0BA2620F221AA7180068D387 /* PullRequests.swift in Sources */,
@@ -512,6 +522,7 @@
 				0B64CD8B2218D215004F6321 /* WindowInfoManager.swift in Sources */,
 				0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */,
 				0BA2620B221A9E4A0068D387 /* Router.swift in Sources */,
+				0B202B34221B645800435657 /* NetworkError.swift in Sources */,
 				0B202B21221B263800435657 /* NSView+Animation.swift in Sources */,
 				0B202B2C221B590400435657 /* MimeType.swift in Sources */,
 				0BA26218221AD42A0068D387 /* IntegrationsPreferencesViewController.swift in Sources */,
@@ -519,6 +530,7 @@
 				0B64CD852218BE38004F6321 /* CollectionViewDataSource.swift in Sources */,
 				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
 				0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */,
+				0B202B32221B640500435657 /* NoResponse.swift in Sources */,
 				0BE418B3221AE33D00B8E85D /* BitBucketIntegrationViewController.swift in Sources */,
 				0BE418BE221AF68A00B8E85D /* ContainerPageable.swift in Sources */,
 				0B4309B022198FAA00766DB0 /* PreferencesWindowController.swift in Sources */,

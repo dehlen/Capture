@@ -6,6 +6,19 @@ struct PullRequest: Codable {
     let title: String
     let open: Bool
     let toRef: PullRequestReference
+    let links: Links
+}
+
+struct Links: Codable {
+    let selfLinks: [BitBucketLink]
+
+    private enum CodingKeys: String, CodingKey {
+        case selfLinks = "self"
+    }
+}
+
+struct BitBucketLink: Codable {
+    let href: String
 }
 
 struct PullRequestReference: Codable {
@@ -60,29 +73,80 @@ extension BitBucketIntegration {
                 completion(.failure(error))
             } else if let paginatedResponse = response {
                 completion(.success(paginatedResponse))
+            } else {
+                completion(.failure(NetworkError.missingResponse))
             }
         })
     }
 
     func addAttachment(_ session: RequestKitURLSession = URLSession.shared, attachment: URL, to pullRequest: PullRequest, completion: @escaping (_ response: Result<Attachment>) -> Void) -> URLSessionDataTaskProtocol? {
         let router = AttachmentRouter.attachment(configuration, attachment, pullRequest)
+
         return router.post(file: attachment, expectedResultType: Attachments.self, completion: { (response, error) in
             if let error = error {
                 completion(.failure(error))
             } else if let response = response, let attachment = response.attachments.first {
                 completion(.success(attachment))
+            } else {
+                completion(.failure(NetworkError.missingResponse))
             }
         })
     }
 
-    func comment(on pullRequest: PullRequest, with attachment: Attachment, completion: @escaping (_ response: Result<Attachment>) -> Void) -> URLSessionDataTaskProtocol? {
-        #warning("implement")
-        return nil
-    }
+    func comment(on pullRequest: PullRequest, with attachment: Attachment, completion: @escaping (_ response: Result<Void>) -> Void) -> URLSessionDataTaskProtocol? {
+        let router = CommentRouter.comment(configuration, attachment, pullRequest)
 
+        return router.load(expectedResultType: NoResponse.self, completion: { (response, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            completion(.success(()))
+        })
+    }
 }
 
 // MARK: Router
+enum CommentRouter: Router {
+    case comment(Configuration, Attachment, PullRequest)
+
+    var configuration: Configuration {
+        switch self {
+        case .comment(let config, _, _): return config
+        }
+    }
+
+    var method: HTTPMethod {
+        switch self {
+        case .comment: return .POST
+        }
+    }
+
+    var encoding: HTTPEncoding {
+        switch self {
+        case .comment: return .json
+        }
+    }
+
+    var params: [String: Any] {
+        switch self {
+        case .comment(_, let attachment, _):
+            return ["text": MarkdownWriter.img(title: "Attachment", url: attachment.url)]
+        }
+    }
+
+    var path: String {
+        switch self {
+        case .comment(_, _, let pullRequest):
+            guard
+                let link = pullRequest.links.selfLinks.first?.href,
+                let url = URL(string: link) else {
+                    return ""
+            }
+            return url.appendingPathComponent("comments").path
+        }
+    }
+}
+
 enum AttachmentRouter: MulitpartFormDataPostRouter {
     case attachment(Configuration, URL, PullRequest)
 
@@ -94,7 +158,7 @@ enum AttachmentRouter: MulitpartFormDataPostRouter {
 
     var method: HTTPMethod {
         switch self {
-        case .attachment(_, _, _): return .POST
+        case .attachment: return .POST
         }
     }
 

@@ -6,6 +6,8 @@ struct ErrorMessageProvider {
             return string(for: error)
         } else if let error = error as? BitBucketIntegrationError {
             return string(for: error)
+        } else if let error = error as? NetworkError {
+            return string(for: error)
         }
         return error.localizedDescription
     }
@@ -25,6 +27,13 @@ struct ErrorMessageProvider {
             return "uploadFailed".localized
         case .notAuthorized:
             return "notAuthorized".localized
+        }
+    }
+
+    private static func string(for error: NetworkError) -> String {
+        switch error {
+        case .missingResponse:
+            return "missingResponse".localized
         }
     }
 }
