@@ -1,7 +1,7 @@
 import AppKit
 
 class WindowListViewController: NSViewController {
-    static let videoPlayerSegue = "showVideoPlayer"
+    static let showContainer = "showContainer"
 
     @IBOutlet private weak var collectionView: NSCollectionView!
     @IBOutlet private weak var recordingButton: RecordingButton!
@@ -61,16 +61,15 @@ class WindowListViewController: NSViewController {
             currentRecorder?.stop()
             selectedWindow = nil
             collectionView.deselectAll(nil)
-            performSegue(withIdentifier: WindowListViewController.videoPlayerSegue, sender: nil)
+            performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
         }
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard let videoUrl = self.currentVideoOutputUrl else { return }
-
-        if segue.identifier == WindowListViewController.videoPlayerSegue {
-            guard let videoPlayerViewController = segue.destinationController as? VideoPlayerViewController else { return }
-            videoPlayerViewController.videoUrl = videoUrl
+        if segue.identifier == WindowListViewController.showContainer {
+            guard let containerViewController = segue.destinationController as? ContainerViewController else { return }
+            containerViewController.videoUrl = videoUrl
         }
     }
 }

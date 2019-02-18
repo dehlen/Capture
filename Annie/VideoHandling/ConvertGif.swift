@@ -16,7 +16,7 @@ enum ConvertGif {
         return ffmpeg
     }
 
-    static func convert(at source: URL, to destination: URL, frameRate: Int = Constants.defaultFrameRate, maximumHeight: Int = Constants.maximumHeight, completion: @escaping (Result<Void, NSError>) -> Void) {
+    static func convert(at source: URL, to destination: URL, frameRate: Int = Constants.defaultFrameRate, maximumHeight: Int = Constants.maximumHeight, completion: @escaping (Result<Void>) -> Void) {
         let palettePath = "palette.png"
         let filters = "fps=\(frameRate),scale=\(maximumHeight):-1:flags=lanczos"
 
@@ -26,11 +26,11 @@ enum ConvertGif {
                     try Process.run(ffmpeg, arguments: ["-i", source.path, "-i", palettePath, "-lavfi", "\(filters)[x];[x][1:v]paletteuse", destination.path]) { _ in
                         completion(.success(()))
                     }
-                } catch let error as NSError {
+                } catch let error {
                         completion(.failure(error))
                 }
             }
-        } catch let error as NSError {
+        } catch let error {
             completion(.failure(error))
         }
     }

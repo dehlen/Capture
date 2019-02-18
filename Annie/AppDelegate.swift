@@ -1,5 +1,4 @@
 import Cocoa
-import UserNotifications
 import AVFoundation
 
 @NSApplicationMain
@@ -10,8 +9,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print(NSString(string:"~/Desktop/HCCQR.txt").expandingTildeInPath)
-        setupNotificationCenter()
         setupPreferenceDefaults()
         ValueTransformerFactory.registerAll()
     }
@@ -24,51 +21,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let defaults = UserDefaults.standard
 
         defaults.register(defaults: [
-            .sendNotifications: true,
             .exportUrl: DirectoryHandler.desktopUrl!.path,
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
             .gifFrameRate: 20,
-            .gifHeight: 720
+            .gifHeight: 720,
+            .bitBucketApiEndpoint: bitbucketBaseURL
         ])
     }
 
     @IBAction func showPreferences(_ sender: Any) {
         preferencesWindowController?.showWindow(sender)
     }
-
-    private func setupNotificationCenter() {
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (permissionGranted, error) in
-            if let error = error {
-                print(error)
-            }
-        }
-
-        let openGifAction = UNNotificationAction(identifier: LocalNotification.Action.openGif, title: "Open".localized, options: [.foreground])
-
-        let category = UNNotificationCategory(identifier: LocalNotification.Category.newGif, actions: [openGifAction], intentIdentifiers: [], options: [])
-        UNUserNotificationCenter.current().setNotificationCategories([category])
-    }
-
-    private func handleNotification(response: UNNotificationResponse) {
-        switch response.actionIdentifier {
-        case LocalNotification.Action.openGif:
-            let userInfo = response.notification.request.content.userInfo
-            guard let gifUrlString = userInfo["gifUrl"] as? String, let url = URL(string: gifUrlString) else { return }
-            NSWorkspace.shared.open(url)
-        default: ()
-        }
-    }
 }
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        handleNotification(response: response)
-        completionHandler()
-    }
-}
-
