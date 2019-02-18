@@ -10,6 +10,9 @@
 		0B202B1D221B11CE00435657 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B1C221B11CE00435657 /* FinishViewController.swift */; };
 		0B202B1F221B1E7100435657 /* DeselectableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B1E221B1E7100435657 /* DeselectableTableView.swift */; };
 		0B202B21221B263800435657 /* NSView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B20221B263800435657 /* NSView+Animation.swift */; };
+		0B202B2A221B532B00435657 /* MulitpartFormDataPostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */; };
+		0B202B2C221B590400435657 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B2B221B590400435657 /* MimeType.swift */; };
+		0B202B2E221B5D7100435657 /* BitBucketIntegrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B2D221B5D7100435657 /* BitBucketIntegrationError.swift */; };
 		0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */; };
 		0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CB2219DAA30028F007 /* Preferences.swift */; };
 		0B3276CE2219E47A0028F007 /* NumberValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */; };
@@ -42,9 +45,6 @@
 		0BA26204221A9DA10068D387 /* BitBucketIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA261FE221A9DA10068D387 /* BitBucketIntegration.swift */; };
 		0BA26205221A9DA10068D387 /* TokenConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA261FF221A9DA10068D387 /* TokenConfiguration.swift */; };
 		0BA26206221A9DA10068D387 /* NSURL+URLParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA26200221A9DA10068D387 /* NSURL+URLParameters.swift */; };
-		0BA26207221A9DA10068D387 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA26201221A9DA10068D387 /* Token.swift */; };
-		0BA26208221A9DA10068D387 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA26202221A9DA10068D387 /* OAuthRouter.swift */; };
-		0BA26209221A9DA10068D387 /* OAuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA26203221A9DA10068D387 /* OAuthConfiguration.swift */; };
 		0BA2620B221A9E4A0068D387 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA2620A221A9E4A0068D387 /* Router.swift */; };
 		0BA2620D221A9F9B0068D387 /* RequestKitSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA2620C221A9F9B0068D387 /* RequestKitSession.swift */; };
 		0BA2620F221AA7180068D387 /* PullRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA2620E221AA7180068D387 /* PullRequests.swift */; };
@@ -70,6 +70,9 @@
 		0B202B1C221B11CE00435657 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 		0B202B1E221B1E7100435657 /* DeselectableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeselectableTableView.swift; sourceTree = "<group>"; };
 		0B202B20221B263800435657 /* NSView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Animation.swift"; sourceTree = "<group>"; };
+		0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulitpartFormDataPostRouter.swift; sourceTree = "<group>"; };
+		0B202B2B221B590400435657 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		0B202B2D221B5D7100435657 /* BitBucketIntegrationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBucketIntegrationError.swift; sourceTree = "<group>"; };
 		0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		0B3276CB2219DAA30028F007 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberValueTransformer.swift; sourceTree = "<group>"; };
@@ -103,9 +106,6 @@
 		0BA261FE221A9DA10068D387 /* BitBucketIntegration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitBucketIntegration.swift; sourceTree = "<group>"; };
 		0BA261FF221A9DA10068D387 /* TokenConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenConfiguration.swift; sourceTree = "<group>"; };
 		0BA26200221A9DA10068D387 /* NSURL+URLParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+URLParameters.swift"; sourceTree = "<group>"; };
-		0BA26201221A9DA10068D387 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		0BA26202221A9DA10068D387 /* OAuthRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
-		0BA26203221A9DA10068D387 /* OAuthConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthConfiguration.swift; sourceTree = "<group>"; };
 		0BA2620A221A9E4A0068D387 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0BA2620C221A9F9B0068D387 /* RequestKitSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestKitSession.swift; sourceTree = "<group>"; };
 		0BA2620E221AA7180068D387 /* PullRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequests.swift; sourceTree = "<group>"; };
@@ -154,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				0BE418B2221AE33D00B8E85D /* BitBucketIntegrationViewController.swift */,
+				0B202B2D221B5D7100435657 /* BitBucketIntegrationError.swift */,
 			);
 			path = BitBucketIntegration;
 			sourceTree = "<group>";
@@ -214,8 +215,8 @@
 			children = (
 				0BA26214221AAB7B0068D387 /* Extensions */,
 				0BA2620A221A9E4A0068D387 /* Router.swift */,
+				0B202B29221B532B00435657 /* MulitpartFormDataPostRouter.swift */,
 				0BA2620C221A9F9B0068D387 /* RequestKitSession.swift */,
-				0BA26202221A9DA10068D387 /* OAuthRouter.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -225,8 +226,6 @@
 			children = (
 				0BA261FE221A9DA10068D387 /* BitBucketIntegration.swift */,
 				0BA261FF221A9DA10068D387 /* TokenConfiguration.swift */,
-				0BA26201221A9DA10068D387 /* Token.swift */,
-				0BA26203221A9DA10068D387 /* OAuthConfiguration.swift */,
 				0BA2620E221AA7180068D387 /* PullRequests.swift */,
 			);
 			path = BitBucket;
@@ -381,6 +380,7 @@
 				0B64CD7C2218BA98004F6321 /* Main.storyboard */,
 				6BE514A42126A2410068337E /* AppDelegate.swift */,
 				0BE418B4221AE59600B8E85D /* AnnieApplication.swift */,
+				0B202B2B221B590400435657 /* MimeType.swift */,
 				0B202B23221B27DC00435657 /* BitBucketIntegration */,
 				0B202B22221B27D300435657 /* Container */,
 				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
@@ -483,8 +483,8 @@
 				0BE418C2221AFF9600B8E85D /* NextContainer.swift in Sources */,
 				0B64CD892218C936004F6321 /* RecordingButton.swift in Sources */,
 				0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */,
-				0BA26208221A9DA10068D387 /* OAuthRouter.swift in Sources */,
 				0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */,
+				0B202B2A221B532B00435657 /* MulitpartFormDataPostRouter.swift in Sources */,
 				0B4309A7221916C500766DB0 /* VideoPlayerViewController.swift in Sources */,
 				0B4309A9221926C500766DB0 /* BundleExtension.swift in Sources */,
 				0B3276D32219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift in Sources */,
@@ -513,23 +513,23 @@
 				0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */,
 				0BA2620B221A9E4A0068D387 /* Router.swift in Sources */,
 				0B202B21221B263800435657 /* NSView+Animation.swift in Sources */,
+				0B202B2C221B590400435657 /* MimeType.swift in Sources */,
 				0BA26218221AD42A0068D387 /* IntegrationsPreferencesViewController.swift in Sources */,
 				0B202B1F221B1E7100435657 /* DeselectableTableView.swift in Sources */,
 				0B64CD852218BE38004F6321 /* CollectionViewDataSource.swift in Sources */,
 				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
 				0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */,
-				0BA26207221A9DA10068D387 /* Token.swift in Sources */,
 				0BE418B3221AE33D00B8E85D /* BitBucketIntegrationViewController.swift in Sources */,
 				0BE418BE221AF68A00B8E85D /* ContainerPageable.swift in Sources */,
 				0B4309B022198FAA00766DB0 /* PreferencesWindowController.swift in Sources */,
 				0B64CD8F2218D4B3004F6321 /* ScreenRecorder.swift in Sources */,
 				0B3276D72219F1590028F007 /* Sugar.swift in Sources */,
 				0BE418C0221AFE9B00B8E85D /* NSViewController+Child.swift in Sources */,
-				0BA26209221A9DA10068D387 /* OAuthConfiguration.swift in Sources */,
 				0BA26205221A9DA10068D387 /* TokenConfiguration.swift in Sources */,
 				0BA26204221A9DA10068D387 /* BitBucketIntegration.swift in Sources */,
 				0BA26206221A9DA10068D387 /* NSURL+URLParameters.swift in Sources */,
 				0B4309B122198FAA00766DB0 /* PreferencesViewController.swift in Sources */,
+				0B202B2E221B5D7100435657 /* BitBucketIntegrationError.swift in Sources */,
 				0B202B1D221B11CE00435657 /* FinishViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

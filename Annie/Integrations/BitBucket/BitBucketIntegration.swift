@@ -1,7 +1,7 @@
 import Foundation
 
-let bitbucketBaseURL = "https://bitbucket.org/api/2.0/"
-let bitbucketWebURL = "https://bitbucket.org/"
+let bitbucketBaseURL = "https://bitbucket.org"
+let bitbucketWebURL = "https://bitbucket.org"
 let BitBucketIntegrationErrorDomain = "com.davidehlen.Annie"
 
 struct BitBucketIntegration {

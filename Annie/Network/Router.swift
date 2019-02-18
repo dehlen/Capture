@@ -10,7 +10,7 @@ public enum HTTPMethod: String {
 }
 
 public enum HTTPEncoding: Int {
-    case url, form, json
+    case url, form, json, multipartFormData
 }
 
 public struct HTTPHeader {
@@ -133,10 +133,14 @@ public extension Router {
             let queryData = urlComponents.percentEncodedQuery?.data(using: String.Encoding.utf8)
             urlComponents.queryItems = nil // clear the query items as they go into the body
             var mutableURLRequest = URLRequest(url: urlComponents.url!)
-            mutableURLRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+            mutableURLRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             mutableURLRequest.httpBody = queryData
             mutableURLRequest.httpMethod = method.rawValue
             return mutableURLRequest as URLRequest
+        case .multipartFormData:
+            var request = URLRequest(url: url)
+            request.httpMethod = method.rawValue
+            return request
         }
     }
 

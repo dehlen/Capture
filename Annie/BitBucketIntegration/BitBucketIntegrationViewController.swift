@@ -1,6 +1,7 @@
 import AppKit
 
 class BitBucketIntegrationViewController: NSViewController {
+    typealias Handler = ((Result<Void>) -> Void)
     var gifOutputUrl: URL?
     private var allOpenPullRequests: [PullRequest] = []
     internal var actionNameObservers: [ActionNameObserver] = []
@@ -13,12 +14,17 @@ class BitBucketIntegrationViewController: NSViewController {
         return viewController
     }
 
+    private var config: TokenConfiguration? {
+        guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else { return nil }
+        guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else { return nil }
+        let config = TokenConfiguration(apiEndpoint: apiEndpoint, accessToken: token)
+        return config
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else { return }
-        guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else { return }
-        let config = TokenConfiguration(apiEndpoint: apiEndpoint, accessToken: token)
+        guard let config = config else { return }
         loadPullRequests(config: config)
     }
 
@@ -43,6 +49,33 @@ class BitBucketIntegrationViewController: NSViewController {
                 print(error)
             }
         }
+    }
+
+    func addAttachment(config: TokenConfiguration, file: URL, pullRequest: PullRequest, then handler: @escaping Handler) {
+        _ = BitBucketIntegration(config).addAttachment(attachment: file, to: pullRequest, completion: { result in
+            switch result {
+            case .success(let attachment):
+                self.comment(config: config, on: pullRequest, with: attachment, then: handler)
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.presentError(error)
+                }
+            }
+        })
+    }
+
+    func comment(config: TokenConfiguration, on pullRequest: PullRequest, with attachment: Attachment, then handler: @escaping Handler) {
+        _ = BitBucketIntegration(config).comment(on: pullRequest, with: attachment, completion: { result in
+            switch result {
+            case .success:
+                handler(.success(()))
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.presentError(error)
+                }
+                handler(.failure(error))
+            }
+        })
     }
 }
 
@@ -106,7 +139,29 @@ extension BitBucketIntegrationViewController: ContainerPageable {
     }
 
     func triggerAction(sender: NSButton, then handler: @escaping (Result<NextContainer>) -> Void) {
-        #warning("implement")
-        handler(.success(.finishPage))
+        guard let fileUrl = gifOutputUrl else {
+            handler(.failure(NSError.create(from: BitBucketIntegrationError.missingFile)))
+            return
+        }
+
+        guard let config = config else {
+            handler(.failure(NSError.create(from: BitBucketIntegrationError.missingFile)))
+            return
+        }
+
+        let selectedRow = tableView.selectedRow
+        if selectedRow > 0 && selectedRow < allOpenPullRequests.count {
+            let selectedPullRequest = allOpenPullRequests[tableView.selectedRow]
+            addAttachment(config: config, file: fileUrl, pullRequest: selectedPullRequest, then: { result in
+                switch result {
+                case .success:
+                    handler(.success(.finishPage))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            })
+        } else {
+            handler(.failure(NSError.create(from: BitBucketIntegrationError.uploadFailed)))
+        }
     }
 }
