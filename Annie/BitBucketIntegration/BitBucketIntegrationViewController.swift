@@ -57,9 +57,7 @@ class BitBucketIntegrationViewController: NSViewController {
             case .success(let attachment):
                 self.comment(config: config, on: pullRequest, with: attachment, then: handler)
             case .failure(let error):
-                DispatchQueue.main.async {
-                    self.presentError(error)
-                }
+                handler(.failure(error))
             }
         })
     }
@@ -70,9 +68,6 @@ class BitBucketIntegrationViewController: NSViewController {
             case .success:
                 handler(.success(()))
             case .failure(let error):
-                DispatchQueue.main.async {
-                    self.presentError(error)
-                }
                 handler(.failure(error))
             }
         })
