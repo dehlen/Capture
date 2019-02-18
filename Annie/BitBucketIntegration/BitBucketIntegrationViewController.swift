@@ -150,7 +150,7 @@ extension BitBucketIntegrationViewController: ContainerPageable {
         }
 
         let selectedRow = tableView.selectedRow
-        if selectedRow > 0 && selectedRow < allOpenPullRequests.count {
+        if selectedRow >= 0 && selectedRow < allOpenPullRequests.count {
             let selectedPullRequest = allOpenPullRequests[tableView.selectedRow]
             addAttachment(config: config, file: fileUrl, pullRequest: selectedPullRequest, then: { result in
                 switch result {
