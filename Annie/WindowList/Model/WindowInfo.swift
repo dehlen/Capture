@@ -10,13 +10,20 @@ struct WindowInfo {
     var frame = NSRect.zero
     var image: NSImage = NSImage()
     var alpha: Int = 0
-
     var directDisplayID: CGDirectDisplayID?
+
     private let cropViewLineWidth: CGFloat = 3.0
     private let mainDisplayBounds = CGDisplayBounds(CGMainDisplayID())
+    private var windowOwnerPid: pid_t?
     lazy private var quartzScreenFrame: CGRect? = {
         return CGDisplayBounds(self.directDisplayID!)
     }()
+
+    var appIconImage: NSImage? {
+        guard let windowOwnerPid = windowOwnerPid else { return nil }
+        let runningApplication = NSRunningApplication(processIdentifier: windowOwnerPid)
+        return runningApplication?.icon
+    }
 
     func directDisplayID(from frame: CGRect) -> CGDirectDisplayID {
         let unsafeDirectDisplayID = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: 1)
@@ -27,6 +34,7 @@ struct WindowInfo {
     }
 
     init(item: [String: AnyObject]) {
+        windowOwnerPid = item[String(kCGWindowOwnerPID)] as? pid_t
         name = item[String(kCGWindowName)] as? String ?? ""
         ownerName = item[String(kCGWindowOwnerName)] as? String ?? ""
         layer = (item[String(kCGWindowLayer)] as! NSNumber).int32Value

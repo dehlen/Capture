@@ -3,7 +3,7 @@ import Cocoa
 class CollectionViewItem: NSCollectionViewItem {
     @IBOutlet weak var iconImageView: NSImageView!
     @IBOutlet weak var titleLabel: NSTextField!
-
+    @IBOutlet weak var appIconImageView: NSImageView!
 
     override var isSelected: Bool {
         willSet {

@@ -42,6 +42,7 @@ extension CollectionViewDataSource where Model == WindowInfo {
             guard let item = item as? CollectionViewItem else { return }
             item.iconImageView?.image = window.image
             item.titleLabel?.stringValue = window.name.isEmpty ? window.ownerName : "\(window.ownerName)\n\(window.name)"
+            item.appIconImageView?.image = window.appIconImage
         }
     }
 }
