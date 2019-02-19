@@ -10,11 +10,15 @@ struct PullRequest: Codable {
 }
 
 struct Links: Codable {
-    let selfLinks: [BitBucketLink]
+    let selfLinks: [BitBucketLink]?
 
     private enum CodingKeys: String, CodingKey {
         case selfLinks = "self"
     }
+}
+
+struct AttachmentLink: Codable {
+    let attachment: BitBucketLink
 }
 
 struct BitBucketLink: Codable {
@@ -41,6 +45,7 @@ struct Attachments: Codable {
 struct Attachment: Codable {
     let url: String
     let id: String
+    let links: AttachmentLink
 }
 
 struct Pagination<T: Codable>: Codable {
@@ -106,7 +111,6 @@ extension BitBucketIntegration {
 }
 
 // MARK: Router
-#warning("todo: comment does not work")
 enum CommentRouter: JSONPostRouter {
     case comment(Configuration, Attachment, PullRequest)
 
@@ -131,7 +135,7 @@ enum CommentRouter: JSONPostRouter {
     var params: [String: Any] {
         switch self {
         case .comment(_, let attachment, _):
-            return ["text": MarkdownWriter.img(title: "Attachment", url: attachment.url)]
+            return ["text": MarkdownWriter.img(attachment: attachment)]
         }
     }
 
@@ -139,7 +143,7 @@ enum CommentRouter: JSONPostRouter {
         switch self {
         case .comment(_, _, let pullRequest):
             guard
-                let link = pullRequest.links.selfLinks.first?.href,
+                let link = pullRequest.links.selfLinks?.first?.href,
                 let url = URL(string: link) else {
                     return ""
             }
