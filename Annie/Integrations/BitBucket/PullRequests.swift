@@ -143,7 +143,9 @@ enum CommentRouter: JSONPostRouter {
                 let url = URL(string: link) else {
                     return ""
             }
-            return url.appendingPathComponent("comments").path
+            let urlPath = url.appendingPathComponent("comments").path
+            let restApiPrepend = "/rest/api/1.0"
+            return (restApiPrepend as NSString).appendingPathComponent(urlPath)
         }
     }
 }
