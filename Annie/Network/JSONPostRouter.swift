@@ -6,9 +6,11 @@ public protocol JSONPostRouter: Router {
 
 public extension JSONPostRouter {
     public func post<T: Codable>(_ session: RequestKitURLSession = URLSession.shared, decoder:JSONDecoder = JSONDecoder(), expectedResultType: T.Type, completion: @escaping (_ json: T?, _ error: Error?) -> Void) -> URLSessionDataTaskProtocol? {
-        guard let request = request() else {
+        guard var request = request() else {
             return nil
         }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
 
         let data: Data
         do {
