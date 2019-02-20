@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .exportUrl: DirectoryHandler.desktopUrl!.path,
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
             .gifFrameRate: 20,
-            .gifHeight: 720,
+            .gifHeight: 480,
             .showMouseCursor: true,
             .showMouseClicks: true
         ])
