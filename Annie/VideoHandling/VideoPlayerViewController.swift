@@ -91,37 +91,36 @@ extension VideoPlayerViewController: ContainerPageable {
     }
 
     func triggerAction(sender: NSButton, then handler: @escaping (Result<NextContainer>) -> Void) {
-        sender.isEnabled = false
+        DispatchQueue.main.async {
+            sender.isEnabled = false
+        }
         exportVideo() { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.convertVideoToGif() { convertResult in
-                        DispatchQueue.main.async {
-                            sender.isEnabled = true
-
-                            switch convertResult {
-                            case .success(let gifOutputUrl):
-                                guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else {
-                                    handler(.success(.finishPage(gifOutputUrl)))
-                                    return
-                                }
-                                guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else {
-                                    handler(.success(.finishPage(gifOutputUrl)))
-                                    return
-                                }
-
-                                handler(.success(.bitBucketIntegration(gifOutputUrl)))
-                            case .failure(let error):
-                                handler(.failure(error))
-                            }
-                        }
-                    }
-                case .failure(let error):
+            switch result {
+            case .success:
+                self.convertVideoToGif() { convertResult in
                     DispatchQueue.main.async {
                         sender.isEnabled = true
+                    }
+                    switch convertResult {
+                    case .success(let gifOutputUrl):
+                        guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else {
+                            handler(.success(.finishPage(gifOutputUrl)))
+                            return
+                        }
+                        guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else {
+                            handler(.success(.finishPage(gifOutputUrl)))
+                            return
+                        }
+
+                        handler(.success(.bitBucketIntegration(gifOutputUrl)))
+                    case .failure(let error):
                         handler(.failure(error))
                     }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    sender.isEnabled = true
+                    handler(.failure(error))
                 }
             }
         }
