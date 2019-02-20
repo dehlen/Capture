@@ -44,8 +44,10 @@ class ContainerViewController: NSViewController {
                 case .bitBucketIntegration(let gifOutputUrl):
                     self.gifOutputUrl = gifOutputUrl
                     self.replacePage(with: BitBucketIntegrationViewController.create(with: gifOutputUrl))
-                case .finishPage:
-                    self.replacePage(with: FinishViewController.create(state: .success(self.gifOutputUrl)))
+                case .finishPage(let gifOutputUrl):
+                    self.gifOutputUrl = gifOutputUrl
+                    self.replacePage(with:
+                        FinishViewController.create(state: .success(self.gifOutputUrl)))
                 case .dismiss:
                     self.view.window?.performClose(nil)
                 }

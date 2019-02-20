@@ -102,6 +102,15 @@ extension VideoPlayerViewController: ContainerPageable {
 
                             switch convertResult {
                             case .success(let gifOutputUrl):
+                                guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else {
+                                    handler(.success(.finishPage(gifOutputUrl)))
+                                    return
+                                }
+                                guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else {
+                                    handler(.success(.finishPage(gifOutputUrl)))
+                                    return
+                                }
+
                                 handler(.success(.bitBucketIntegration(gifOutputUrl)))
                             case .failure(let error):
                                 handler(.failure(error))

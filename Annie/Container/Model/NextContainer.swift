@@ -2,6 +2,6 @@ import Foundation
 
 enum NextContainer {
     case bitBucketIntegration(URL)
-    case finishPage
+    case finishPage(URL)
     case dismiss
 }

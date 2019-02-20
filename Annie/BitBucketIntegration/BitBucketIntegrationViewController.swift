@@ -156,7 +156,7 @@ extension BitBucketIntegrationViewController: ContainerPageable {
                 }
                 switch result {
                 case .success:
-                    handler(.success(.finishPage))
+                    handler(.success(NextContainer.finishPage(fileUrl)))
                 case .failure(let error):
                     handler(.failure(error))
                 }
