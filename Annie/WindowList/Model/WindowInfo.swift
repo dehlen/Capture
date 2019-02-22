@@ -67,6 +67,7 @@ struct WindowInfo {
     }
 
     func convertPosition(_ frame:NSRect) -> NSPoint {
+        //TODO: do not use mainDisplayBounds here 
         var convertedPoint = frame.origin
         let y = mainDisplayBounds.height - frame.height - frame.origin.y
         convertedPoint.y = y
