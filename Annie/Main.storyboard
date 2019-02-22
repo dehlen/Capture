@@ -126,9 +126,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <containerView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T37-H0-yCP">
-                                <rect key="frame" x="0.0" y="59" width="450" height="241"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="T37-H0-yCP">
+                                <rect key="frame" x="0.0" y="61" width="450" height="239"/>
                             </containerView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="txX-dp-rdo">
                                 <rect key="frame" x="396" y="13" width="40" height="32"/>
@@ -152,9 +151,13 @@ Gw
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="T37-H0-yCP" firstAttribute="top" secondItem="yTO-gI-n1D" secondAttribute="top" id="0J6-an-GC8"/>
+                            <constraint firstItem="txX-dp-rdo" firstAttribute="top" secondItem="T37-H0-yCP" secondAttribute="bottom" constant="20" id="8JO-ZX-r0s"/>
+                            <constraint firstAttribute="trailing" secondItem="T37-H0-yCP" secondAttribute="trailing" id="Bfl-9I-fE2"/>
                             <constraint firstItem="txX-dp-rdo" firstAttribute="leading" secondItem="63c-t2-iji" secondAttribute="trailing" constant="10" id="HIL-Ib-COa"/>
                             <constraint firstAttribute="bottom" secondItem="txX-dp-rdo" secondAttribute="bottom" constant="20" id="IUX-la-myb"/>
                             <constraint firstAttribute="trailing" secondItem="txX-dp-rdo" secondAttribute="trailing" constant="20" id="JHH-6J-bjy"/>
+                            <constraint firstItem="T37-H0-yCP" firstAttribute="leading" secondItem="yTO-gI-n1D" secondAttribute="leading" id="rCx-fM-KJb"/>
                             <constraint firstItem="63c-t2-iji" firstAttribute="centerY" secondItem="txX-dp-rdo" secondAttribute="centerY" id="yOR-Oc-9hP"/>
                         </constraints>
                     </view>
