@@ -61,8 +61,14 @@ class VideoPlayerViewController: NSViewController {
     }
 
     private func exportVideo(then handler: @escaping Handler) {
-        guard let playerItem = playerView.player?.currentItem else { return }
-        guard let outputUrl = trimmedOutputUrl() else { return }
+        guard let playerItem = playerView.player?.currentItem else {
+            handler(.failure(NSError(domain: "com.davidehlen.Annie", code: 1000, userInfo: nil)))
+            return
+        }
+        guard let outputUrl = trimmedOutputUrl() else {
+            handler(.failure(NSError(domain: "com.davidehlen.Annie", code: 1001, userInfo: nil)))
+            return
+        }
 
         let preset: String = UserDefaults.standard[.movieQuality] ?? AVAssetExportPresetAppleM4V480pSD
         let exportSession = AVAssetExportSession(asset: playerItem.asset, presetName: preset)!
@@ -79,7 +85,7 @@ class VideoPlayerViewController: NSViewController {
             case .completed:
                 handler(.success(()))
             default:
-                return handler(.failure(NSError(domain: "com.davidehlen.Annie", code: 1000, userInfo: ["status": exportSession.status.rawValue])))
+                return handler(.failure(NSError(domain: "com.davidehlen.Annie", code: 1002, userInfo: ["status": exportSession.status.rawValue])))
             }
         }
     }
