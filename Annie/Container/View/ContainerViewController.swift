@@ -2,7 +2,6 @@ import AppKit
 
 class ContainerViewController: NSViewController {
     var videoUrl: URL?
-    var gifOutputUrl: URL?
 
     @IBOutlet private weak var actionButton: NSButton!
     @IBOutlet private weak var containerView: NSView!
@@ -42,12 +41,10 @@ class ContainerViewController: NSViewController {
             case .success(let nextContainer):
                 switch nextContainer {
                 case .bitBucketIntegration(let gifOutputUrl):
-                    self.gifOutputUrl = gifOutputUrl
                     self.replacePage(with: BitBucketIntegrationViewController.create(with: gifOutputUrl))
                 case .finishPage(let gifOutputUrl):
-                    self.gifOutputUrl = gifOutputUrl
                     self.replacePage(with:
-                        FinishViewController.create(state: .success(self.gifOutputUrl)))
+                        FinishViewController.create(state: .success(gifOutputUrl)))
                 case .dismiss:
                     self.view.window?.performClose(nil)
                 }
