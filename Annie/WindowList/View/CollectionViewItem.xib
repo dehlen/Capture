@@ -21,7 +21,7 @@
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="oQd-dH-lG8">
                             <rect key="frame" x="31" y="37" width="150" height="150"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="eFP-hK-9be"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="eFP-hK-9be"/>
                         </imageView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Bxv-Gm-Yvi">
                             <rect key="frame" x="-2" y="10" width="216" height="17"/>
@@ -43,7 +43,7 @@
                     </customSpacing>
                 </stackView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EB8-2y-orq">
-                    <rect key="frame" x="141" y="47" width="30" height="30"/>
+                    <rect key="frame" x="83" y="89" width="46" height="46"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="EB8-2y-orq" secondAttribute="height" multiplier="1:1" id="oI4-uA-sbv"/>
                     </constraints>
@@ -52,12 +52,12 @@
             </subviews>
             <constraints>
                 <constraint firstItem="K5M-d4-Zsr" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="0JQ-VB-zhC"/>
+                <constraint firstItem="EB8-2y-orq" firstAttribute="centerX" secondItem="oQd-dH-lG8" secondAttribute="centerX" id="0P5-vh-2H6"/>
+                <constraint firstItem="EB8-2y-orq" firstAttribute="centerY" secondItem="oQd-dH-lG8" secondAttribute="centerY" id="4hx-g2-e4j"/>
                 <constraint firstItem="K5M-d4-Zsr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Edl-RG-E1J"/>
                 <constraint firstAttribute="bottom" secondItem="K5M-d4-Zsr" secondAttribute="bottom" id="JYL-gX-ucc"/>
-                <constraint firstItem="EB8-2y-orq" firstAttribute="bottom" secondItem="oQd-dH-lG8" secondAttribute="bottom" constant="-10" id="Oui-sP-MFO"/>
                 <constraint firstAttribute="trailing" secondItem="K5M-d4-Zsr" secondAttribute="trailing" id="d35-eA-H5P"/>
-                <constraint firstItem="EB8-2y-orq" firstAttribute="width" secondItem="oQd-dH-lG8" secondAttribute="width" multiplier="0.2" id="rJ1-1B-jx1"/>
-                <constraint firstItem="EB8-2y-orq" firstAttribute="trailing" secondItem="oQd-dH-lG8" secondAttribute="trailing" constant="-10" id="wcS-wm-JHc"/>
+                <constraint firstItem="EB8-2y-orq" firstAttribute="width" secondItem="oQd-dH-lG8" secondAttribute="width" multiplier="0.3" id="rJ1-1B-jx1"/>
             </constraints>
             <point key="canvasLocation" x="-140.5" y="117.5"/>
         </customView>
