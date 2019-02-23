@@ -15,8 +15,8 @@ class BitBucketIntegrationViewController: NSViewController {
     }
 
     private var config: TokenConfiguration? {
-        guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else { return nil }
-        guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else { return nil }
+        guard let apiEndpoint: String = Current.defaults[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else { return nil }
+        guard let token: String = Current.defaults[.bitBucketToken], !token.isEmpty else { return nil }
         let config = TokenConfiguration(apiEndpoint: apiEndpoint, accessToken: token)
         return config
     }

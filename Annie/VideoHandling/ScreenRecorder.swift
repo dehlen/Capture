@@ -33,8 +33,8 @@ public class Recorder: NSObject {
             input.cropRect = cropRect
         }
 
-        input.capturesCursor = UserDefaults.standard[.showMouseCursor] ?? true
-        input.capturesMouseClicks = UserDefaults.standard[.showMouseClicks] ?? true
+        input.capturesCursor = Current.defaults[.showMouseCursor] ?? true
+        input.capturesMouseClicks = Current.defaults[.showMouseClicks] ?? true
 
         output = AVCaptureMovieFileOutput()
         output.movieFragmentInterval = CMTime.invalid

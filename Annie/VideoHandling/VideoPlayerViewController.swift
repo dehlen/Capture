@@ -70,7 +70,7 @@ class VideoPlayerViewController: NSViewController {
             return
         }
 
-        let preset: String = UserDefaults.standard[.movieQuality] ?? AVAssetExportPresetAppleM4V480pSD
+        let preset: String = Current.defaults[.movieQuality] ?? AVAssetExportPresetAppleM4V480pSD
         let exportSession = AVAssetExportSession(asset: playerItem.asset, presetName: preset)!
         exportSession.outputFileType = AVFileType.m4v
         exportSession.outputURL = outputUrl
@@ -109,11 +109,11 @@ extension VideoPlayerViewController: ContainerPageable {
                     }
                     switch convertResult {
                     case .success(let gifOutputUrl):
-                        guard let apiEndpoint: String = UserDefaults.standard[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else {
+                        guard let apiEndpoint: String = Current.defaults[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else {
                             handler(.success(.finishPage(gifOutputUrl)))
                             return
                         }
-                        guard let token: String = UserDefaults.standard[.bitBucketToken], !token.isEmpty else {
+                        guard let token: String = Current.defaults[.bitBucketToken], !token.isEmpty else {
                             handler(.success(.finishPage(gifOutputUrl)))
                             return
                         }

@@ -3,10 +3,10 @@ import Foundation
 enum ConvertGif {
     enum Constants {
         static var maximumHeight: Int {
-            return Int(UserDefaults.standard[.gifHeight] ?? "720") ?? 720
+            return Int(Current.defaults[.gifHeight] ?? "720") ?? 720
         }
         static var defaultFrameRate: Int {
-            return Int(UserDefaults.standard[.gifFrameRate] ?? "20") ?? 20
+            return Int(Current.defaults[.gifFrameRate] ?? "20") ?? 20
         }
     }
 

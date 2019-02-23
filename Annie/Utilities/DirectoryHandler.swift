@@ -9,7 +9,7 @@ struct DirectoryHandler {
     }
 
     static var exportFolder: URL? {
-        guard let exportUrlPath: String = UserDefaults.standard[.exportUrl] else {
+        guard let exportUrlPath: String = Current.defaults[.exportUrl] else {
             return desktopUrl
         }
         return URL(fileURLWithPath: exportUrlPath)

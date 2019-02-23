@@ -7,26 +7,26 @@ class AdvancedPreferencesViewController: PreferencesViewController {
 
     @objc dynamic var gifHeight: String {
         get {
-            return String(UserDefaults.standard[.gifHeight] ?? "720")
+            return String(Current.defaults[.gifHeight] ?? "720")
         }
         set {
             if newValue.isNumeric {
-                UserDefaults.standard[.gifHeight] = newValue
+                Current.defaults[.gifHeight] = newValue
             }
         }
     }
 
     @objc dynamic var gifFrameRate: String {
         get {
-            return String(UserDefaults.standard[.gifFrameRate] ?? "20")
+            return String(Current.defaults[.gifFrameRate] ?? "20")
         }
         set {
-            UserDefaults.standard[.gifFrameRate] = newValue
+            Current.defaults[.gifFrameRate] = newValue
         }
     }
 
     var movieQualityTitle: String {
-        let movieQualityString: String = UserDefaults.standard[.movieQuality] ?? "480p"
+        let movieQualityString: String = Current.defaults[.movieQuality] ?? "480p"
         switch movieQualityString {
         case AVAssetExportPresetAppleM4V720pHD: return "720p"
         case AVAssetExportPresetAppleM4V1080pHD: return "1080p"
@@ -50,6 +50,6 @@ class AdvancedPreferencesViewController: PreferencesViewController {
         default: selectedMovieQuality = AVAssetExportPresetAppleM4V480pSD
         }
 
-        UserDefaults.standard[.movieQuality] = selectedMovieQuality
+        Current.defaults[.movieQuality] = selectedMovieQuality
     }
 }
