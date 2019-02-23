@@ -18,4 +18,13 @@ struct DirectoryHandler {
     static var desktopUrl: URL? {
         return try? FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     }
+
+    static func copy(from videoUrl: URL) {
+        guard let destination = exportFolder else { return }
+        do {
+            try FileManager.default.copyItem(at: videoUrl, to: destination.appendingPathComponent(videoUrl.path.fileName.mov))
+        } catch let error {
+            print(error)
+        }
+    }
 }
