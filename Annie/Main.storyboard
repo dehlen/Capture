@@ -344,14 +344,18 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="FinishViewController" id="4na-lm-BRm" customClass="FinishViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="uBq-RI-LzS">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="649"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="268"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0G-2K-ldE">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="649"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="268"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zxo-7b-iPc">
-                                        <rect key="frame" x="0.0" y="98" width="480" height="531"/>
+                                        <rect key="frame" x="165" y="98" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="zxo-7b-iPc" secondAttribute="height" multiplier="1:1" id="4Wd-yP-eL0"/>
+                                            <constraint firstAttribute="width" constant="150" id="8N4-ca-XH3"/>
+                                        </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="success" id="Rje-YE-SmX"/>
                                     </imageView>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="pY8-YP-p6Z">
