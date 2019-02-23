@@ -82,7 +82,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HSQ-T7-A50" secondAttribute="height" multiplier="1:1" id="CZ6-kL-217"/>
                                 </constraints>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="tlz-LC-MVh">
+                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="tlz-LC-MVh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -95,6 +95,21 @@
                                     <action selector="toggleRecording:" target="uaI-qh-UhH" id="xUX-Ns-cbt"/>
                                 </connections>
                             </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kAs-MG-hLH">
+                                <rect key="frame" x="247" y="10" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="HY7-Fw-wrv"/>
+                                    <constraint firstAttribute="width" constant="24" id="niB-RO-SeX"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="disclosureIndicator" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="esG-Vf-yM2">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showOptions:" target="uaI-qh-UhH" id="hoT-a3-4n4"/>
+                                    <segue destination="YOT-lv-2ug" kind="popover" identifier="showOptionsPopover" popoverAnchorView="kAs-MG-hLH" popoverBehavior="t" preferredEdge="maxY" id="ygh-cz-N5G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SE2-gW-bkq" secondAttribute="trailing" constant="20" id="5lg-rM-Zx3"/>
@@ -102,6 +117,8 @@
                             <constraint firstAttribute="bottom" secondItem="zzB-mQ-fYD" secondAttribute="bottom" constant="44" id="MTJ-a2-0R5"/>
                             <constraint firstAttribute="bottom" secondItem="SE2-gW-bkq" secondAttribute="bottom" constant="8" id="Ykl-Qw-iIO"/>
                             <constraint firstItem="zzB-mQ-fYD" firstAttribute="leading" secondItem="R5p-jo-UKs" secondAttribute="leading" id="bK8-4a-1C9"/>
+                            <constraint firstItem="kAs-MG-hLH" firstAttribute="leading" secondItem="HSQ-T7-A50" secondAttribute="trailing" constant="8" id="d4V-U4-YRc"/>
+                            <constraint firstItem="kAs-MG-hLH" firstAttribute="centerY" secondItem="HSQ-T7-A50" secondAttribute="centerY" id="eG6-OX-Tw3"/>
                             <constraint firstAttribute="bottom" secondItem="HSQ-T7-A50" secondAttribute="bottom" constant="8" id="hW6-qc-oJf"/>
                             <constraint firstItem="zzB-mQ-fYD" firstAttribute="top" secondItem="R5p-jo-UKs" secondAttribute="top" id="kqg-CO-qJj"/>
                             <constraint firstAttribute="trailing" secondItem="zzB-mQ-fYD" secondAttribute="trailing" id="vJf-Wi-TJH"/>
@@ -110,6 +127,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="II8-pA-cSp" id="EW0-rL-dVg"/>
+                        <outlet property="optionsButton" destination="kAs-MG-hLH" id="jjm-kL-dds"/>
                         <outlet property="recordingButton" destination="HSQ-T7-A50" id="Z9o-9d-wYq"/>
                         <segue destination="wTd-mG-kcM" kind="show" identifier="showContainer" id="7e5-he-qGJ"/>
                     </connections>
@@ -117,6 +135,133 @@
                 <customObject id="IA5-T1-rcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-59" y="588"/>
+        </scene>
+        <!--Option View Controller-->
+        <scene sceneID="qVJ-hu-kTj">
+            <objects>
+                <viewController id="YOT-lv-2ug" customClass="OptionViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="AQE-79-cBC">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="325"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-t9-afT">
+                                <rect key="frame" x="18" y="289" width="88" height="18"/>
+                                <buttonCell key="cell" type="check" title="Save video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="TEx-Qk-2g4">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="zG3-NZ-cFk" name="value" keyPath="values.SaveVideo" id="BLx-sS-Gb5"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xKT-mn-kAt">
+                                <rect key="frame" x="18" y="181" width="414" height="28"/>
+                                <textFieldCell key="cell" selectable="YES" title="When selected the mouse cursor will be visible in the exported GIF. Else the mouse cursor will be hidden." id="T5R-vQ-Eph">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6HG-qi-cPy">
+                                <rect key="frame" x="18" y="253" width="414" height="28"/>
+                                <textFieldCell key="cell" selectable="YES" id="tSQ-gE-Xid">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <string key="title">When exporting the GIF and saving it to the selected destination the recorded video will also be exported and saved in that location.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8u8-7E-o2a">
+                                <rect key="frame" x="18" y="217" width="144" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show Mouse Cursor" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kX8-V5-CbV">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="zG3-NZ-cFk" name="value" keyPath="values.ShowMouseCursor" id="Mdo-ZG-9U3"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="23r-4k-ty2">
+                                <rect key="frame" x="18" y="109" width="414" height="28"/>
+                                <textFieldCell key="cell" selectable="YES" title="When selected the mouse clicks made during the video will be visible in the exported GIF. Else the clicks will be hidden." id="vvK-ns-Jiz">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S2c-db-fnY">
+                                <rect key="frame" x="18" y="145" width="140" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show Mouse Clicks" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iAU-mR-uhr">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="zG3-NZ-cFk" name="value" keyPath="values.ShowMouseClicks" id="zCO-wD-suf"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VuK-Iv-Naf">
+                                <rect key="frame" x="18" y="72" width="72" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="GIF Height:" id="FI5-A1-Z3y">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FIX-cW-7uE">
+                                <rect key="frame" x="18" y="20" width="414" height="42"/>
+                                <textFieldCell key="cell" selectable="YES" id="hWJ-JP-a0V">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <string key="title">You can choose the height with which the recorded video will be saved. Smaller dimensions will result in a smaller GIF file size. The width will be calculated so that the GIF automatically will keep its aspect ratio.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kLr-Aq-oTH">
+                                <rect key="frame" x="98" y="70" width="80" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="u7O-BA-J8n"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" placeholderString="Height" drawsBackground="YES" id="met-cm-xsT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="YOT-lv-2ug" name="value" keyPath="self.gifHeight" id="PXb-Uj-JH1"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="8u8-7E-o2a" firstAttribute="leading" secondItem="jvb-t9-afT" secondAttribute="leading" id="5ww-hw-JWP"/>
+                            <constraint firstItem="S2c-db-fnY" firstAttribute="leading" secondItem="8u8-7E-o2a" secondAttribute="leading" id="75N-OJ-YoD"/>
+                            <constraint firstItem="xKT-mn-kAt" firstAttribute="top" secondItem="8u8-7E-o2a" secondAttribute="bottom" constant="10" id="8BG-mw-ibZ"/>
+                            <constraint firstAttribute="trailing" secondItem="6HG-qi-cPy" secondAttribute="trailing" constant="20" id="Gd9-zW-Jkm"/>
+                            <constraint firstAttribute="trailing" secondItem="xKT-mn-kAt" secondAttribute="trailing" constant="20" id="H2e-a9-v1S"/>
+                            <constraint firstItem="23r-4k-ty2" firstAttribute="top" secondItem="S2c-db-fnY" secondAttribute="bottom" constant="10" id="Hhi-xo-1ev"/>
+                            <constraint firstItem="8u8-7E-o2a" firstAttribute="top" secondItem="6HG-qi-cPy" secondAttribute="bottom" constant="20" id="Mm9-ha-Bq8"/>
+                            <constraint firstItem="6HG-qi-cPy" firstAttribute="top" secondItem="jvb-t9-afT" secondAttribute="bottom" constant="10" id="NCO-fq-Rgz"/>
+                            <constraint firstItem="FIX-cW-7uE" firstAttribute="leading" secondItem="jvb-t9-afT" secondAttribute="leading" id="Qhv-xe-95b"/>
+                            <constraint firstAttribute="trailing" secondItem="23r-4k-ty2" secondAttribute="trailing" constant="20" id="R8b-sP-W7P"/>
+                            <constraint firstItem="jvb-t9-afT" firstAttribute="top" secondItem="AQE-79-cBC" secondAttribute="top" constant="20" id="RLO-ic-vRg"/>
+                            <constraint firstItem="VuK-Iv-Naf" firstAttribute="top" secondItem="23r-4k-ty2" secondAttribute="bottom" constant="20" id="RR4-Oz-a0a"/>
+                            <constraint firstItem="jvb-t9-afT" firstAttribute="leading" secondItem="AQE-79-cBC" secondAttribute="leading" constant="20" id="Xc4-9c-JrN"/>
+                            <constraint firstItem="23r-4k-ty2" firstAttribute="leading" secondItem="S2c-db-fnY" secondAttribute="leading" id="c4x-bz-qwb"/>
+                            <constraint firstItem="6HG-qi-cPy" firstAttribute="leading" secondItem="jvb-t9-afT" secondAttribute="leading" id="cIK-0s-hNQ"/>
+                            <constraint firstAttribute="trailing" secondItem="FIX-cW-7uE" secondAttribute="trailing" constant="20" id="cao-vN-Z1N"/>
+                            <constraint firstAttribute="bottom" secondItem="FIX-cW-7uE" secondAttribute="bottom" constant="20" id="dMP-oP-FnF"/>
+                            <constraint firstItem="xKT-mn-kAt" firstAttribute="leading" secondItem="8u8-7E-o2a" secondAttribute="leading" id="fvk-aS-ieP"/>
+                            <constraint firstItem="kLr-Aq-oTH" firstAttribute="leading" secondItem="VuK-Iv-Naf" secondAttribute="trailing" constant="10" id="iqj-1I-oRM"/>
+                            <constraint firstItem="S2c-db-fnY" firstAttribute="top" secondItem="xKT-mn-kAt" secondAttribute="bottom" constant="20" id="mMt-xd-5DW"/>
+                            <constraint firstItem="VuK-Iv-Naf" firstAttribute="leading" secondItem="jvb-t9-afT" secondAttribute="leading" id="q5W-aA-Wsg"/>
+                            <constraint firstItem="FIX-cW-7uE" firstAttribute="top" secondItem="VuK-Iv-Naf" secondAttribute="bottom" constant="10" id="wTm-6X-LEz"/>
+                            <constraint firstItem="kLr-Aq-oTH" firstAttribute="centerY" secondItem="VuK-Iv-Naf" secondAttribute="centerY" id="yWV-xQ-E39"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="rWb-fA-dkx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="zG3-NZ-cFk"/>
+            </objects>
+            <point key="canvasLocation" x="-59" y="1016"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="16m-PV-kGq">
@@ -178,7 +323,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <avPlayerView fixedFrame="YES" videoGravity="resizeAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Fj-RHV">
+                            <avPlayerView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-Fj-RHV">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </avPlayerView>
@@ -562,6 +707,7 @@ Gw
     </scenes>
     <resources>
         <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="disclosureIndicator" width="30" height="30"/>
         <image name="success" width="480" height="480"/>
     </resources>
 </document>
