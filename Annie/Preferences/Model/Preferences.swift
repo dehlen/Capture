@@ -9,4 +9,5 @@ public extension UserDefaults.Key {
     static let bitBucketApiEndpoint: UserDefaults.Key = "BitBucketApiEndpoint"
     static let showMouseCursor: UserDefaults.Key = "ShowMouseCursor"
     static let showMouseClicks: UserDefaults.Key = "ShowMouseClicks"
+    static let saveVideo: UserDefaults.Key = "SaveVideo"
 }
