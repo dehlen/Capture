@@ -37,6 +37,7 @@
 		0B581A2C22219B1E006EF012 /* HotKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2B22219B1E006EF012 /* HotKeyType.swift */; };
 		0B581A2E22219C6A006EF012 /* NSCoding+Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */; };
 		0B581A3022219CC0006EF012 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2F22219CC0006EF012 /* Constants.swift */; };
+		0B581A322221AD98006EF012 /* CutoutWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A312221AD98006EF012 /* CutoutWindow.swift */; };
 		0B64CD7D2218BA99004F6321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CD7C2218BA98004F6321 /* Main.storyboard */; };
 		0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */; };
 		0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */; };
@@ -109,6 +110,7 @@
 		0B581A2B22219B1E006EF012 /* HotKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyType.swift; sourceTree = "<group>"; };
 		0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCoding+Archive.swift"; sourceTree = "<group>"; };
 		0B581A2F22219CC0006EF012 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0B581A312221AD98006EF012 /* CutoutWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutoutWindow.swift; sourceTree = "<group>"; };
 		0B64CD7C2218BA98004F6321 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowListViewController.swift; sourceTree = "<group>"; };
 		0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutFactory.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				6BE514A42126A2410068337E /* AppDelegate.swift */,
 				0BE418B4221AE59600B8E85D /* AnnieApplication.swift */,
 				0B581A2F22219CC0006EF012 /* Constants.swift */,
+				0B581A312221AD98006EF012 /* CutoutWindow.swift */,
 				0B202B23221B27DC00435657 /* BitBucketIntegration */,
 				0B202B22221B27D300435657 /* Container */,
 				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
@@ -566,6 +569,7 @@
 				0B3276D02219E6810028F007 /* AdvancedPreferencesViewController.swift in Sources */,
 				6BE514B42126A4E60068337E /* CollectionViewItem.swift in Sources */,
 				0B202B30221B615100435657 /* MarkdownWriter.swift in Sources */,
+				0B581A322221AD98006EF012 /* CutoutWindow.swift in Sources */,
 				0BD239EB2219A43B003AF068 /* UserInterfaceError.swift in Sources */,
 				0BE418B5221AE59600B8E85D /* AnnieApplication.swift in Sources */,
 				0BA2620F221AA7180068D387 /* PullRequests.swift in Sources */,

@@ -10,6 +10,7 @@ class WindowListViewController: NSViewController {
     private var selectedWindow: WindowInfo?
     private var currentRecorder: Recorder?
     private var currentVideoOutputUrl: URL?
+    private var cutoutWindow: CutoutWindow?
     private var dataSource = CollectionViewDataSource<WindowInfo>.make(for: []) {
         didSet {
             collectionView.reloadData()
@@ -36,6 +37,7 @@ class WindowListViewController: NSViewController {
 
     @objc func stopRecording() {
         guard let currentRecorder = currentRecorder else { return }
+        cutoutWindow?.orderOut(nil)
         NSApplication.shared.activate(ignoringOtherApps: true)
         currentRecorder.stop()
         selectedWindow = nil
@@ -46,6 +48,9 @@ class WindowListViewController: NSViewController {
     private func startRecording() {
         guard let selectedWindow = self.selectedWindow, let displayId = selectedWindow.directDisplayID, let id = selectedWindow.id else { return }
         do {
+            let fullScreenBounds = CGDisplayBounds(displayId)
+            cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
+            cutoutWindow?.makeKeyAndOrderFront(nil)
             let videoOutputUrl = DirectoryHandler.videoDestination
             currentVideoOutputUrl = videoOutputUrl
             currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: displayId, cropRect: selectedWindow.frame, audioDevice: nil)
