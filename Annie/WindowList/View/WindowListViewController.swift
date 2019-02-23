@@ -36,6 +36,7 @@ class WindowListViewController: NSViewController {
 
     @objc func stopRecording() {
         guard let currentRecorder = currentRecorder else { return }
+        NSApplication.shared.activate(ignoringOtherApps: true)
         currentRecorder.stop()
         selectedWindow = nil
         collectionView.deselectAll(nil)
