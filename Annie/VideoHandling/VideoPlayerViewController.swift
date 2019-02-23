@@ -60,7 +60,7 @@ class VideoPlayerViewController: NSViewController {
         }
     }
 
-    private func exportVideo(then handler: @escaping Handler) {
+    private func exportVideo(then handler: @escaping URLHandler) {
         guard let playerItem = playerView.player?.currentItem else {
             handler(.failure(NSError(domain: "com.davidehlen.Annie", code: 1000, userInfo: nil)))
             return
@@ -83,11 +83,15 @@ class VideoPlayerViewController: NSViewController {
         exportSession.exportAsynchronously {
             switch exportSession.status {
             case .completed:
-                handler(.success(()))
+                handler(.success(outputUrl))
             default:
                 return handler(.failure(NSError(domain: "com.davidehlen.Annie", code: 1002, userInfo: ["status": exportSession.status.rawValue])))
             }
         }
+    }
+
+    private func copy(from: URL) {
+        
     }
 }
 
@@ -102,7 +106,10 @@ extension VideoPlayerViewController: ContainerPageable {
         }
         exportVideo() { result in
             switch result {
-            case .success:
+            case .success(let videoUrl):
+                if Current.defaults[.saveVideo] == true {
+                    DirectoryHandler.copy(from: videoUrl)
+                }
                 self.convertVideoToGif() { convertResult in
                     DispatchQueue.main.async {
                         sender.isEnabled = true

@@ -5,6 +5,7 @@ class WindowListViewController: NSViewController {
 
     @IBOutlet private weak var collectionView: NSCollectionView!
     @IBOutlet private weak var recordingButton: RecordingButton!
+    @IBOutlet private weak var optionsButton: NSButton!
 
     private var windowListViewModel = WindowListViewModel()
     private var selectedWindow: WindowInfo?
@@ -82,6 +83,11 @@ class WindowListViewController: NSViewController {
         } else {
             stopRecording()
         }
+    }
+
+    @IBAction func showOptions(_ sender: Any) {
+        optionsButton.state = .on
+        performSegue(withIdentifier: "showOptionsPopover", sender: nil)
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
