@@ -1,5 +1,6 @@
 import Cocoa
 import AVFoundation
+import Magnet
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -11,6 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupPreferenceDefaults()
         ValueTransformerFactory.registerAll()
+        Current.hotKeyService.setupDefaultHotKeys()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -18,9 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func setupPreferenceDefaults() {
-        let defaults = UserDefaults.standard
-
-        defaults.register(defaults: [
+        Current.defaults.register(defaults: [
             .exportUrl: DirectoryHandler.desktopUrl!.path,
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
             .gifFrameRate: 20,
@@ -28,6 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .showMouseCursor: true,
             .showMouseClicks: true
         ])
+        
+        let keyCombo = KeyCombo(keyCode: 15, carbonModifiers: 4352)
+            if let data = keyCombo?.archive() {
+                Current.defaults.register(defaults: [
+                    Constants.HotKey.stopRecordingKeyCombo: data
+                ])
+        }
     }
 
     @IBAction func showPreferences(_ sender: Any) {

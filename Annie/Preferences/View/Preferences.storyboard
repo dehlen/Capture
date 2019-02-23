@@ -36,6 +36,7 @@
                         <tabViewItem image="NSNetwork" id="qeF-Sn-1oh">
                             <nil key="label"/>
                         </tabViewItem>
+                        <tabViewItem image="shortcut" id="mra-oD-k6P"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="Mj1-0u-SZL">
@@ -51,6 +52,7 @@
                         <segue destination="CbG-uA-UXG" kind="relationship" relationship="tabItems" id="p6U-IE-ILd"/>
                         <segue destination="jIF-zo-Q9v" kind="relationship" relationship="tabItems" id="QCH-QO-mvV"/>
                         <segue destination="BM0-If-l1N" kind="relationship" relationship="tabItems" id="biA-ao-SWN"/>
+                        <segue destination="QR1-iB-TYI" kind="relationship" relationship="tabItems" id="gC3-ZV-Kvk"/>
                     </connections>
                 </tabViewController>
                 <customObject id="wzg-J3-s6R" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -62,11 +64,11 @@
             <objects>
                 <viewController title="General" id="CbG-uA-UXG" customClass="PreferencesViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4Ei-kU-JuY">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="225"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="239"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <pathControl focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xix-mN-5C6" customClass="PopUpButtonLikePathControl" customModule="Annie" customModuleProvider="target">
-                                <rect key="frame" x="118" y="184" width="136" height="25"/>
+                                <rect key="frame" x="118" y="198" width="136" height="25"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" focusRingType="none" alignment="left" pathStyle="popUp" id="fAZ-H5-ScI">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Applications/"/>
@@ -83,7 +85,7 @@
                                 </connections>
                             </pathControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="btq-nd-DrW">
-                                <rect key="frame" x="18" y="164" width="601" height="14"/>
+                                <rect key="frame" x="18" y="164" width="414" height="28"/>
                                 <textFieldCell key="cell" selectable="YES" title="Choose the directory the generated GIFs should be exported to. By default the GIF will be moved to your desktop." id="ePr-4A-nsB">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -91,7 +93,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-1b-v6d">
-                                <rect key="frame" x="18" y="188" width="95" height="17"/>
+                                <rect key="frame" x="18" y="202" width="95" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Export GIFs to:" id="312-bw-BIU">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -136,6 +138,7 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="btq-nd-DrW" secondAttribute="trailing" constant="20" id="078-OX-KBz"/>
                             <constraint firstItem="xix-mN-5C6" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="trailing" constant="10" id="3UI-KT-DWK"/>
                             <constraint firstItem="ZIb-RS-dNM" firstAttribute="leading" secondItem="zLP-bJ-Kcs" secondAttribute="leading" id="3s4-GX-kOo"/>
                             <constraint firstAttribute="trailing" secondItem="eyF-fs-hWw" secondAttribute="trailing" constant="20" id="5w5-2e-VRN"/>
@@ -407,12 +410,65 @@
                 <customObject id="fjV-XN-Ndi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="0t2-Dn-ABy"/>
             </objects>
-            <point key="canvasLocation" x="551" y="921.5"/>
+            <point key="canvasLocation" x="551" y="784"/>
+        </scene>
+        <!--Shortcuts-->
+        <scene sceneID="sQO-En-g4s">
+            <objects>
+                <viewController title="Shortcuts" id="QR1-iB-TYI" customClass="ShortcutPreferencesViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Fpw-BH-1m3">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="104"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gP0-fn-Mw8">
+                                <rect key="frame" x="18" y="20" width="414" height="28"/>
+                                <textFieldCell key="cell" selectable="YES" title="Set a shortcut to quickly stop a recording. This shortcut will work globally as long as the application is running." id="MsX-He-7Fn">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Crv-c9-8k9">
+                                <rect key="frame" x="18" y="67" width="158" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Stop Recording Shortcut:" id="sxX-U6-kcm">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="woe-vk-qNR" customClass="RecordView" customModule="KeyHolder">
+                                <rect key="frame" x="184" y="58" width="160" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="1y8-Iu-p5J"/>
+                                    <constraint firstAttribute="height" constant="34" id="FBb-Uu-Mlw"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="woe-vk-qNR" firstAttribute="leading" secondItem="Crv-c9-8k9" secondAttribute="trailing" constant="10" id="BEs-Qr-C7U"/>
+                            <constraint firstAttribute="trailing" secondItem="gP0-fn-Mw8" secondAttribute="trailing" constant="20" id="DJO-Ly-UpG"/>
+                            <constraint firstAttribute="bottom" secondItem="gP0-fn-Mw8" secondAttribute="bottom" constant="20" id="WJT-up-2hc"/>
+                            <constraint firstItem="Crv-c9-8k9" firstAttribute="top" secondItem="Fpw-BH-1m3" secondAttribute="top" constant="20" id="ZHg-2c-w0J"/>
+                            <constraint firstItem="gP0-fn-Mw8" firstAttribute="top" secondItem="woe-vk-qNR" secondAttribute="bottom" constant="10" id="hRr-4V-vGf"/>
+                            <constraint firstItem="woe-vk-qNR" firstAttribute="centerY" secondItem="Crv-c9-8k9" secondAttribute="centerY" id="kcI-f8-P7G"/>
+                            <constraint firstItem="gP0-fn-Mw8" firstAttribute="leading" secondItem="Fpw-BH-1m3" secondAttribute="leading" constant="20" id="qRI-N2-QwJ"/>
+                            <constraint firstItem="Crv-c9-8k9" firstAttribute="leading" secondItem="Fpw-BH-1m3" secondAttribute="leading" constant="20" id="r0R-TF-GdZ"/>
+                            <constraint firstItem="gP0-fn-Mw8" firstAttribute="leading" secondItem="Crv-c9-8k9" secondAttribute="leading" id="tHf-xi-MfL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="stopRecordingShortcutRecordView" destination="woe-vk-qNR" id="d3d-fx-WZm"/>
+                    </connections>
+                </viewController>
+                <customObject id="Bst-kG-9Uh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="550" y="1093"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSNetwork" width="32" height="32"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="shortcut" width="46" height="43"/>
     </resources>
 </document>

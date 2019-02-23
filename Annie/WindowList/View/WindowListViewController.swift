@@ -20,6 +20,7 @@ class WindowListViewController: NSViewController {
         super.viewDidLoad()
 
         setupCollectionView()
+        setupObserver()
     }
 
     private func setupCollectionView() {
@@ -27,6 +28,31 @@ class WindowListViewController: NSViewController {
         collectionView.collectionViewLayout = CollectionViewLayoutFactory.createGridLayout()
         collectionView.delegate = self
         refresh()
+    }
+
+    private func setupObserver() {
+        Current.notificationCenter.addObserver(self, selector: #selector(stopRecording), name: .shouldStopRecording, object: nil)
+    }
+
+    @objc func stopRecording() {
+        guard let currentRecorder = currentRecorder else { return }
+        currentRecorder.stop()
+        selectedWindow = nil
+        collectionView.deselectAll(nil)
+        performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
+    }
+
+    private func startRecording() {
+        guard let selectedWindow = self.selectedWindow, let displayId = selectedWindow.directDisplayID, let id = selectedWindow.id else { return }
+        do {
+            let videoOutputUrl = DirectoryHandler.videoDestination
+            currentVideoOutputUrl = videoOutputUrl
+            currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: displayId, cropRect: selectedWindow.frame, audioDevice: nil)
+            WindowInfoManager.switchToApp(withWindowId: id)
+            currentRecorder?.start()
+        } catch let error {
+            print(error)
+        }
     }
 
     private func refresh() {
@@ -46,22 +72,9 @@ class WindowListViewController: NSViewController {
         }
         recordingButton.isRecording.toggle()
         if recordingButton.isRecording {
-            guard let selectedWindow = self.selectedWindow, let displayId = selectedWindow.directDisplayID, let id = selectedWindow.id else { return }
-            do {
-                let videoOutputUrl = DirectoryHandler.videoDestination
-                currentVideoOutputUrl = videoOutputUrl
-                currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: displayId, cropRect: selectedWindow.frame, audioDevice: nil)
-                WindowInfoManager.switchToApp(withWindowId: id)
-                currentRecorder?.start()
-            } catch let error {
-                print(error)
-            }
-
+            startRecording()
         } else {
-            currentRecorder?.stop()
-            selectedWindow = nil
-            collectionView.deselectAll(nil)
-            performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
+            stopRecording()
         }
     }
 

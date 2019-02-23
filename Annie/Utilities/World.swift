@@ -5,6 +5,9 @@ public struct World {
     var date = { Date() }
     var locale = Locale.autoupdatingCurrent
     var timeZone = TimeZone.autoupdatingCurrent
+    var hotKeyService = HotKeyService()
+    var defaults = UserDefaults.standard
+    var notificationCenter = NotificationCenter.default
 }
 
 #if DEBUG

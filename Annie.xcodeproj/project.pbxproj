@@ -30,6 +30,13 @@
 		0B4309AF22198FAA00766DB0 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B4309AC22198FAA00766DB0 /* Preferences.storyboard */; };
 		0B4309B022198FAA00766DB0 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4309AD22198FAA00766DB0 /* PreferencesWindowController.swift */; };
 		0B4309B122198FAA00766DB0 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4309AE22198FAA00766DB0 /* PreferencesViewController.swift */; };
+		0B581A252221951A006EF012 /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B581A232221951A006EF012 /* Magnet.framework */; };
+		0B581A262221951A006EF012 /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B581A242221951A006EF012 /* KeyHolder.framework */; };
+		0B581A282221955D006EF012 /* ShortcutPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A272221955D006EF012 /* ShortcutPreferencesViewController.swift */; };
+		0B581A2A222199EA006EF012 /* HotKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A29222199EA006EF012 /* HotKeyService.swift */; };
+		0B581A2C22219B1E006EF012 /* HotKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2B22219B1E006EF012 /* HotKeyType.swift */; };
+		0B581A2E22219C6A006EF012 /* NSCoding+Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */; };
+		0B581A3022219CC0006EF012 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2F22219CC0006EF012 /* Constants.swift */; };
 		0B64CD7D2218BA99004F6321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CD7C2218BA98004F6321 /* Main.storyboard */; };
 		0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */; };
 		0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */; };
@@ -95,6 +102,13 @@
 		0B4309AC22198FAA00766DB0 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		0B4309AD22198FAA00766DB0 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		0B4309AE22198FAA00766DB0 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		0B581A232221951A006EF012 /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
+		0B581A242221951A006EF012 /* KeyHolder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyHolder.framework; path = Carthage/Build/Mac/KeyHolder.framework; sourceTree = "<group>"; };
+		0B581A272221955D006EF012 /* ShortcutPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferencesViewController.swift; sourceTree = "<group>"; };
+		0B581A29222199EA006EF012 /* HotKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyService.swift; sourceTree = "<group>"; };
+		0B581A2B22219B1E006EF012 /* HotKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyType.swift; sourceTree = "<group>"; };
+		0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCoding+Archive.swift"; sourceTree = "<group>"; };
+		0B581A2F22219CC0006EF012 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B64CD7C2218BA98004F6321 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowListViewController.swift; sourceTree = "<group>"; };
 		0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutFactory.swift; sourceTree = "<group>"; };
@@ -143,6 +157,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B581A252221951A006EF012 /* Magnet.framework in Frameworks */,
+				0B581A262221951A006EF012 /* KeyHolder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +283,7 @@
 				0B3276CF2219E6810028F007 /* AdvancedPreferencesViewController.swift */,
 				0B4309AD22198FAA00766DB0 /* PreferencesWindowController.swift */,
 				0BA26217221AD42A0068D387 /* IntegrationsPreferencesViewController.swift */,
+				0B581A272221955D006EF012 /* ShortcutPreferencesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,6 +333,9 @@
 				0B64CD902218D9E1004F6321 /* World.swift */,
 				0BC8320B221A087700FD8CF4 /* Error */,
 				0BC8320A221A086E00FD8CF4 /* ValueTransformer */,
+				0B581A29222199EA006EF012 /* HotKeyService.swift */,
+				0B581A2B22219B1E006EF012 /* HotKeyType.swift */,
+				0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -365,6 +385,8 @@
 		0BD239E722199E09003AF068 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B581A242221951A006EF012 /* KeyHolder.framework */,
+				0B581A232221951A006EF012 /* Magnet.framework */,
 				0BD239E822199E09003AF068 /* Automator.framework */,
 			);
 			name = Frameworks;
@@ -393,6 +415,7 @@
 				0B64CD7C2218BA98004F6321 /* Main.storyboard */,
 				6BE514A42126A2410068337E /* AppDelegate.swift */,
 				0BE418B4221AE59600B8E85D /* AnnieApplication.swift */,
+				0B581A2F22219CC0006EF012 /* Constants.swift */,
 				0B202B23221B27DC00435657 /* BitBucketIntegration */,
 				0B202B22221B27D300435657 /* Container */,
 				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
@@ -422,6 +445,7 @@
 				6BE5149D2126A2410068337E /* Sources */,
 				6BE5149E2126A2410068337E /* Frameworks */,
 				6BE5149F2126A2410068337E /* Resources */,
+				0B581A22222194BD006EF012 /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -487,6 +511,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B581A22222194BD006EF012 /* Carthage Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Magnet.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/KeyHolder.framework",
+			);
+			name = "Carthage Copy Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Magnet.framework\n",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeyHolder.framework\n",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6BE5149D2126A2410068337E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -510,6 +559,7 @@
 				0BA26213221AAB710068D387 /* String+QueryParameters.swift in Sources */,
 				0B64CD9C2218DE1B004F6321 /* Result.swift in Sources */,
 				0BE418BC221AF3B200B8E85D /* ContainerViewController.swift in Sources */,
+				0B581A2A222199EA006EF012 /* HotKeyService.swift in Sources */,
 				0B64CD972218DD5A004F6321 /* ConvertGif.swift in Sources */,
 				0BA2620D221A9F9B0068D387 /* RequestKitSession.swift in Sources */,
 				0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */,
@@ -526,7 +576,9 @@
 				0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */,
 				0BA2620B221A9E4A0068D387 /* Router.swift in Sources */,
 				0B202B34221B645800435657 /* NetworkError.swift in Sources */,
+				0B581A3022219CC0006EF012 /* Constants.swift in Sources */,
 				0B202B21221B263800435657 /* NSView+Animation.swift in Sources */,
+				0B581A2E22219C6A006EF012 /* NSCoding+Archive.swift in Sources */,
 				0B202B2C221B590400435657 /* MimeType.swift in Sources */,
 				0BA26218221AD42A0068D387 /* IntegrationsPreferencesViewController.swift in Sources */,
 				0B202B1F221B1E7100435657 /* DeselectableTableView.swift in Sources */,
@@ -534,6 +586,7 @@
 				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
 				0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */,
 				0B202B32221B640500435657 /* NoResponse.swift in Sources */,
+				0B581A2C22219B1E006EF012 /* HotKeyType.swift in Sources */,
 				0BE418B3221AE33D00B8E85D /* BitBucketIntegrationViewController.swift in Sources */,
 				0BE418BE221AF68A00B8E85D /* ContainerPageable.swift in Sources */,
 				0B4309B022198FAA00766DB0 /* PreferencesWindowController.swift in Sources */,
@@ -547,6 +600,7 @@
 				0B202B36221B70E100435657 /* JSONPostRouter.swift in Sources */,
 				0B202B2E221B5D7100435657 /* BitBucketIntegrationError.swift in Sources */,
 				0B202B1D221B11CE00435657 /* FinishViewController.swift in Sources */,
+				0B581A282221955D006EF012 /* ShortcutPreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +739,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = UQGQH2VG43;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = Annie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -706,6 +764,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = UQGQH2VG43;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = Annie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
