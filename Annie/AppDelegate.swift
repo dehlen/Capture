@@ -26,7 +26,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .gifFrameRate: 20,
             .gifHeight: 480,
             .showMouseCursor: true,
-            .showMouseClicks: true
+            .showMouseClicks: true,
+            .saveVideo: true
         ])
         
         let keyCombo = KeyCombo(keyCode: 15, carbonModifiers: 4352)
