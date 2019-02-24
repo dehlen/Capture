@@ -66,9 +66,11 @@ struct WindowInfo {
         frame = optimizeFrame
     }
 
+    //kCGWindowBounds returns bounds relative to the upper left corner of the main display
+    //therefore we need to convert this rect in order to get the actual window location
     func convertPosition(_ frame:NSRect) -> NSPoint {
         var convertedPoint = frame.origin
-        let displayBounds = CGDisplayBounds(directDisplayID ?? CGMainDisplayID())
+        let displayBounds = CGDisplayBounds(CGMainDisplayID())
         let y = displayBounds.height - frame.height - frame.origin.y
         convertedPoint.y = y
         return convertedPoint
