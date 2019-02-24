@@ -39,6 +39,7 @@
 		0B581A3022219CC0006EF012 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2F22219CC0006EF012 /* Constants.swift */; };
 		0B581A322221AD98006EF012 /* CutoutWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A312221AD98006EF012 /* CutoutWindow.swift */; };
 		0B581A3422220A82006EF012 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A3322220A82006EF012 /* OptionViewController.swift */; };
+		0B581A362222141B006EF012 /* RegiftOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B581A352222141B006EF012 /* RegiftOSX.framework */; };
 		0B64CD7D2218BA99004F6321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CD7C2218BA98004F6321 /* Main.storyboard */; };
 		0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */; };
 		0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */; };
@@ -52,7 +53,6 @@
 		0B64CD932218DA3F004F6321 /* DirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */; };
 		0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD942218DA7D004F6321 /* StringExtension.swift */; };
 		0B64CD972218DD5A004F6321 /* ConvertGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD962218DD5A004F6321 /* ConvertGif.swift */; };
-		0B64CD992218DD65004F6321 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CD982218DD65004F6321 /* ffmpeg */; };
 		0B64CD9C2218DE1B004F6321 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD9B2218DE1B004F6321 /* Result.swift */; };
 		0B64CDA32218E42C004F6321 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CDA52218E42C004F6321 /* Localizable.strings */; };
 		0BA26204221A9DA10068D387 /* BitBucketIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA261FE221A9DA10068D387 /* BitBucketIntegration.swift */; };
@@ -113,6 +113,7 @@
 		0B581A2F22219CC0006EF012 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B581A312221AD98006EF012 /* CutoutWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutoutWindow.swift; sourceTree = "<group>"; };
 		0B581A3322220A82006EF012 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		0B581A352222141B006EF012 /* RegiftOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RegiftOSX.framework; path = Carthage/Build/Mac/RegiftOSX.framework; sourceTree = "<group>"; };
 		0B64CD7C2218BA98004F6321 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowListViewController.swift; sourceTree = "<group>"; };
 		0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutFactory.swift; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryHandler.swift; sourceTree = "<group>"; };
 		0B64CD942218DA7D004F6321 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		0B64CD962218DD5A004F6321 /* ConvertGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertGif.swift; sourceTree = "<group>"; };
-		0B64CD982218DD65004F6321 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		0B64CD9B2218DE1B004F6321 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0B64CDA42218E42C004F6321 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0BA261FE221A9DA10068D387 /* BitBucketIntegration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitBucketIntegration.swift; sourceTree = "<group>"; };
@@ -161,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B581A362222141B006EF012 /* RegiftOSX.framework in Frameworks */,
 				0B581A252221951A006EF012 /* Magnet.framework in Frameworks */,
 				0B581A262221951A006EF012 /* KeyHolder.framework in Frameworks */,
 			);
@@ -210,14 +211,6 @@
 				0BE418C1221AFF9600B8E85D /* NextContainer.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		0B64CD9A2218DD69004F6321 /* third-party */ = {
-			isa = PBXGroup;
-			children = (
-				0B64CD982218DD65004F6321 /* ffmpeg */,
-			);
-			path = "third-party";
 			sourceTree = "<group>";
 		};
 		0BA261FD221A9DA10068D387 /* Integrations */ = {
@@ -389,6 +382,7 @@
 		0BD239E722199E09003AF068 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B581A352222141B006EF012 /* RegiftOSX.framework */,
 				0B581A242221951A006EF012 /* KeyHolder.framework */,
 				0B581A232221951A006EF012 /* Magnet.framework */,
 				0BD239E822199E09003AF068 /* Automator.framework */,
@@ -429,7 +423,6 @@
 				0BA261FD221A9DA10068D387 /* Integrations */,
 				0BA26215221AAB890068D387 /* Network */,
 				0BC83202221A07E600FD8CF4 /* Preferences */,
-				0B64CD9A2218DD69004F6321 /* third-party */,
 				0BC83209221A085200FD8CF4 /* Utilities */,
 				0BC8320D221A08EB00FD8CF4 /* VideoHandling */,
 				0BC83206221A082F00FD8CF4 /* WindowList */,
@@ -511,7 +504,6 @@
 				6BE514B52126A4E60068337E /* CollectionViewItem.xib in Resources */,
 				0B4309AF22198FAA00766DB0 /* Preferences.storyboard in Resources */,
 				0B64CD7D2218BA99004F6321 /* Main.storyboard in Resources */,
-				0B64CD992218DD65004F6321 /* ffmpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +520,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Magnet.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/KeyHolder.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RegiftOSX.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputFileListPaths = (
@@ -535,6 +528,7 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Magnet.framework\n",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeyHolder.framework\n",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RegiftOSX.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

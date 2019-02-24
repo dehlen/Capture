@@ -1,4 +1,9 @@
 import Foundation
+import RegiftOSX
+
+enum GifConversionError: Error {
+    case conversionFailed
+}
 
 enum ConvertGif {
     enum Constants {
@@ -10,29 +15,13 @@ enum ConvertGif {
         }
     }
 
-    private static var ffmpeg: URL {
-        guard let ffmpeg = Bundle.main.url(forResource: "ffmpeg", withExtension: nil) else { fatalError("ffmpeg not found") }
-
-        return ffmpeg
-    }
-
     static func convert(at source: URL, to destination: URL, frameRate: Int = Constants.defaultFrameRate, maximumHeight: Int = Constants.maximumHeight, completion: @escaping (Result<Void>) -> Void) {
-        let palettePath = "palette.png"
-        let filters = "fps=\(frameRate),scale=\(maximumHeight):-1:flags=lanczos"
-
-        do {
-            try Process.run(ffmpeg, arguments: ["-y", "-i", source.path, "-vf", "\(filters),palettegen", palettePath]) { _ in
-                do {
-                    try Process.run(ffmpeg, arguments: ["-i", source.path, "-i", palettePath, "-lavfi", "\(filters)[x];[x][1:v]paletteuse", destination.path]) { _ in
-                        completion(.success(()))
-                    }
-                } catch let error {
-                        completion(.failure(error))
-                }
+        Regift.createGIFFromSource(source, destinationFileURL: destination, frameCount: frameRate, delayTime: 0, loopCount: 0, size: CGSize(width: 0, height: maximumHeight)) { (result) in
+            if let _ = result {
+                completion(.success(()))
+            } else {
+                completion(.failure(GifConversionError.conversionFailed))
             }
-        } catch let error {
-            completion(.failure(error))
         }
     }
-
 }
