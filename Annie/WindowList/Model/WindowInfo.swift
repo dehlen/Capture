@@ -46,32 +46,24 @@ struct WindowInfo {
         }
 
         let bounds = item[String(kCGWindowBounds)] as! Dictionary<String, CGFloat>
-
         let cgFrame = NSRect(
             x: bounds["X"]!, y: bounds["Y"]!, width: bounds["Width"]!, height: bounds["Height"]!
         )
-
         var windowFrame = NSRectFromCGRect(cgFrame)
         directDisplayID = directDisplayID(from: windowFrame)
         windowFrame.origin = convertPosition(windowFrame)
-
-        let differencialValue = cropViewLineWidth - CGFloat(2)
-        let optimizeFrame = NSRect(
-            x: windowFrame.origin.x - differencialValue,
-            y: windowFrame.origin.y - differencialValue,
-            width: windowFrame.width + differencialValue * 2.0,
-            height: windowFrame.height + differencialValue * 2.0
-        )
-
-        frame = optimizeFrame
+        frame = windowFrame
     }
 
     //kCGWindowBounds returns bounds relative to the upper left corner of the main display
     //therefore we need to convert this rect in order to get the actual window location
     func convertPosition(_ frame:NSRect) -> NSPoint {
         var convertedPoint = frame.origin
-        let displayBounds = CGDisplayBounds(CGMainDisplayID())
-        let y = displayBounds.height - frame.height - frame.origin.y
+        let displayBounds = CGDisplayBounds(directDisplayID ?? CGMainDisplayID())
+        let x = frame.origin.x - displayBounds.origin.x
+        let y = displayBounds.height - displayBounds.origin.y - frame.origin.y - frame.height
+
+        convertedPoint.x = x
         convertedPoint.y = y
         return convertedPoint
     }
