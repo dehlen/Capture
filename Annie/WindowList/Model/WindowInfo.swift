@@ -1,4 +1,3 @@
-import Foundation
 import Cocoa
 
 struct WindowInfo {
@@ -10,14 +9,9 @@ struct WindowInfo {
     var frame = NSRect.zero
     var image: NSImage = NSImage()
     var alpha: Int = 0
-    var directDisplayID: CGDirectDisplayID?
+    var directDisplayID = CGMainDisplayID()
 
-    private let cropViewLineWidth: CGFloat = 3.0
-    private let mainDisplayBounds = CGDisplayBounds(CGMainDisplayID())
     private var windowOwnerPid: pid_t?
-    lazy private var quartzScreenFrame: CGRect? = {
-        return CGDisplayBounds(self.directDisplayID!)
-    }()
 
     var appIconImage: NSImage? {
         guard let windowOwnerPid = windowOwnerPid else { return nil }
@@ -55,11 +49,9 @@ struct WindowInfo {
         frame = windowFrame
     }
 
-    //kCGWindowBounds returns bounds relative to the upper left corner of the main display
-    //therefore we need to convert this rect in order to get the actual window location
     func convertPosition(_ frame:NSRect) -> NSPoint {
         var convertedPoint = frame.origin
-        let displayBounds = CGDisplayBounds(directDisplayID ?? CGMainDisplayID())
+        let displayBounds = CGDisplayBounds(directDisplayID)
         let x = frame.origin.x - displayBounds.origin.x
         let y = displayBounds.height - displayBounds.origin.y - frame.origin.y - frame.height
 
