@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupPreferenceDefaults()
         ValueTransformerFactory.registerAll()
         Current.hotKeyService.setupDefaultHotKeys()
+        askForAccessibilityPermission()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -36,6 +37,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     Constants.HotKey.stopRecordingKeyCombo: data
                 ])
         }
+    }
+
+    private func askForAccessibilityPermission() {
+        let promptFlag = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
+        let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
+        AXIsProcessTrustedWithOptions(myDict)
     }
 
     @IBAction func showPreferences(_ sender: Any) {

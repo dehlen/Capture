@@ -48,19 +48,25 @@ class WindowListViewController: NSViewController {
     }
 
     private func startRecording() {
-        guard let selectedWindow = self.selectedWindow, let id = selectedWindow.id else { return }
-        do {
-            recordingButton.isRecording = true
-            let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
-            cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
-            cutoutWindow?.makeKeyAndOrderFront(nil)
-            let videoOutputUrl = DirectoryHandler.videoDestination
-            currentVideoOutputUrl = videoOutputUrl
-            currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: selectedWindow.directDisplayID, cropRect: selectedWindow.frame, audioDevice: nil)
-            WindowInfoManager.switchToApp(withWindowId: id)
-            currentRecorder?.start()
-        } catch let error {
-            print(error)
+        let promptFlag = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
+        let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
+        AXIsProcessTrustedWithOptions(myDict)
+
+        if (AXIsProcessTrustedWithOptions(myDict)) {
+            guard let selectedWindow = self.selectedWindow, let id = selectedWindow.id else { return }
+            do {
+                recordingButton.isRecording = true
+                let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
+                cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
+                cutoutWindow?.makeKeyAndOrderFront(nil)
+                let videoOutputUrl = DirectoryHandler.videoDestination
+                currentVideoOutputUrl = videoOutputUrl
+                currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: selectedWindow.directDisplayID, cropRect: selectedWindow.frame, audioDevice: nil)
+                WindowInfoManager.switchToApp(withWindowId: id)
+                currentRecorder?.start()
+            } catch let error {
+                print(error)
+            }
         }
     }
 
