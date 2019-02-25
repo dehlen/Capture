@@ -38,6 +38,7 @@ class WindowListViewController: NSViewController {
 
     @objc func stopRecording() {
         guard let currentRecorder = currentRecorder else { return }
+        recordingButton.isRecording = false
         cutoutWindow?.orderOut(nil)
         NSApplication.shared.activate(ignoringOtherApps: true)
         currentRecorder.stop()
@@ -49,6 +50,7 @@ class WindowListViewController: NSViewController {
     private func startRecording() {
         guard let selectedWindow = self.selectedWindow, let id = selectedWindow.id else { return }
         do {
+            recordingButton.isRecording = true
             let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
             cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
             cutoutWindow?.makeKeyAndOrderFront(nil)
@@ -77,8 +79,7 @@ class WindowListViewController: NSViewController {
             presentError(NSError.create(from: UserInterfaceError.selectWindow))
             return
         }
-        recordingButton.isRecording.toggle()
-        if recordingButton.isRecording {
+        if !recordingButton.isRecording {
             startRecording()
         } else {
             stopRecording()
