@@ -67,6 +67,7 @@
 		0BD239EB2219A43B003AF068 /* UserInterfaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EA2219A43B003AF068 /* UserInterfaceError.swift */; };
 		0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */; };
 		0BD239EF2219A477003AF068 /* ErrorMessageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */; };
+		0BD5CA232226D46100E392F6 /* NSBezierPath+CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5CA222226D46100E392F6 /* NSBezierPath+CGPath.swift */; };
 		0BE418B3221AE33D00B8E85D /* BitBucketIntegrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE418B2221AE33D00B8E85D /* BitBucketIntegrationViewController.swift */; };
 		0BE418B5221AE59600B8E85D /* AnnieApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE418B4221AE59600B8E85D /* AnnieApplication.swift */; };
 		0BE418BC221AF3B200B8E85D /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE418BB221AF3B200B8E85D /* ContainerViewController.swift */; };
@@ -142,6 +143,7 @@
 		0BD239EA2219A43B003AF068 /* UserInterfaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceError.swift; sourceTree = "<group>"; };
 		0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageProvider.swift; sourceTree = "<group>"; };
+		0BD5CA222226D46100E392F6 /* NSBezierPath+CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+CGPath.swift"; sourceTree = "<group>"; };
 		0BE418B2221AE33D00B8E85D /* BitBucketIntegrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBucketIntegrationViewController.swift; sourceTree = "<group>"; };
 		0BE418B4221AE59600B8E85D /* AnnieApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnieApplication.swift; sourceTree = "<group>"; };
 		0BE418BB221AF3B200B8E85D /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				0B202B20221B263800435657 /* NSView+Animation.swift */,
 				0B64CD882218C936004F6321 /* RecordingButton.swift */,
 				0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */,
+				0BD5CA222226D46100E392F6 /* NSBezierPath+CGPath.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				0B64CD852218BE38004F6321 /* CollectionViewDataSource.swift in Sources */,
 				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
 				0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */,
+				0BD5CA232226D46100E392F6 /* NSBezierPath+CGPath.swift in Sources */,
 				0B202B32221B640500435657 /* NoResponse.swift in Sources */,
 				0B581A2C22219B1E006EF012 /* HotKeyType.swift in Sources */,
 				0BE418B3221AE33D00B8E85D /* BitBucketIntegrationViewController.swift in Sources */,

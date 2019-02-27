@@ -56,13 +56,15 @@ class WindowListViewController: NSViewController {
             guard let selectedWindow = self.selectedWindow, let id = selectedWindow.id else { return }
             do {
                 recordingButton.isRecording = true
-                let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
-                cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
-                cutoutWindow?.makeKeyAndOrderFront(nil)
                 let videoOutputUrl = DirectoryHandler.videoDestination
                 currentVideoOutputUrl = videoOutputUrl
                 currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: selectedWindow.directDisplayID, cropRect: selectedWindow.frame, audioDevice: nil)
                 WindowInfoManager.switchToApp(withWindowId: id)
+
+                let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
+                cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
+                cutoutWindow?.makeKeyAndOrderFront(nil)
+
                 currentRecorder?.start()
             } catch let error {
                 print(error)
