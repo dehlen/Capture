@@ -1,4 +1,4 @@
 # Capture
 <p align="center">
-   <img src="./Capture/Assets.xcassets/AppIcon.appiconset/mac_appicon-128@1x.png">
+   <img width="256" height="256" src="./icon.png">
 </p>
