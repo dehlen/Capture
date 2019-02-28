@@ -2,21 +2,28 @@ import AppKit
 import AVKit
 import os
 
+enum VideoPlayerError: Error {
+    case noCurrentItem
+    case missingFile
+    case exportFailed
+}
+
 class VideoPlayerViewController: NSViewController {
-    typealias Handler = ((Result<Void>) -> Void)
     typealias URLHandler = ((Result<URL>) -> Void)
 
     @IBOutlet private weak var playerView: AVPlayerView!
+    @IBOutlet private weak var trimButton: NSButton!
     var videoUrl: URL?
+    weak var delegate: ContainerViewControllerDelegate?
 
-    internal var actionNameObservers: [ActionNameObserver] = []
     private var didCallBeginTrimming: Bool = false
     private var beginTrimmingObserver: NSKeyValueObservation?
 
-    static func create(with videoUrl: URL?) -> VideoPlayerViewController {
+    static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateController(withIdentifier: "VideoPlayerViewController") as! VideoPlayerViewController
         viewController.videoUrl = videoUrl
+        viewController.delegate = delegate
         return viewController
     }
     
@@ -28,21 +35,27 @@ class VideoPlayerViewController: NSViewController {
             os_log(.default, log: .videoPlayer, "Video not found")
             return
         }
+
         loadVideo(at: videoUrl)
     }
 
     func loadVideo(at videoUrl: URL) {
         let player = AVPlayer(url: videoUrl)
         playerView.player = player
-
         beginTrimmingObserver = playerView.observe(\AVPlayerView.canBeginTrimming, options: .new) { playerView, change in
-            if !self.didCallBeginTrimming && change.newValue == true {
-                self.didCallBeginTrimming = true
-                self.playerView.beginTrimming(completionHandler: nil)
+            if change.newValue == true {
+                self.trimButton.contentTintColor = NSColor.labelColor
+
+                if !self.didCallBeginTrimming {
+                    self.didCallBeginTrimming = true
+                    self.playerView.beginTrimming(completionHandler: nil)
+                }
+            } else {
+                self.trimButton.contentTintColor = NSColor.controlAccentColor
             }
         }
     }
-
+    
     private func trimmedOutputUrl() -> URL? {
         guard let videoOutputUrl = videoUrl else { return nil }
         let fileName = videoOutputUrl.path.fileName
@@ -66,13 +79,13 @@ class VideoPlayerViewController: NSViewController {
 
     private func exportVideo(then handler: @escaping URLHandler) {
         guard let playerItem = playerView.player?.currentItem else {
-            handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1000, userInfo: nil)))
+            handler(.failure(NSError.create(from: VideoPlayerError.noCurrentItem)))
             os_log(.info, log: .videoPlayer, "VideoPlayer current item is nil")
             return
         }
         guard let outputUrl = trimmedOutputUrl() else {
             os_log(.info, log: .videoPlayer, "Video file could not be found")
-            handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1001, userInfo: nil)))
+            handler(.failure(NSError.create(from: VideoPlayerError.missingFile)))
             return
         }
 
@@ -92,25 +105,22 @@ class VideoPlayerViewController: NSViewController {
                 handler(.success(outputUrl))
             default:
                 os_log(.info, log: .videoPlayer, "Export Status changed %{public}i", exportSession.status.rawValue)
-                return handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1002, userInfo: ["status": exportSession.status.rawValue])))
+                return handler(.failure(NSError.create(from: VideoPlayerError.exportFailed)))
             }
         }
     }
-
-    private func copy(from: URL) {
-        
-    }
 }
 
-extension VideoPlayerViewController: ContainerPageable {
-    var actionName: String {
-        return "ConvertToGif".localized
+extension VideoPlayerViewController {
+    @IBAction func toggleTrimming(_ sender: Any) {
+        if playerView.canBeginTrimming {
+            playerView.beginTrimming(completionHandler: nil)
+        }
     }
 
-    func triggerAction(sender: NSButton, then handler: @escaping (Result<NextContainer>) -> Void) {
-        DispatchQueue.main.async {
-            sender.isEnabled = false
-        }
+    @IBAction func export(_ sender: NSButton) {
+        sender.isEnabled = false
+        delegate?.requestLoadingIndicator()
         exportVideo() { result in
             switch result {
             case .success(let videoUrl):
@@ -120,27 +130,21 @@ extension VideoPlayerViewController: ContainerPageable {
                 self.convertVideoToGif() { convertResult in
                     DispatchQueue.main.async {
                         sender.isEnabled = true
-                    }
-                    switch convertResult {
-                    case .success(let gifOutputUrl):
-                        guard let apiEndpoint: String = Current.defaults[.bitBucketApiEndpoint], !apiEndpoint.isEmpty else {
-                            handler(.success(.finishPage(gifOutputUrl)))
-                            return
+                        switch convertResult {
+                        case .success(let gifOutputUrl):
+                            self.delegate?.dismissLoadingIndicator()
+                            self.delegate?.requestReplace(new: FinishViewController.create(state: .success(gifOutputUrl)))
+                        case .failure(let error):
+                            let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
+                            self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
                         }
-                        guard let token: String = Current.defaults[.bitBucketToken], !token.isEmpty else {
-                            handler(.success(.finishPage(gifOutputUrl)))
-                            return
-                        }
-
-                        handler(.success(.bitBucketIntegration(gifOutputUrl)))
-                    case .failure(let error):
-                        handler(.failure(error))
                     }
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
                     sender.isEnabled = true
-                    handler(.failure(error))
+                    let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
+                    self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
                 }
             }
         }

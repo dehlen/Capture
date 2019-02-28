@@ -8,7 +8,7 @@
         <!--Window Controller-->
         <scene sceneID="dhl-jS-4rY">
             <objects>
-                <windowController id="Rqw-GB-nSm" customClass="PreferencesWindowController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="Rqw-GB-nSm" customClass="PreferencesWindowController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="jCK-cv-aDA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -32,10 +32,6 @@
                 <tabViewController tabStyle="toolbar" id="J6k-5a-SbH" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" image="NSPreferencesGeneral" id="A1Q-mE-RUm"/>
-                        <tabViewItem image="NSNetwork" id="qeF-Sn-1oh">
-                            <nil key="label"/>
-                        </tabViewItem>
-                        <tabViewItem image="shortcut" id="mra-oD-k6P"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="Mj1-0u-SZL">
@@ -49,8 +45,6 @@
                     <connections>
                         <outlet property="tabView" destination="Mj1-0u-SZL" id="b7T-9z-pp5"/>
                         <segue destination="CbG-uA-UXG" kind="relationship" relationship="tabItems" id="p6U-IE-ILd"/>
-                        <segue destination="BM0-If-l1N" kind="relationship" relationship="tabItems" id="biA-ao-SWN"/>
-                        <segue destination="QR1-iB-TYI" kind="relationship" relationship="tabItems" id="gC3-ZV-Kvk"/>
                     </connections>
                 </tabViewController>
                 <customObject id="wzg-J3-s6R" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -60,13 +54,13 @@
         <!--General-->
         <scene sceneID="N6l-xC-bfR">
             <objects>
-                <viewController title="General" id="CbG-uA-UXG" customClass="GeneralPreferencesViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="General" id="CbG-uA-UXG" customClass="GeneralPreferencesViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4Ei-kU-JuY">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="245"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="170"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <pathControl focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xix-mN-5C6" customClass="PopUpButtonLikePathControl" customModule="Annie" customModuleProvider="target">
-                                <rect key="frame" x="118" y="204" width="136" height="25"/>
+                            <pathControl focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xix-mN-5C6" customClass="PopUpButtonLikePathControl" customModule="Capture" customModuleProvider="target">
+                                <rect key="frame" x="118" y="129" width="136" height="25"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" focusRingType="none" alignment="left" pathStyle="popUp" id="fAZ-H5-ScI">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Applications/"/>
@@ -83,7 +77,7 @@
                                 </connections>
                             </pathControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="btq-nd-DrW">
-                                <rect key="frame" x="18" y="170" width="414" height="28"/>
+                                <rect key="frame" x="18" y="95" width="414" height="28"/>
                                 <textFieldCell key="cell" selectable="YES" title="Choose the directory the generated GIFs should be exported to. By default the GIF will be moved to your desktop." id="ePr-4A-nsB">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -91,122 +85,56 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-1b-v6d">
-                                <rect key="frame" x="18" y="208" width="95" height="17"/>
+                                <rect key="frame" x="18" y="133" width="95" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Export GIFs to:" id="312-bw-BIU">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VhK-wd-UaU">
-                                <rect key="frame" x="18" y="133" width="90" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Movie Quality:" id="cpe-Cw-h1s">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WZi-dL-P5R">
-                                <rect key="frame" x="114" y="128" width="93" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="88" placeholder="YES" id="gWR-eN-xPK"/>
-                                </constraints>
-                                <popUpButtonCell key="cell" type="push" title="480p" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="3M7-hs-byr" id="ZcY-iN-cBE">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="cmE-np-zbn">
-                                        <items>
-                                            <menuItem title="480p" state="on" id="3M7-hs-byr"/>
-                                            <menuItem title="720p" id="hW8-N3-hzs"/>
-                                            <menuItem title="1080p" id="c7D-7L-ACC"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="selectMovieQuality:" target="CbG-uA-UXG" id="PS9-zE-tab"/>
-                                </connections>
-                            </popUpButton>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="g9E-J9-6gt">
-                                <rect key="frame" x="18" y="95" width="414" height="28"/>
-                                <textFieldCell key="cell" selectable="YES" title="You can choose the quality wih which the recorded video will be saved. A lower quality will result in a smaller GIF file size" id="eGp-Js-p2j">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vb6-1e-Qwy">
-                                <rect key="frame" x="18" y="58" width="94" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="GIF Framerate:" id="fKN-bb-8z4">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eY9-I9-sR7">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Maz-20-LlC">
                                 <rect key="frame" x="18" y="20" width="414" height="28"/>
-                                <textFieldCell key="cell" selectable="YES" title="You can choose the quality with which the recorded video will be saved. A lower quality will result in a smaller GIF file size" id="fRw-QI-RJ6">
+                                <textFieldCell key="cell" selectable="YES" title="Set a shortcut to quickly stop a recording. This shortcut will work globally as long as the application is running." id="EDg-3c-i1r">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ot7-oc-wzO">
-                                <rect key="frame" x="118" y="58" width="19" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="10" id="EQ1-UI-LoA">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UDU-Gc-nF1">
+                                <rect key="frame" x="18" y="67" width="158" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Stop Recording Shortcut:" id="oyp-PE-GmB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="CbG-uA-UXG" name="value" keyPath="self.gifFrameRate" id="zBT-Yj-2N9">
-                                        <dictionary key="options">
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
                             </textField>
-                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YxT-2w-0X4">
-                                <rect key="frame" x="140" y="53" width="19" height="27"/>
-                                <stepperCell key="cell" continuous="YES" alignment="left" minValue="10" maxValue="60" doubleValue="10" valueWraps="YES" id="IHG-q7-irw"/>
-                                <connections>
-                                    <binding destination="CbG-uA-UXG" name="value" keyPath="self.gifFrameRate" id="MaR-k0-D86">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NumberValueTransformer</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </stepper>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="K7Z-TW-8U8" customClass="RecordView" customModule="KeyHolder">
+                                <rect key="frame" x="184" y="58" width="160" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="X15-zY-tJi"/>
+                                    <constraint firstAttribute="height" constant="34" id="jTh-0g-gT0"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="btq-nd-DrW" secondAttribute="trailing" constant="20" id="078-OX-KBz"/>
-                            <constraint firstAttribute="trailing" secondItem="eY9-I9-sR7" secondAttribute="trailing" constant="20" id="0Vc-G3-4l1"/>
-                            <constraint firstItem="ot7-oc-wzO" firstAttribute="leading" secondItem="Vb6-1e-Qwy" secondAttribute="trailing" constant="10" id="27G-jr-2r4"/>
-                            <constraint firstItem="VhK-wd-UaU" firstAttribute="top" secondItem="btq-nd-DrW" secondAttribute="bottom" constant="20" id="32p-zG-siz"/>
-                            <constraint firstItem="ot7-oc-wzO" firstAttribute="centerY" secondItem="Vb6-1e-Qwy" secondAttribute="centerY" id="3LS-xx-Omm"/>
                             <constraint firstItem="xix-mN-5C6" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="trailing" constant="10" id="3UI-KT-DWK"/>
+                            <constraint firstAttribute="trailing" secondItem="Maz-20-LlC" secondAttribute="trailing" constant="20" id="41h-OP-eMs"/>
+                            <constraint firstAttribute="bottom" secondItem="Maz-20-LlC" secondAttribute="bottom" constant="20" id="7Vz-kA-FHc"/>
+                            <constraint firstItem="K7Z-TW-8U8" firstAttribute="centerY" secondItem="UDU-Gc-nF1" secondAttribute="centerY" id="7fS-hS-Mf1"/>
                             <constraint firstItem="btq-nd-DrW" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="leading" id="8Cv-GA-lj2"/>
-                            <constraint firstItem="eY9-I9-sR7" firstAttribute="top" secondItem="Vb6-1e-Qwy" secondAttribute="bottom" constant="10" id="8o4-Kq-RPb"/>
-                            <constraint firstItem="WZi-dL-P5R" firstAttribute="leading" secondItem="VhK-wd-UaU" secondAttribute="trailing" constant="10" id="Aum-7Z-i2a"/>
-                            <constraint firstItem="YxT-2w-0X4" firstAttribute="centerY" secondItem="ot7-oc-wzO" secondAttribute="centerY" id="Cyo-5W-LIY"/>
+                            <constraint firstItem="Maz-20-LlC" firstAttribute="top" secondItem="K7Z-TW-8U8" secondAttribute="bottom" constant="10" id="DlR-2F-fjH"/>
                             <constraint firstItem="IDG-1b-v6d" firstAttribute="top" secondItem="4Ei-kU-JuY" secondAttribute="top" constant="20" id="Exg-sT-rCA"/>
-                            <constraint firstItem="WZi-dL-P5R" firstAttribute="centerY" secondItem="VhK-wd-UaU" secondAttribute="centerY" id="M6f-hn-uoC"/>
-                            <constraint firstItem="Vb6-1e-Qwy" firstAttribute="top" secondItem="g9E-J9-6gt" secondAttribute="bottom" constant="20" id="MvX-aQ-lHi"/>
-                            <constraint firstItem="g9E-J9-6gt" firstAttribute="top" secondItem="VhK-wd-UaU" secondAttribute="bottom" constant="10" id="OnA-BW-5KI"/>
+                            <constraint firstItem="UDU-Gc-nF1" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="leading" id="T6l-jB-xL5"/>
                             <constraint firstItem="xix-mN-5C6" firstAttribute="bottom" secondItem="IDG-1b-v6d" secondAttribute="bottom" id="TWm-Uv-LMv"/>
                             <constraint firstItem="IDG-1b-v6d" firstAttribute="leading" secondItem="4Ei-kU-JuY" secondAttribute="leading" constant="20" id="YCS-ir-ksJ"/>
-                            <constraint firstAttribute="bottom" secondItem="eY9-I9-sR7" secondAttribute="bottom" constant="20" id="f8d-BZ-VdJ"/>
-                            <constraint firstItem="Vb6-1e-Qwy" firstAttribute="leading" secondItem="4Ei-kU-JuY" secondAttribute="leading" constant="20" id="jaC-PH-EtK"/>
-                            <constraint firstItem="VhK-wd-UaU" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="leading" id="lfe-tN-YiO"/>
-                            <constraint firstAttribute="trailing" secondItem="g9E-J9-6gt" secondAttribute="trailing" constant="20" id="lqf-f6-7xY"/>
-                            <constraint firstItem="g9E-J9-6gt" firstAttribute="leading" secondItem="VhK-wd-UaU" secondAttribute="leading" id="mfv-CG-9BG"/>
+                            <constraint firstItem="Maz-20-LlC" firstAttribute="leading" secondItem="UDU-Gc-nF1" secondAttribute="leading" id="tgb-RF-1FF"/>
                             <constraint firstItem="btq-nd-DrW" firstAttribute="top" secondItem="IDG-1b-v6d" secondAttribute="bottom" constant="10" id="tkw-xm-Os6"/>
-                            <constraint firstItem="eY9-I9-sR7" firstAttribute="leading" secondItem="4Ei-kU-JuY" secondAttribute="leading" constant="20" id="upn-cg-z9D"/>
-                            <constraint firstItem="YxT-2w-0X4" firstAttribute="leading" secondItem="ot7-oc-wzO" secondAttribute="trailing" constant="8" id="vOL-c9-Wnr"/>
+                            <constraint firstItem="K7Z-TW-8U8" firstAttribute="leading" secondItem="UDU-Gc-nF1" secondAttribute="trailing" constant="10" id="x8u-V1-rN7"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="gifFrameRateStepper" destination="YxT-2w-0X4" id="cbe-au-DmT"/>
-                        <outlet property="movieQualityPopUpButton" destination="WZi-dL-P5R" id="MqD-dY-LCZ"/>
+                        <outlet property="stopRecordingShortcutRecordView" destination="K7Z-TW-8U8" id="v6c-pU-Fzg"/>
                     </connections>
                 </viewController>
                 <customObject id="FvE-cN-eWk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -214,157 +142,8 @@
             </objects>
             <point key="canvasLocation" x="550" y="243.5"/>
         </scene>
-        <!--Integrations-->
-        <scene sceneID="Ajo-no-4hF">
-            <objects>
-                <viewController title="Integrations" id="BM0-If-l1N" customClass="IntegrationsPreferencesViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="z8b-tJ-WhY">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="197"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qhg-P9-00h">
-                                <rect key="frame" x="18" y="160" width="109" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="BitBucket Server:" id="WH4-HB-Xpq">
-                                    <font key="font" metaFont="titleBar"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="foQ-tI-ygN">
-                                <rect key="frame" x="18" y="44" width="414" height="42"/>
-                                <textFieldCell key="cell" selectable="YES" id="zxC-mF-RAZ">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <string key="title">When BitBucket integration is added we can provide you a list of open Pull Requests after converting the recording to GIF. You can then easily attach the generated GIF to one of the open PRs.</string>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EAz-Lt-zFP">
-                                <rect key="frame" x="18" y="20" width="223" height="14"/>
-                                <textFieldCell key="cell" selectable="YES" title="More on creating a personal access token" id="PVU-xh-AqO">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xrC-pe-2CV">
-                                <rect key="frame" x="20" y="128" width="410" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Host, like https://bitbucketserver.com" drawsBackground="YES" id="bI8-un-aeP">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="0t2-Dn-ABy" name="value" keyPath="values.BitBucketApiEndpoint" id="BlK-PB-iLe"/>
-                                </connections>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VcO-Kj-RBM">
-                                <rect key="frame" x="20" y="96" width="410" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Personal Access Token" drawsBackground="YES" id="a3u-0H-Cdx">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="0t2-Dn-ABy" name="value" keyPath="values.BitBucketToken" id="qq1-jZ-ggT"/>
-                                </connections>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="04r-St-7Kr">
-                                <rect key="frame" x="245" y="13" width="25" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="21" id="Ktk-4f-YKF"/>
-                                    <constraint firstAttribute="height" constant="21" id="qUO-GJ-koo"/>
-                                </constraints>
-                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bgw-bJ-lN9">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showPersonalAccessTokenHelp:" target="BM0-If-l1N" id="PTq-Va-RRo"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="Qhg-P9-00h" firstAttribute="top" secondItem="z8b-tJ-WhY" secondAttribute="top" constant="20" id="5FW-pH-9vs"/>
-                            <constraint firstItem="VcO-Kj-RBM" firstAttribute="top" secondItem="xrC-pe-2CV" secondAttribute="bottom" constant="10" id="5nB-Rb-Pzm"/>
-                            <constraint firstItem="foQ-tI-ygN" firstAttribute="leading" secondItem="z8b-tJ-WhY" secondAttribute="leading" constant="20" id="EzK-jh-9oy"/>
-                            <constraint firstAttribute="trailing" secondItem="xrC-pe-2CV" secondAttribute="trailing" constant="20" id="FIF-oV-19A"/>
-                            <constraint firstAttribute="trailing" secondItem="foQ-tI-ygN" secondAttribute="trailing" constant="20" id="K4E-Hc-xjG"/>
-                            <constraint firstItem="xrC-pe-2CV" firstAttribute="leading" secondItem="Qhg-P9-00h" secondAttribute="leading" id="RNT-xY-0TQ"/>
-                            <constraint firstAttribute="bottom" secondItem="EAz-Lt-zFP" secondAttribute="bottom" constant="20" id="RVI-dz-mIX"/>
-                            <constraint firstItem="xrC-pe-2CV" firstAttribute="top" secondItem="Qhg-P9-00h" secondAttribute="bottom" constant="10" id="UUY-Ps-fli"/>
-                            <constraint firstItem="foQ-tI-ygN" firstAttribute="top" secondItem="VcO-Kj-RBM" secondAttribute="bottom" constant="10" id="UbR-72-wkx"/>
-                            <constraint firstAttribute="trailing" secondItem="VcO-Kj-RBM" secondAttribute="trailing" constant="20" id="VB4-lO-7CS"/>
-                            <constraint firstItem="04r-St-7Kr" firstAttribute="leading" secondItem="EAz-Lt-zFP" secondAttribute="trailing" constant="8" id="Vju-y8-UDV"/>
-                            <constraint firstItem="EAz-Lt-zFP" firstAttribute="leading" secondItem="foQ-tI-ygN" secondAttribute="leading" id="gBA-Fh-J1n"/>
-                            <constraint firstItem="04r-St-7Kr" firstAttribute="centerY" secondItem="EAz-Lt-zFP" secondAttribute="centerY" id="lxa-9c-98W"/>
-                            <constraint firstItem="Qhg-P9-00h" firstAttribute="leading" secondItem="z8b-tJ-WhY" secondAttribute="leading" constant="20" id="pHM-Yw-T4y"/>
-                            <constraint firstItem="VcO-Kj-RBM" firstAttribute="leading" secondItem="xrC-pe-2CV" secondAttribute="leading" id="qpG-Dr-Agk"/>
-                            <constraint firstItem="EAz-Lt-zFP" firstAttribute="top" secondItem="foQ-tI-ygN" secondAttribute="bottom" constant="10" id="sD1-ne-3My"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="fjV-XN-Ndi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController id="0t2-Dn-ABy"/>
-            </objects>
-            <point key="canvasLocation" x="551" y="784"/>
-        </scene>
-        <!--Shortcuts-->
-        <scene sceneID="sQO-En-g4s">
-            <objects>
-                <viewController title="Shortcuts" id="QR1-iB-TYI" customClass="ShortcutPreferencesViewController" customModule="Annie" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Fpw-BH-1m3">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="104"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gP0-fn-Mw8">
-                                <rect key="frame" x="18" y="20" width="414" height="28"/>
-                                <textFieldCell key="cell" selectable="YES" title="Set a shortcut to quickly stop a recording. This shortcut will work globally as long as the application is running." id="MsX-He-7Fn">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Crv-c9-8k9">
-                                <rect key="frame" x="18" y="67" width="158" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Stop Recording Shortcut:" id="sxX-U6-kcm">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="woe-vk-qNR" customClass="RecordView" customModule="KeyHolder">
-                                <rect key="frame" x="184" y="58" width="160" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="1y8-Iu-p5J"/>
-                                    <constraint firstAttribute="height" constant="34" id="FBb-Uu-Mlw"/>
-                                </constraints>
-                            </customView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="woe-vk-qNR" firstAttribute="leading" secondItem="Crv-c9-8k9" secondAttribute="trailing" constant="10" id="BEs-Qr-C7U"/>
-                            <constraint firstAttribute="trailing" secondItem="gP0-fn-Mw8" secondAttribute="trailing" constant="20" id="DJO-Ly-UpG"/>
-                            <constraint firstAttribute="bottom" secondItem="gP0-fn-Mw8" secondAttribute="bottom" constant="20" id="WJT-up-2hc"/>
-                            <constraint firstItem="Crv-c9-8k9" firstAttribute="top" secondItem="Fpw-BH-1m3" secondAttribute="top" constant="20" id="ZHg-2c-w0J"/>
-                            <constraint firstItem="gP0-fn-Mw8" firstAttribute="top" secondItem="woe-vk-qNR" secondAttribute="bottom" constant="10" id="hRr-4V-vGf"/>
-                            <constraint firstItem="woe-vk-qNR" firstAttribute="centerY" secondItem="Crv-c9-8k9" secondAttribute="centerY" id="kcI-f8-P7G"/>
-                            <constraint firstItem="gP0-fn-Mw8" firstAttribute="leading" secondItem="Fpw-BH-1m3" secondAttribute="leading" constant="20" id="qRI-N2-QwJ"/>
-                            <constraint firstItem="Crv-c9-8k9" firstAttribute="leading" secondItem="Fpw-BH-1m3" secondAttribute="leading" constant="20" id="r0R-TF-GdZ"/>
-                            <constraint firstItem="gP0-fn-Mw8" firstAttribute="leading" secondItem="Crv-c9-8k9" secondAttribute="leading" id="tHf-xi-MfL"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="stopRecordingShortcutRecordView" destination="woe-vk-qNR" id="d3d-fx-WZm"/>
-                    </connections>
-                </viewController>
-                <customObject id="Bst-kG-9Uh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="550" y="1093"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="NSNetwork" width="32" height="32"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
-        <image name="shortcut" width="46" height="43"/>
     </resources>
 </document>

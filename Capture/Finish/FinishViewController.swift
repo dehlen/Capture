@@ -7,8 +7,6 @@ enum FinishState {
 }
 
 class FinishViewController: NSViewController {
-    internal var actionNameObservers: [ActionNameObserver] = []
-
     private var state: FinishState = .failure("genericError".localized)
     @IBOutlet private weak var revealInFinderButton: NSButton!
     @IBOutlet private weak var messageLabel: NSTextField!
@@ -50,15 +48,5 @@ class FinishViewController: NSViewController {
             os_log(.info, log: .exportContainer, "Reveal in Finder could not find specified file")
             return
         }
-    }
-}
-
-extension FinishViewController: ContainerPageable {
-    var actionName: String {
-        return "Done".localized
-    }
-
-    func triggerAction(sender: NSButton, then handler: @escaping (Result<NextContainer>) -> Void) {
-        handler(.success(.dismiss))
     }
 }

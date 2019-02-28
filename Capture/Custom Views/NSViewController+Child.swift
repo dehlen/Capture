@@ -21,7 +21,7 @@ extension NSViewController {
         }
 
         vc.view.frame = frame
-        targetView.addSubView(vc.view, animated: true)
+        targetView.addSubView(vc.view, animated: false)
 
         vc.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -33,7 +33,7 @@ extension NSViewController {
     }
 
     public func remove(_ vc: NSViewController) {
-        vc.view.removeFromSuperview(animated: true)
+        vc.view.removeFromSuperview(animated: false)
         vc.removeFromParent()
     }
 }

@@ -4,9 +4,9 @@ struct ErrorMessageProvider {
     static func string(for error: Error) -> String {
         if let error = error as? UserInterfaceError {
             return string(for: error)
-        } else if let error = error as? BitBucketIntegrationError {
+        } else if let error = error as? GifConversionError {
             return string(for: error)
-        } else if let error = error as? NetworkError {
+        } else if let error = error as? VideoPlayerError {
             return string(for: error)
         }
         return error.localizedDescription
@@ -19,21 +19,21 @@ struct ErrorMessageProvider {
         }
     }
 
-    private static func string(for error: BitBucketIntegrationError) -> String {
+    private static func string(for error: GifConversionError) -> String {
         switch error {
-        case .missingFile:
-            return "missingFile".localized
-        case .uploadFailed:
-            return "uploadFailed".localized
-        case .notAuthorized:
-            return "notAuthorized".localized
+        case .conversionFailed:
+            return "conversionFailed".localized
         }
     }
 
-    private static func string(for error: NetworkError) -> String {
+    private static func string(for error: VideoPlayerError) -> String {
         switch error {
-        case .missingResponse:
-            return "missingResponse".localized
+        case .noCurrentItem:
+            return "noCurrentItem".localized
+        case .missingFile:
+            return "missingFile".localized
+        case .exportFailed:
+            return "exportFailed".localized
         }
     }
 }
