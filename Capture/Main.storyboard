@@ -118,7 +118,7 @@
                 </viewController>
                 <customObject id="IA5-T1-rcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="588"/>
+            <point key="canvasLocation" x="-110" y="701"/>
         </scene>
         <!--Video Option View Controller-->
         <scene sceneID="qVJ-hu-kTj">
@@ -261,11 +261,11 @@
                 <customObject id="9g9-wM-2Cd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="wTd-mG-kcM" customClass="ContainerViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="yTO-gI-n1D">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="680" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="T37-H0-yCP">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="680" height="470"/>
                             </containerView>
                         </subviews>
                         <constraints>
@@ -280,7 +280,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="447" y="588"/>
+            <point key="canvasLocation" x="581" y="701"/>
         </scene>
         <!--Capture-->
         <scene sceneID="LWX-B3-LhJ">
@@ -385,7 +385,7 @@ DQ
                 </viewController>
                 <customObject id="gFj-7p-2R0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="973.5" y="588"/>
+            <point key="canvasLocation" x="1491" y="960"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="noa-eg-Bue">
