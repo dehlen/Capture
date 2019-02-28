@@ -155,9 +155,19 @@
 		0B202B25221B27F300435657 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0B94455A222815EC0058D5DD /* LoadingViewController.swift */,
 				0BE418BB221AF3B200B8E85D /* ContainerViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0B94456022287E650058D5DD /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				0B944558222815EC0058D5DD /* GIFOptionViewController.swift */,
+				0B944559222815EC0058D5DD /* VideoOptionViewController.swift */,
+			);
+			path = Options;
 			sourceTree = "<group>";
 		};
 		0BC83202221A07E600FD8CF4 /* Preferences */ = {
@@ -262,6 +272,7 @@
 		0BC8320C221A08CE00FD8CF4 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				0B581A312221AD98006EF012 /* CutoutWindow.swift */,
 				0BE418BF221AFE9B00B8E85D /* NSViewController+Child.swift */,
 				0B202B20221B263800435657 /* NSView+Animation.swift */,
 				0B64CD882218C936004F6321 /* RecordingButton.swift */,
@@ -316,13 +327,10 @@
 				6BE514A42126A2410068337E /* AppDelegate.swift */,
 				0BE418B4221AE59600B8E85D /* CaptureApplication.swift */,
 				0B581A2F22219CC0006EF012 /* Constants.swift */,
-				0B581A312221AD98006EF012 /* CutoutWindow.swift */,
-				0B944558222815EC0058D5DD /* GIFOptionViewController.swift */,
-				0B94455A222815EC0058D5DD /* LoadingViewController.swift */,
-				0B944559222815EC0058D5DD /* VideoOptionViewController.swift */,
 				0B202B22221B27D300435657 /* Container */,
 				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
 				0B202B24221B27E300435657 /* Finish */,
+				0B94456022287E650058D5DD /* Options */,
 				0BC83202221A07E600FD8CF4 /* Preferences */,
 				0BC83209221A085200FD8CF4 /* Utilities */,
 				0BC8320D221A08EB00FD8CF4 /* VideoHandling */,
