@@ -79,8 +79,8 @@ class VideoPlayerViewController: NSViewController {
 
     private func exportVideo(then handler: @escaping URLHandler) {
         guard let playerItem = playerView.player?.currentItem else {
-            handler(.failure(NSError.create(from: VideoPlayerError.noCurrentItem)))
             os_log(.info, log: .videoPlayer, "VideoPlayer current item is nil")
+            handler(.failure(NSError.create(from: VideoPlayerError.noCurrentItem)))
             return
         }
         guard let outputUrl = trimmedOutputUrl() else {
@@ -100,12 +100,13 @@ class VideoPlayerViewController: NSViewController {
         exportSession.timeRange = timeRange
 
         exportSession.exportAsynchronously {
+            os_log(.info, log: .videoPlayer, "Export Status changed %{public}i", exportSession.status.rawValue)
             switch exportSession.status {
             case .completed:
                 handler(.success(outputUrl))
-            default:
-                os_log(.info, log: .videoPlayer, "Export Status changed %{public}i", exportSession.status.rawValue)
-                return handler(.failure(NSError.create(from: VideoPlayerError.exportFailed)))
+            case .cancelled, .failed, .unknown:
+                handler(.failure(NSError.create(from: VideoPlayerError.exportFailed)))
+            default: ()
             }
         }
     }
