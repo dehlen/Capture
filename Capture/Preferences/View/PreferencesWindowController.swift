@@ -1,7 +1,6 @@
 import Cocoa
 
 class PreferencesWindowController: NSWindowController, NSWindowDelegate {
-
     override func windowDidLoad() {
         super.windowDidLoad()
     }

@@ -1,5 +1,6 @@
 import AppKit
 import AVKit
+import os
 
 class VideoPlayerViewController: NSViewController {
     typealias Handler = ((Result<Void>) -> Void)
@@ -21,8 +22,12 @@ class VideoPlayerViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        os_log(.info, log: .videoPlayer, "VideoPlayer loaded")
 
-        guard let videoUrl = self.videoUrl else { return }
+        guard let videoUrl = self.videoUrl else {
+            os_log(.default, log: .videoPlayer, "Video not found")
+            return
+        }
         loadVideo(at: videoUrl)
     }
 
@@ -54,7 +59,6 @@ class VideoPlayerViewController: NSViewController {
             case .success:
                 handler(.success(gifOutputUrl))
             case .failure(let error):
-                print(error)
                 handler(.failure(error))
             }
         }
@@ -63,9 +67,11 @@ class VideoPlayerViewController: NSViewController {
     private func exportVideo(then handler: @escaping URLHandler) {
         guard let playerItem = playerView.player?.currentItem else {
             handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1000, userInfo: nil)))
+            os_log(.info, log: .videoPlayer, "VideoPlayer current item is nil")
             return
         }
         guard let outputUrl = trimmedOutputUrl() else {
+            os_log(.info, log: .videoPlayer, "Video file could not be found")
             handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1001, userInfo: nil)))
             return
         }
@@ -85,6 +91,7 @@ class VideoPlayerViewController: NSViewController {
             case .completed:
                 handler(.success(outputUrl))
             default:
+                os_log(.info, log: .videoPlayer, "Export Status changed %{public}i", exportSession.status.rawValue)
                 return handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1002, userInfo: ["status": exportSession.status.rawValue])))
             }
         }

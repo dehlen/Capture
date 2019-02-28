@@ -1,4 +1,5 @@
 import AVFoundation
+import os
 
 public func recordScreen(destination: URL, displayId: CGDirectDisplayID, cropRect: CGRect?, audioDevice: AVCaptureDevice?) throws -> Recorder {
     return try Recorder.init(destination: destination, displayId: displayId, cropRect: cropRect, audioDevice: audioDevice)
@@ -41,6 +42,7 @@ public class Recorder: NSObject {
 
         if let audioDevice = audioDevice {
             if !audioDevice.hasMediaType(AVMediaType.audio) {
+                os_log(.error, log: .videoRecorder, "Invalid Audio Device")
                 throw RecorderError.invalidAudioDevice
             }
 
@@ -49,6 +51,7 @@ public class Recorder: NSObject {
             if session.canAddInput(audioInput) {
                 session.addInput(audioInput)
             } else {
+                os_log(.error, log: .videoRecorder, "Could not add microphone")
                 throw RecorderError.couldNotAddMic
             }
         }
@@ -56,12 +59,14 @@ public class Recorder: NSObject {
         if session.canAddInput(input) {
             session.addInput(input)
         } else {
+            os_log(.error, log: .videoRecorder, "Could not add screen")
             throw RecorderError.couldNotAddScreen
         }
 
         if session.canAddOutput(output) {
             session.addOutput(output)
         } else {
+            os_log(.error, log: .videoRecorder, "Could not add output")
             throw RecorderError.couldNotAddOutput
         }
     }

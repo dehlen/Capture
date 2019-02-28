@@ -1,4 +1,5 @@
 import AppKit
+import os
 
 class BitBucketIntegrationViewController: NSViewController {
     typealias Handler = ((Result<Void>) -> Void)
@@ -23,6 +24,7 @@ class BitBucketIntegrationViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        os_log(.info, log: .bitBucket, "BitBucket Screen loaded")
 
         guard let config = config else { return }
         loadPullRequests(config: config)
@@ -41,12 +43,9 @@ class BitBucketIntegrationViewController: NSViewController {
                 }
                 if let nextPageStart = paginatedResponse.nextPageStart {
                     self.loadPullRequests(config: config, nextParams: ["start": "\(nextPageStart)", "state": "OPEN"])
-                } else {
-                    print("Did finish loading pull requests:")
-                    print(self.allOpenPullRequests)
                 }
             case .failure(let error):
-                print(error)
+                os_log(.default, log: .bitBucket, "Requesting open PRs from BitBucket failed, %{public}@", error.localizedDescription)
             }
         }
     }
@@ -57,6 +56,7 @@ class BitBucketIntegrationViewController: NSViewController {
             case .success(let attachment):
                 self.comment(config: config, on: pullRequest, with: attachment, then: handler)
             case .failure(let error):
+                os_log(.default, log: .bitBucket, "Adding an attachment to BitBucket failed, %{public}@", error.localizedDescription)
                 handler(.failure(error))
             }
         })
@@ -68,6 +68,7 @@ class BitBucketIntegrationViewController: NSViewController {
             case .success:
                 handler(.success(()))
             case .failure(let error):
+                os_log(.default, log: .bitBucket, "Adding a comment to BitBucket failed, %{public}@", error.localizedDescription)
                 handler(.failure(error))
             }
         })
@@ -135,12 +136,14 @@ extension BitBucketIntegrationViewController: ContainerPageable {
 
     func triggerAction(sender: NSButton, then handler: @escaping (Result<NextContainer>) -> Void) {
         guard let fileUrl = gifOutputUrl else {
+            os_log(.default, log: .bitBucket, "Exported GIF could not be found")
             handler(.failure(NSError.create(from: BitBucketIntegrationError.missingFile)))
             return
         }
 
         guard let config = config else {
-            handler(.failure(NSError.create(from: BitBucketIntegrationError.missingFile)))
+            os_log(.default, log: .bitBucket, "No authorized BitBucket account")
+            handler(.failure(NSError.create(from: BitBucketIntegrationError.notAuthorized)))
             return
         }
 

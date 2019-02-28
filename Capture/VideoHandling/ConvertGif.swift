@@ -1,5 +1,6 @@
 import Foundation
 import RegiftOSX
+import os
 
 enum GifConversionError: Error {
     case conversionFailed
@@ -20,6 +21,7 @@ enum ConvertGif {
             if let _ = result {
                 completion(.success(()))
             } else {
+                os_log(.error, log: .gifExport, "GIF export failed")
                 completion(.failure(GifConversionError.conversionFailed))
             }
         }

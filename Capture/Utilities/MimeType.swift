@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 internal let DEFAULT_MIME_TYPE = "application/octet-stream"
 
@@ -110,6 +111,7 @@ internal let mimeTypes = [
 
 internal func MimeType(ext: String?) -> String {
     if ext != nil && mimeTypes.contains(where: { $0.0 == ext!.lowercased() }) {
+        os_log(.info, log: .app, "MimeType for %{public}@: %{public}@", ext ?? "",  mimeTypes[ext!.lowercased()]!)
         return mimeTypes[ext!.lowercased()]!
     }
     return DEFAULT_MIME_TYPE

@@ -1,6 +1,7 @@
 import Cocoa
 import KeyHolder
 import Magnet
+import os
 
 class ShortcutPreferencesViewController: NSViewController {
 
@@ -10,6 +11,7 @@ class ShortcutPreferencesViewController: NSViewController {
     // MARK: - Initialize
     override func loadView() {
         super.loadView()
+        os_log(.info, log: .preferences, "Shortcut preferences loaded")
         stopRecordingShortcutRecordView.delegate = self
         setupColors()
         prepareHotKeys()
@@ -27,6 +29,7 @@ private extension ShortcutPreferencesViewController {
         stopRecordingShortcutRecordView.cornerRadius = 17
 
     }
+
     func prepareHotKeys() {
         stopRecordingShortcutRecordView.keyCombo = Current.hotKeyService.stopRecordingKeyCombo
     }
@@ -52,6 +55,7 @@ extension ShortcutPreferencesViewController: RecordViewDelegate {
     }
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
+        os_log(.info, log: .preferences, "Did change shortcut keycombo to modifiers: %{public}i keyCode: %{public}i", keyCombo.modifiers, keyCombo.keyCode)
         switch recordView {
         case stopRecordingShortcutRecordView:
             Current.hotKeyService.change(with: .stopRecording, keyCombo: keyCombo)

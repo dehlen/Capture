@@ -5,6 +5,7 @@ import Magnet
 extension NSNotification.Name {
     static let shouldStopRecording = NSNotification.Name("on-should-stop-recording")
 }
+
 final class HotKeyService: NSObject {
     fileprivate(set) var stopRecordingKeyCombo: KeyCombo?
 }

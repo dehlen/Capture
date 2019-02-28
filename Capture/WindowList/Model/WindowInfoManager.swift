@@ -1,7 +1,7 @@
 import AppKit
+import os
 
 class WindowInfoManager {
-
     static func allWindows() -> [WindowInfo] {
         let windowInfosRef = CGWindowListCopyWindowInfo(
             [CGWindowListOption.optionAll, CGWindowListOption.excludeDesktopElements],
@@ -10,7 +10,6 @@ class WindowInfoManager {
         var items: [WindowInfo] = []
 
         for i in 0..<CFArrayGetCount(windowInfosRef) {
-
             let lineUnsafePointer: UnsafeRawPointer = CFArrayGetValueAtIndex(windowInfosRef, i)
             let lineRef = unsafeBitCast(lineUnsafePointer, to: CFDictionary.self)
             let dic = lineRef as Dictionary<NSObject, AnyObject>

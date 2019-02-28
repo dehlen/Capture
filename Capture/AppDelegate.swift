@@ -1,6 +1,7 @@
 import Cocoa
 import AVFoundation
 import Magnet
+import os
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -10,6 +11,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        os_log(.info, log: .app, "Application did finish launching")
         setupPreferenceDefaults()
         ValueTransformerFactory.registerAll()
         Current.hotKeyService.setupDefaultHotKeys()
@@ -17,10 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        os_log(.info, log: .app, "Application will terminate")
         // Insert code here to tear down your application
     }
 
     private func setupPreferenceDefaults() {
+        os_log(.info, log: .app, "Setting preference defaults")
         Current.defaults.register(defaults: [
             .exportUrl: DirectoryHandler.desktopUrl!.path,
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
@@ -40,12 +44,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func askForAccessibilityPermission() {
+        os_log(.info, log: .app, "Ask for accessibility control")
         let promptFlag = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
         let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
         AXIsProcessTrustedWithOptions(myDict)
     }
 
     @IBAction func showPreferences(_ sender: Any) {
+        os_log(.info, log: .preferences, "Preferences shown")
         preferencesWindowController?.showWindow(sender)
     }
 }

@@ -1,4 +1,5 @@
 import Cocoa
+import os
 
 struct WindowInfo {
     var order: Int?
@@ -81,6 +82,8 @@ struct WindowInfo {
         if layer >= CGWindowLevelForKey(.mainMenuWindow) {
             return false
         }
+
+        os_log(.info, log: .windowHandling, "Found normal window: Name: %{public}@, OwnerName: %{public}@, Alpha: %{public}i, Frame: %{public}@, DisplayID: %{public}lu", name, ownerName, alpha, NSStringFromRect(frame), directDisplayID)
         return true
     }
 }

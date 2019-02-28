@@ -1,4 +1,5 @@
 import AppKit
+import os
 
 enum FinishState {
     case success(_ gifOutputUrl: URL?)
@@ -39,11 +40,14 @@ class FinishViewController: NSViewController {
     }
 
     @IBAction func revealInFinder(_ sender: Any) {
+        os_log(.info, log: .exportContainer, "Reveal in Finder triggered")
+
         switch state {
         case .success(let url):
             guard let url = url else { return }
             _ = NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: "")
         case .failure:
+            os_log(.info, log: .exportContainer, "Reveal in Finder could not find specified file")
             return
         }
     }

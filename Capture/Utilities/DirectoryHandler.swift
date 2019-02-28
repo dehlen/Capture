@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 struct DirectoryHandler {
     static var videoDestination: URL {
@@ -24,7 +25,7 @@ struct DirectoryHandler {
         do {
             try FileManager.default.copyItem(at: videoUrl, to: destination.appendingPathComponent(videoUrl.path.fileName.mov))
         } catch let error {
-            print(error)
+            os_log(.error, log: .app, "Could not copy file from %{public}@, %{public}@", videoUrl.path, error.localizedDescription)
         }
     }
 }

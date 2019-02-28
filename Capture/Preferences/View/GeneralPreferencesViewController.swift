@@ -1,5 +1,6 @@
 import AppKit
 import AVFoundation
+import os
 
 class GeneralPreferencesViewController: PreferencesViewController {
     @IBOutlet private weak var gifFrameRateStepper: NSStepper!
@@ -25,6 +26,8 @@ class GeneralPreferencesViewController: PreferencesViewController {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        os_log(.info, log: .preferences, "General preferences loaded")
+
         gifFrameRateStepper.integerValue = Int(gifFrameRate) ?? 20
         movieQualityPopUpButton.selectItem(withTitle: movieQualityTitle)
     }

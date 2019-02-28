@@ -1,4 +1,5 @@
 import AppKit
+import os
 
 class OptionViewController: NSViewController {
     @objc dynamic var gifHeight: String {
@@ -10,5 +11,10 @@ class OptionViewController: NSViewController {
                 Current.defaults[.gifHeight] = newValue
             }
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        os_log(.info, log: .mainScreen, "Showing options")
     }
 }

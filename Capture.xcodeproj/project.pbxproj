@@ -17,6 +17,7 @@
 		0B202B32221B640500435657 /* NoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B31221B640500435657 /* NoResponse.swift */; };
 		0B202B34221B645800435657 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B33221B645800435657 /* NetworkError.swift */; };
 		0B202B36221B70E100435657 /* JSONPostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B202B35221B70E100435657 /* JSONPostRouter.swift */; };
+		0B3151882227C52500025C6B /* OSLog+Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3151872227C52500025C6B /* OSLog+Definitions.swift */; };
 		0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */; };
 		0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CB2219DAA30028F007 /* Preferences.swift */; };
 		0B3276CE2219E47A0028F007 /* NumberValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */; };
@@ -91,6 +92,7 @@
 		0B202B31221B640500435657 /* NoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResponse.swift; sourceTree = "<group>"; };
 		0B202B33221B645800435657 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		0B202B35221B70E100435657 /* JSONPostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPostRouter.swift; sourceTree = "<group>"; };
+		0B3151872227C52500025C6B /* OSLog+Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Definitions.swift"; sourceTree = "<group>"; };
 		0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		0B3276CB2219DAA30028F007 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberValueTransformer.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				0B581A29222199EA006EF012 /* HotKeyService.swift */,
 				0B581A2B22219B1E006EF012 /* HotKeyType.swift */,
 				0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */,
+				0B3151872227C52500025C6B /* OSLog+Definitions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				0BD239EB2219A43B003AF068 /* UserInterfaceError.swift in Sources */,
 				0BE418B5221AE59600B8E85D /* CaptureApplication.swift in Sources */,
 				0BA2620F221AA7180068D387 /* PullRequests.swift in Sources */,
+				0B3151882227C52500025C6B /* OSLog+Definitions.swift in Sources */,
 				0B64CD8D2218D2B5004F6321 /* WindowInfo.swift in Sources */,
 				0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */,
 				0B64CD912218D9E1004F6321 /* World.swift in Sources */,

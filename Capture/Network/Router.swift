@@ -131,7 +131,7 @@ public extension Router {
             return request
         case .form:
             let queryData = urlComponents.percentEncodedQuery?.data(using: String.Encoding.utf8)
-            urlComponents.queryItems = nil // clear the query items as they go into the body
+            urlComponents.queryItems = nil
             var mutableURLRequest = URLRequest(url: urlComponents.url!)
             mutableURLRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             mutableURLRequest.httpBody = queryData
