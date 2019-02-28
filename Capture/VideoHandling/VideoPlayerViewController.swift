@@ -2,6 +2,12 @@ import AppKit
 import AVKit
 import os
 
+enum VideoPlayerError: Error {
+    case noCurrentItem
+    case missingFile
+    case exportFailed
+}
+
 class VideoPlayerViewController: NSViewController {
     typealias URLHandler = ((Result<URL>) -> Void)
 
@@ -36,7 +42,6 @@ class VideoPlayerViewController: NSViewController {
     func loadVideo(at videoUrl: URL) {
         let player = AVPlayer(url: videoUrl)
         playerView.player = player
-
         beginTrimmingObserver = playerView.observe(\AVPlayerView.canBeginTrimming, options: .new) { playerView, change in
             if change.newValue == true {
                 self.trimButton.contentTintColor = NSColor.labelColor
@@ -74,13 +79,13 @@ class VideoPlayerViewController: NSViewController {
 
     private func exportVideo(then handler: @escaping URLHandler) {
         guard let playerItem = playerView.player?.currentItem else {
-            handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1000, userInfo: nil)))
+            handler(.failure(NSError.create(from: VideoPlayerError.noCurrentItem)))
             os_log(.info, log: .videoPlayer, "VideoPlayer current item is nil")
             return
         }
         guard let outputUrl = trimmedOutputUrl() else {
             os_log(.info, log: .videoPlayer, "Video file could not be found")
-            handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1001, userInfo: nil)))
+            handler(.failure(NSError.create(from: VideoPlayerError.missingFile)))
             return
         }
 
@@ -100,7 +105,7 @@ class VideoPlayerViewController: NSViewController {
                 handler(.success(outputUrl))
             default:
                 os_log(.info, log: .videoPlayer, "Export Status changed %{public}i", exportSession.status.rawValue)
-                return handler(.failure(NSError(domain: "com.davidehlen.Capture", code: 1002, userInfo: ["status": exportSession.status.rawValue])))
+                return handler(.failure(NSError.create(from: VideoPlayerError.exportFailed)))
             }
         }
     }
@@ -130,14 +135,16 @@ extension VideoPlayerViewController {
                             self.delegate?.dismissLoadingIndicator()
                             self.delegate?.requestReplace(new: FinishViewController.create(state: .success(gifOutputUrl)))
                         case .failure(let error):
-                            self.presentError(NSError.create(from: error))
+                            let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
+                            self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
                         }
                     }
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
                     sender.isEnabled = true
-                    self.presentError(NSError.create(from: error))
+                    let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
+                    self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
                 }
             }
         }
