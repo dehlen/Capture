@@ -133,8 +133,10 @@ extension VideoPlayerViewController {
                         sender.isEnabled = true
                         switch convertResult {
                         case .success(let gifOutputUrl):
-                            self.delegate?.dismissLoadingIndicator()
-                            self.delegate?.requestReplace(new: FinishViewController.create(state: .success(gifOutputUrl)))
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                self.delegate?.dismissLoadingIndicator()
+                                self.delegate?.requestReplace(new: FinishViewController.create(state: .success(gifOutputUrl)))
+                            }
                         case .failure(let error):
                             let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
                             self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
