@@ -14,7 +14,3 @@
 "successMessage" = "Congratulations! Your screen recording was successfully exported as a GIF and can be found at: %@. You can just click the button below to quickly navigate to the new file.";
 "Continue" = "Continue";
 "Done" = "Done";
-"missingFile" = "We're sorry but it looks like there is no file we could upload to BitBucket. You might try again later.";
-"uploadFailed" = "We're sorry but it seems like the upload of your GIF to BitBucket Server failed. You might try again later.";
-"notAuthorized" = "We're sorry but it seems like you are not authorized to add an attachment to BitBucket. Please check your entered BitBucket Server host and personal access token to continue.";
-"missingResponse" = "We could not execute your requested action because the server returned with no response.";

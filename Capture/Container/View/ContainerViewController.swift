@@ -3,62 +3,59 @@ import AppKit
 class ContainerViewController: NSViewController {
     var videoUrl: URL?
 
-    @IBOutlet private weak var actionButton: NSButton!
     @IBOutlet private weak var containerView: NSView!
-    private var currentPageable: ContainerPageable?
+    private var currentViewController: NSViewController?
+    private var loadingViewController: NSViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Bundle.main.displayName
         view.window?.title = Bundle.main.displayName ?? "Capture"
         setupFirstPage()
+        addLoadingIndicator()
     }
 
     private func setupFirstPage() {
         guard let videoUrl = videoUrl else { return }
-        replacePage(with: VideoPlayerViewController.create(with: videoUrl))
+        replacePage(with: VideoPlayerViewController.create(with: videoUrl, delegate: self))
     }
 
-    private func replacePage(with pageable: ContainerPageable) {
-        DispatchQueue.main.async {
-            if self.currentPageable != nil {
-                self.remove(self.currentPageable!.viewController)
-            }
-            self.currentPageable = pageable
-            self.currentPageable?.register(observer: self)
-
-            self.actionButton.title = pageable.actionName
-            self.actionButton.target = self
-            self.actionButton.action = #selector(self.triggerCurrentPageableAction)
-
-            self.embed(self.currentPageable!.viewController, container: self.containerView)
+    private func replacePage(with currentViewController: NSViewController) {
+        if self.currentViewController != nil {
+            remove(self.currentViewController!)
         }
+
+        self.currentViewController = currentViewController
+        embed(self.currentViewController!, container: containerView)
     }
 
-    @objc func triggerCurrentPageableAction() {
-        currentPageable?.triggerAction(sender: actionButton, then: { (result) in
-            switch result {
-            case .success(let nextContainer):
-                switch nextContainer {
-                case .bitBucketIntegration(let gifOutputUrl):
-                    self.replacePage(with: BitBucketIntegrationViewController.create(with: gifOutputUrl))
-                case .finishPage(let gifOutputUrl):
-                    self.replacePage(with:
-                        FinishViewController.create(state: .success(gifOutputUrl)))
-                case .dismiss:
-                    self.view.window?.performClose(nil)
-                }
-            case .failure(let error):
-                self.replacePage(with: FinishViewController.create(state: .failure(ErrorMessageProvider.string(for: error))))
-            }
-        })
+    private func addLoadingIndicator() {
+        loadingViewController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "LoadingViewController") as? NSViewController
+        loadingViewController?.view.wantsLayer = true
+        loadingViewController?.view.layer?.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.5).cgColor
+        embed(loadingViewController!, container: containerView)
+        loadingViewController?.view.isHidden = true
     }
 }
 
-extension ContainerViewController: ActionNameObserver {
-    func didChangeActionName(newValue: String) {
+extension ContainerViewController: ContainerViewControllerDelegate {
+    func requestLoadingIndicator() {
+       loadingViewController?.view.isHidden = false
+    }
+
+    func dismissLoadingIndicator() {
         DispatchQueue.main.async {
-            self.actionButton.title = newValue
+            self.loadingViewController?.view.isHidden = true
         }
     }
+
+    func requestReplace(new: NSViewController) {
+        replacePage(with: new)
+    }
+}
+
+protocol ContainerViewControllerDelegate: class {
+    func requestLoadingIndicator()
+    func dismissLoadingIndicator()
+    func requestReplace(new: NSViewController)
 }
