@@ -63,20 +63,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="SE2-gW-bkq">
-                                <rect key="frame" x="404" y="8" width="26" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="OPS-CZ-Ncs"/>
-                                    <constraint firstAttribute="width" constant="26" id="s1R-NY-NlI"/>
-                                </constraints>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="7PI-aB-Lwo">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="refreshWindowList:" target="uaI-qh-UhH" id="D60-iq-jKW"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HSQ-T7-A50" customClass="RecordingButton" customModule="Capture" customModuleProvider="target">
                                 <rect key="frame" x="211" y="8" width="28" height="28"/>
                                 <constraints>
@@ -112,10 +98,8 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="SE2-gW-bkq" secondAttribute="trailing" constant="20" id="5lg-rM-Zx3"/>
                             <constraint firstItem="HSQ-T7-A50" firstAttribute="top" secondItem="zzB-mQ-fYD" secondAttribute="bottom" constant="8" id="LbL-aY-AH9"/>
                             <constraint firstAttribute="bottom" secondItem="zzB-mQ-fYD" secondAttribute="bottom" constant="44" id="MTJ-a2-0R5"/>
-                            <constraint firstAttribute="bottom" secondItem="SE2-gW-bkq" secondAttribute="bottom" constant="8" id="Ykl-Qw-iIO"/>
                             <constraint firstItem="zzB-mQ-fYD" firstAttribute="leading" secondItem="R5p-jo-UKs" secondAttribute="leading" id="bK8-4a-1C9"/>
                             <constraint firstItem="kAs-MG-hLH" firstAttribute="leading" secondItem="HSQ-T7-A50" secondAttribute="trailing" constant="8" id="d4V-U4-YRc"/>
                             <constraint firstItem="kAs-MG-hLH" firstAttribute="centerY" secondItem="HSQ-T7-A50" secondAttribute="centerY" id="eG6-OX-Tw3"/>
@@ -706,7 +690,6 @@ Gw
         </scene>
     </scenes>
     <resources>
-        <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="disclosureIndicator" width="30" height="30"/>
         <image name="success" width="480" height="480"/>
     </resources>

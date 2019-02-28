@@ -23,6 +23,11 @@ class WindowInfoManager {
         return items
     }
 
+    static func updateWindow(windowInfo: WindowInfo?) -> WindowInfo? {
+        guard let windowInfo = windowInfo else { return nil }
+        return allWindows().filter { $0.id == windowInfo.id }.first
+    }
+
     static func switchToApp(withWindowId id: CGWindowID) {
         let options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
         let windowListInfo = CGWindowListCopyWindowInfo(options, CGWindowID(0))

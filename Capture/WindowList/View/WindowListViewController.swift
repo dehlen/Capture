@@ -12,6 +12,7 @@ class WindowListViewController: NSViewController {
     private var currentRecorder: Recorder?
     private var currentVideoOutputUrl: URL?
     private var cutoutWindow: CutoutWindow?
+    private var timer: Timer?
     private var dataSource = CollectionViewDataSource<WindowInfo>.make(for: []) {
         didSet {
             collectionView.reloadData()
@@ -34,6 +35,10 @@ class WindowListViewController: NSViewController {
 
     private func setupObserver() {
         Current.notificationCenter.addObserver(self, selector: #selector(stopRecording), name: .shouldStopRecording, object: nil)
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
+            (_) in
+            self.refresh()
+        }
     }
 
     @objc func stopRecording() {
@@ -53,6 +58,10 @@ class WindowListViewController: NSViewController {
         AXIsProcessTrustedWithOptions(myDict)
 
         if (AXIsProcessTrustedWithOptions(myDict)) {
+            if let updatedWindow = WindowInfoManager.updateWindow(windowInfo: self.selectedWindow) {
+                self.selectedWindow = updatedWindow
+            }
+
             guard let selectedWindow = self.selectedWindow, let id = selectedWindow.id else { return }
             do {
                 recordingButton.isRecording = true
@@ -73,13 +82,11 @@ class WindowListViewController: NSViewController {
     }
 
     private func refresh() {
+        let selectionIndexPaths = collectionView.selectionIndexPaths
         windowListViewModel.reloadWindows()
         dataSource = .make(for: windowListViewModel.windows)
         collectionView.dataSource = dataSource
-    }
-
-    @IBAction func refreshWindowList(_ sender: Any) {
-       refresh()
+        collectionView.selectItems(at: selectionIndexPaths, scrollPosition: .nearestHorizontalEdge)
     }
 
     @IBAction func toggleRecording(_ sender: Any) {

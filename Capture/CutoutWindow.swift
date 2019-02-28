@@ -12,7 +12,7 @@ class CutoutWindow: NSWindow {
 
     static func create(with rect: NSRect, cutout: NSRect) -> CutoutWindow {
         let window = CutoutWindow(contentRect: rect, styleMask: .borderless, backing: .buffered, defer: true)
-        window.contentView?.addSubview(CutoutView(frame: rect, cutout: cutout))
+        window.contentView?.addSubview(CutoutView(frame: NSRect(x: 0, y: 0, width: rect.size.width, height: rect.size.height), cutout: cutout))
         return window
     }
 }
