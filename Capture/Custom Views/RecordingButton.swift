@@ -4,7 +4,11 @@ import Cocoa
     @IBInspectable var outerCircleColor: NSColor = NSColor.white.withAlphaComponent(0.7)
     @IBInspectable var innerCircleColor: NSColor = NSColor.red
 
-    var isRecording: Bool = false
+    var isRecording: Bool = false {
+        didSet {
+            setNeedsDisplay(self.frame)
+        }
+    }
 
     override func draw(_ dirtyRect: NSRect) {
         outerCircleColor.setFill()

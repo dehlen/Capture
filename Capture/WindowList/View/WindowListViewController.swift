@@ -42,8 +42,8 @@ class WindowListViewController: NSViewController {
     }
 
     @objc func stopRecording() {
-        guard let currentRecorder = currentRecorder else { return }
         recordingButton.isRecording = false
+        guard let currentRecorder = currentRecorder else { return }
         cutoutWindow?.orderOut(nil)
         NSApplication.shared.activate(ignoringOtherApps: true)
         currentRecorder.stop()
