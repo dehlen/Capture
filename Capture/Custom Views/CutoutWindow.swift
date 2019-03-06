@@ -8,6 +8,7 @@ class CutoutWindow: NSWindow {
         isOpaque = false
         hasShadow = false
         level = NSWindow.Level.statusBar
+        ignoresMouseEvents = true
     }
 
     static func create(with rect: NSRect, cutout: NSRect) -> CutoutWindow {
