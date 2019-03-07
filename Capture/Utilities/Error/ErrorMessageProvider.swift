@@ -8,6 +8,8 @@ struct ErrorMessageProvider {
             return string(for: error)
         } else if let error = error as? VideoPlayerError {
             return string(for: error)
+        } else if let error = error as? AppUpdaterError {
+            return string(for: error)
         }
         return error.localizedDescription
     }
@@ -34,6 +36,15 @@ struct ErrorMessageProvider {
             return "missingFile".localized
         case .exportFailed:
             return "exportFailed".localized
+        }
+    }
+
+    private static func string(for error: AppUpdaterError) -> String {
+        switch error {
+        case .alreadyUpToDate:
+            return "alreadyUpToDate".localized
+        case .failure(let message):
+            return String(format: "updateFailed".localized, message)
         }
     }
 }

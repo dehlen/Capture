@@ -35,6 +35,7 @@
 		0B3D7A70223109DD000F8C85 /* Path+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D7A67223109DD000F8C85 /* Path+Codable.swift */; };
 		0B3D7A71223109DD000F8C85 /* Path+StringConvertibles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D7A68223109DD000F8C85 /* Path+StringConvertibles.swift */; };
 		0B3D7A7422310A52000F8C85 /* PMKFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3D7A7322310A52000F8C85 /* PMKFoundation.framework */; };
+		0B3D7A7622311676000F8C85 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D7A7522311676000F8C85 /* Alerts.swift */; };
 		0B4309A7221916C500766DB0 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4309A6221916C500766DB0 /* VideoPlayerViewController.swift */; };
 		0B4309A9221926C500766DB0 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4309A8221926C500766DB0 /* BundleExtension.swift */; };
 		0B4309AF22198FAA00766DB0 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B4309AC22198FAA00766DB0 /* Preferences.storyboard */; };
@@ -109,6 +110,7 @@
 		0B3D7A67223109DD000F8C85 /* Path+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+Codable.swift"; sourceTree = "<group>"; };
 		0B3D7A68223109DD000F8C85 /* Path+StringConvertibles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Path+StringConvertibles.swift"; sourceTree = "<group>"; };
 		0B3D7A7322310A52000F8C85 /* PMKFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PMKFoundation.framework; path = Carthage/Build/Mac/PMKFoundation.framework; sourceTree = "<group>"; };
+		0B3D7A7522311676000F8C85 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		0B4309A6221916C500766DB0 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		0B4309A8221926C500766DB0 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		0B4309AC22198FAA00766DB0 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		0BC83209221A085200FD8CF4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0B3D7A7522311676000F8C85 /* Alerts.swift */,
 				0B4309A8221926C500766DB0 /* BundleExtension.swift */,
 				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
 				0B64CD9B2218DE1B004F6321 /* Result.swift */,
@@ -551,6 +554,7 @@
 				0BE418BC221AF3B200B8E85D /* ContainerViewController.swift in Sources */,
 				0B581A2A222199EA006EF012 /* HotKeyService.swift in Sources */,
 				0B64CD972218DD5A004F6321 /* ConvertGif.swift in Sources */,
+				0B3D7A7622311676000F8C85 /* Alerts.swift in Sources */,
 				0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */,
 				0B3276D02219E6810028F007 /* GeneralPreferencesViewController.swift in Sources */,
 				0B3D7A5E223109CC000F8C85 /* Version+Comparable.swift in Sources */,

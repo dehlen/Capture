@@ -17,6 +17,16 @@ class GeneralPreferencesViewController: PreferencesViewController {
         prepareHotKeys()
     }
 
+    @IBAction func userRequestedAnExplicitUpdateCheck(_ sender: Any) {
+        let delegate = NSApplication.shared.delegate as? AppDelegate
+        delegate?.updater.check().catch(policy: .allErrors) { error in
+            if error.isCancelled {
+                showAlert(title: "alreadyUpToDateTitle".localized, message: ErrorMessageProvider.string(for: AppUpdaterError.alreadyUpToDate))
+            } else {
+                self.presentError(NSError.create(from: AppUpdaterError.failure(error.localizedDescription)))
+            }
+        }
+    }
 }
 
 // MARK: - Shortcut

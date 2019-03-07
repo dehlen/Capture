@@ -4,6 +4,11 @@ import PMKFoundation
 import Foundation
 import PromiseKit
 
+enum AppUpdaterError: Error {
+    case alreadyUpToDate
+    case failure(String)
+}
+
 public class AppUpdater {
     var active = Promise()
     #if !DEBUG
