@@ -141,16 +141,21 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-uL-5ms">
+                                <rect key="frame" x="351" y="61" width="16" height="16"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="btq-nd-DrW" secondAttribute="trailing" constant="20" id="078-OX-KBz"/>
                             <constraint firstItem="xix-mN-5C6" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="trailing" constant="10" id="3UI-KT-DWK"/>
                             <constraint firstAttribute="trailing" secondItem="Maz-20-LlC" secondAttribute="trailing" constant="20" id="41h-OP-eMs"/>
                             <constraint firstItem="K7Z-TW-8U8" firstAttribute="centerY" secondItem="UDU-Gc-nF1" secondAttribute="centerY" id="7fS-hS-Mf1"/>
+                            <constraint firstItem="aCH-uL-5ms" firstAttribute="leading" secondItem="OBT-6X-HhQ" secondAttribute="trailing" constant="8" id="89v-xc-R4n"/>
                             <constraint firstItem="btq-nd-DrW" firstAttribute="leading" secondItem="IDG-1b-v6d" secondAttribute="leading" id="8Cv-GA-lj2"/>
                             <constraint firstItem="Y8G-g4-hdo" firstAttribute="leading" secondItem="4Ei-kU-JuY" secondAttribute="leading" constant="20" id="AgO-fd-4zk"/>
                             <constraint firstItem="BYr-zV-DCp" firstAttribute="top" secondItem="Maz-20-LlC" secondAttribute="bottom" constant="20" id="Bro-qe-PVH"/>
                             <constraint firstItem="Maz-20-LlC" firstAttribute="top" secondItem="K7Z-TW-8U8" secondAttribute="bottom" constant="10" id="DlR-2F-fjH"/>
+                            <constraint firstItem="aCH-uL-5ms" firstAttribute="centerY" secondItem="OBT-6X-HhQ" secondAttribute="centerY" id="EJV-Ud-3Sa"/>
                             <constraint firstItem="IDG-1b-v6d" firstAttribute="top" secondItem="4Ei-kU-JuY" secondAttribute="top" constant="20" id="Exg-sT-rCA"/>
                             <constraint firstItem="Y8G-g4-hdo" firstAttribute="top" secondItem="OBT-6X-HhQ" secondAttribute="bottom" constant="10" id="FL5-cX-QmI"/>
                             <constraint firstItem="OBT-6X-HhQ" firstAttribute="leading" secondItem="BYr-zV-DCp" secondAttribute="trailing" constant="10" id="OFT-n9-A8z"/>
@@ -169,6 +174,7 @@
                     </view>
                     <connections>
                         <outlet property="stopRecordingShortcutRecordView" destination="K7Z-TW-8U8" id="v6c-pU-Fzg"/>
+                        <outlet property="updateActivityIndicator" destination="aCH-uL-5ms" id="qBn-Wk-ExD"/>
                     </connections>
                 </viewController>
                 <customObject id="FvE-cN-eWk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -2,11 +2,13 @@ import Cocoa
 import KeyHolder
 import Magnet
 import os
+import PromiseKit
 
 class GeneralPreferencesViewController: PreferencesViewController {
 
     // MARK: - Properties
     @IBOutlet private weak var stopRecordingShortcutRecordView: RecordView!
+    @IBOutlet private weak var updateActivityIndicator: NSProgressIndicator!
 
     // MARK: - Initialize
     override func loadView() {
@@ -17,14 +19,26 @@ class GeneralPreferencesViewController: PreferencesViewController {
         prepareHotKeys()
     }
 
-    @IBAction func userRequestedAnExplicitUpdateCheck(_ sender: Any) {
+    @IBAction func userRequestedAnExplicitUpdateCheck(_ sender: NSButton) {
         let delegate = NSApplication.shared.delegate as? AppDelegate
+
+        updateActivityIndicator.startAnimation(nil)
+        updateActivityIndicator.isHidden = false
+        sender.isEnabled = false
+
         delegate?.updater.check().catch(policy: .allErrors) { error in
+            self.updateActivityIndicator.stopAnimation(nil)
+            sender.isEnabled = true
+
             if error.isCancelled {
                 showAlert(title: "alreadyUpToDateTitle".localized, message: ErrorMessageProvider.string(for: AppUpdaterError.alreadyUpToDate))
             } else {
                 self.presentError(NSError.create(from: AppUpdaterError.failure(error.localizedDescription)))
             }
+        }.finally {
+            self.updateActivityIndicator.stopAnimation(nil)
+            self.updateActivityIndicator.isHidden = true
+            sender.isEnabled = true
         }
     }
 }
