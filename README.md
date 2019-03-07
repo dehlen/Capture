@@ -4,8 +4,6 @@
 </p>
 
 ## Releasing
-1. Update changelog blog post on https://davidehlen.dev
-2. Update `latest.zip` on https://captureapp.dev
-3. Tag new version in git repository
-4. Create new GitHub release
-5. Append signed .app to created release
+1. Tag new version in git repository
+2. Create new GitHub release
+3. Append signed .app to created release
