@@ -9,6 +9,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
         return storyboard.instantiateInitialController() as? NSWindowController
     }()
+
+    let updater = AppUpdater(owner: "dehlen", repo: "Capture")
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         os_log(.info, log: .app, "Application did finish launching")
