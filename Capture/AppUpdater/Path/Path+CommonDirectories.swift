@@ -1,8 +1,8 @@
 import Foundation
 
 extension Path {
-    //MARK: Common Directories
-    
+    // MARK: Common Directories
+
     /// Returns a `Path` containing `FileManager.default.currentDirectoryPath`.
     public static var cwd: Path {
         return Path(string: FileManager.default.currentDirectoryPath)
@@ -46,7 +46,7 @@ extension Path {
         default:
             fatalError()
         }
-    #else    
+    #else
         guard let pathString = FileManager.default.urls(for: searchPath, in: .userDomainMask).first?.path else { return defaultUrl(for: searchPath) }
         return Path(string: pathString)
     #endif
@@ -94,4 +94,3 @@ func defaultUrl(for searchPath: FileManager.SearchPathDirectory) -> Path {
     }
 }
 #endif
-

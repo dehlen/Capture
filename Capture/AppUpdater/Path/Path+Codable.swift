@@ -23,7 +23,7 @@ public extension CodingUserInfoKey {
  Provided for relative-path coding. See the instructions in our
  [README](https://github.com/mxcl/Path.swift/#codable).
 */
-extension Path: Codable {    
+extension Path: Codable {
     /// - SeeAlso: `CodingUserInfoKey.relativePath`
     /// :nodoc:
     public init(from decoder: Decoder) throws {
@@ -32,7 +32,10 @@ extension Path: Codable {
             string = value
         } else {
             guard let root = decoder.userInfo[.relativePath] as? Path else {
-                throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Path cannot decode a relative path if `userInfo[.relativePath]` not set to a Path object."))
+                throw DecodingError.dataCorrupted(
+                    .init(codingPath: [],
+                          debugDescription: "Path cannot decode a relative path if `userInfo[.relativePath]` not set to a Path object.")
+                )
             }
             string = (root/value).string
         }

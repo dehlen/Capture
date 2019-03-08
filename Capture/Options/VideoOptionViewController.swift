@@ -8,9 +8,12 @@ class VideoOptionViewController: NSViewController {
     var movieQualityTitle: String {
         let movieQualityString: String = Current.defaults[.movieQuality] ?? "480p"
         switch movieQualityString {
-        case AVAssetExportPresetAppleM4V720pHD: return "720p"
-        case AVAssetExportPresetAppleM4V1080pHD: return "1080p"
-        default: return "480p"
+        case AVAssetExportPresetAppleM4V720pHD:
+            return "720p"
+        case AVAssetExportPresetAppleM4V1080pHD:
+            return "1080p"
+        default:
+            return "480p"
         }
     }
 
@@ -21,14 +24,17 @@ class VideoOptionViewController: NSViewController {
         movieQualityPopUpButton.selectItem(withTitle: movieQualityTitle)
     }
 
-    @IBAction func selectMovieQuality(_ sender: NSPopUpButton) {
+    @IBAction private func selectMovieQuality(_ sender: NSPopUpButton) {
         let selectedString = sender.titleOfSelectedItem ?? "480p"
         var selectedMovieQuality: String!
 
         switch selectedString {
-        case "720p": selectedMovieQuality = AVAssetExportPresetAppleM4V720pHD
-        case "1080p": selectedMovieQuality = AVAssetExportPresetAppleM4V1080pHD
-        default: selectedMovieQuality = AVAssetExportPresetAppleM4V480pSD
+        case "720p":
+            selectedMovieQuality = AVAssetExportPresetAppleM4V720pHD
+        case "1080p":
+            selectedMovieQuality = AVAssetExportPresetAppleM4V1080pHD
+        default:
+            selectedMovieQuality = AVAssetExportPresetAppleM4V480pSD
         }
 
         Current.defaults[.movieQuality] = selectedMovieQuality

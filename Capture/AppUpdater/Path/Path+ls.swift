@@ -18,8 +18,8 @@ public struct Entry {
     public let path: Path
 }
 
-public extension Path {    
-    //MARK: Directory Listings
+public extension Path {
+    // MARK: Directory Listings
 
     /**
      Same as the `ls -a` command ∴ output is ”shallow” and unsorted.

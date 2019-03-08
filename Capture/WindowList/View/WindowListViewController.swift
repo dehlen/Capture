@@ -27,7 +27,8 @@ class WindowListViewController: NSViewController {
     }
 
     private func setupCollectionView() {
-        collectionView.register(NSNib(nibNamed: "CollectionViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem"))
+        collectionView.register(NSNib(nibNamed: "CollectionViewItem", bundle: nil),
+                                forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem"))
         collectionView.collectionViewLayout = CollectionViewLayoutFactory.createGridLayout()
         collectionView.delegate = self
         refresh()
@@ -35,8 +36,7 @@ class WindowListViewController: NSViewController {
 
     private func setupObserver() {
         Current.notificationCenter.addObserver(self, selector: #selector(stopRecording), name: .shouldStopRecording, object: nil)
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
-            (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (_) in
             self.refresh()
         }
     }
@@ -57,7 +57,7 @@ class WindowListViewController: NSViewController {
         let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
         AXIsProcessTrustedWithOptions(myDict)
 
-        if (AXIsProcessTrustedWithOptions(myDict)) {
+        if AXIsProcessTrustedWithOptions(myDict) {
             if let updatedWindow = WindowInfoManager.updateWindow(windowInfo: self.selectedWindow) {
                 self.selectedWindow = updatedWindow
             }
@@ -67,7 +67,12 @@ class WindowListViewController: NSViewController {
                 recordingButton.isRecording = true
                 let videoOutputUrl = DirectoryHandler.videoDestination
                 currentVideoOutputUrl = videoOutputUrl
-                currentRecorder = try recordScreen(destination: videoOutputUrl, displayId: selectedWindow.directDisplayID, cropRect: selectedWindow.frame, audioDevice: nil)
+                currentRecorder = try recordScreen(
+                    destination: videoOutputUrl,
+                    displayId: selectedWindow.directDisplayID,
+                    cropRect: selectedWindow.frame,
+                    audioDevice: nil
+                )
                 WindowInfoManager.switchToApp(withWindowId: id)
 
                 let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
@@ -90,7 +95,7 @@ class WindowListViewController: NSViewController {
     }
 
     @IBAction func toggleRecording(_ sender: Any) {
-        guard let _ = self.selectedWindow else {
+        guard selectedWindow != nil else {
             presentError(NSError.create(from: UserInterfaceError.selectWindow))
             return
         }
@@ -122,4 +127,3 @@ extension WindowListViewController: NSCollectionViewDelegate {
         }
     }
 }
-

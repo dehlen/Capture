@@ -14,7 +14,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var aboutWindowControllerConfig: AboutWindowControllerConfig = {
         let website = URL(string: "https://github.com/dehlen/Capture")
 
-        return AboutWindowControllerConfig(creditsButtonTitle: "credits".localized, eula: nil, eulaButtonTitle: "eula".localized, url: website, hasShadow: true)
+        return AboutWindowControllerConfig(creditsButtonTitle: "credits".localized,
+                                           eula: nil,
+                                           eulaButtonTitle: "eula".localized,
+                                           url: website,
+                                           hasShadow: true)
     }()
 
     lazy var aboutWindowController: AboutWindowController = {
@@ -22,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     let updater = AppUpdater(owner: "dehlen", repo: "Capture")
-    
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         os_log(.info, log: .app, "Application did finish launching")
         setupPreferenceDefaults()
@@ -48,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .showMouseClicks: true,
             .saveVideo: true
         ])
-        
+
         let keyCombo = KeyCombo(keyCode: 15, carbonModifiers: 4352)
             if let data = keyCombo?.archive() {
                 Current.defaults.register(defaults: [
@@ -69,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesWindowController?.showWindow(sender)
     }
 
-    @IBAction func showAboutWindow(_ sender:AnyObject) {
+    @IBAction func showAboutWindow(_ sender: AnyObject) {
         aboutWindowController.showWindow(self)
     }
 }

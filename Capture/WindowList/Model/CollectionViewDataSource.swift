@@ -34,7 +34,8 @@ class CollectionViewDataSource<Model>: NSObject, NSCollectionViewDataSource {
 
 extension CollectionViewDataSource where Model == WindowInfo {
     static func make(for windows: [WindowInfo],
-                     itemIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem")) -> CollectionViewDataSource {
+                     itemIdentifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem")
+        ) -> CollectionViewDataSource {
         return CollectionViewDataSource(
             models: windows,
             itemIdentifier: itemIdentifier

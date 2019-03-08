@@ -4,8 +4,8 @@ import Glibc
 #endif
 
 public extension Path {
-    //MARK: File Management
-    
+    // MARK: File Management
+
     /**
      Copies a file.
 

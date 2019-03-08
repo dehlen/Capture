@@ -30,7 +30,8 @@ class ContainerViewController: NSViewController {
     }
 
     private func addLoadingIndicator() {
-        loadingViewController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "LoadingViewController") as? NSViewController
+        loadingViewController = NSStoryboard(name: "Main", bundle: nil)
+            .instantiateController(withIdentifier: "LoadingViewController") as? NSViewController
         loadingViewController?.view.wantsLayer = true
         loadingViewController?.view.layer?.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.5).cgColor
         embed(loadingViewController!, container: containerView)

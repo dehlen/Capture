@@ -21,12 +21,15 @@ class VideoPlayerViewController: NSViewController {
 
     static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateController(withIdentifier: "VideoPlayerViewController") as! VideoPlayerViewController
+        guard let viewController = storyboard.instantiateController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController else {
+            fatalError("Could not instantiate VideoPlayerViewController")
+        }
+
         viewController.videoUrl = videoUrl
         viewController.delegate = delegate
         return viewController
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         os_log(.info, log: .videoPlayer, "VideoPlayer loaded")
@@ -55,7 +58,7 @@ class VideoPlayerViewController: NSViewController {
             }
         }
     }
-    
+
     private func trimmedOutputUrl() -> URL? {
         guard let videoOutputUrl = videoUrl else { return nil }
         let fileName = videoOutputUrl.path.fileName
@@ -122,13 +125,13 @@ extension VideoPlayerViewController {
     @IBAction func export(_ sender: NSButton) {
         sender.isEnabled = false
         delegate?.requestLoadingIndicator()
-        exportVideo() { result in
+        exportVideo { result in
             switch result {
             case .success(let videoUrl):
                 if Current.defaults[.saveVideo] == true {
                     DirectoryHandler.copy(from: videoUrl)
                 }
-                self.convertVideoToGif() { convertResult in
+                self.convertVideoToGif { convertResult in
                     DispatchQueue.main.async {
                         sender.isEnabled = true
                         switch convertResult {

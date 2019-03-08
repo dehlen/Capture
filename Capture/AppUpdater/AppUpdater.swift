@@ -84,7 +84,7 @@ public class AppUpdater {
                 }.compactMap { downloadedAppBundle in
                     Bundle(url: downloadedAppBundle)
                 }.then { downloadedAppBundle in
-                    validate(codeSigning: .main, downloadedAppBundle).map{ downloadedAppBundle }
+                    validate(codeSigning: .main, downloadedAppBundle).map { downloadedAppBundle }
                 }.done { downloadedAppBundle in
 
                     // UNIX is cool. Delete ourselves, move new one in then restart.
@@ -187,7 +187,7 @@ extension Release: Comparable {
 
 private extension Array where Element == Release {
     func findViableUpdate(appVersion: Version, repo: String) throws -> Release.Asset? {
-        let properReleases = filter{ !$0.prerelease }
+        let properReleases = filter { !$0.prerelease }
         guard let latestRelease = properReleases.sorted().last else { return nil }
         guard appVersion < latestRelease.tag_name else { throw PMKError.cancelled }
         return latestRelease.viableAsset(forRepo: repo)

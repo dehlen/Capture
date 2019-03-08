@@ -16,9 +16,18 @@ enum ConvertGif {
         }
     }
 
-    static func convert(at source: URL, to destination: URL, frameRate: Int = Constants.defaultFrameRate, maximumHeight: Int = Constants.maximumHeight, completion: @escaping (Result<Void>) -> Void) {
-        Regift.createGIFFromSource(source, destinationFileURL: destination, frameCount: frameRate, delayTime: 0, loopCount: 0, size: CGSize(width: 0, height: maximumHeight)) { (result) in
-            if let _ = result {
+    static func convert(at source: URL,
+                        to destination: URL,
+                        frameRate: Int = Constants.defaultFrameRate,
+                        maximumHeight: Int = Constants.maximumHeight,
+                        completion: @escaping (Result<Void>) -> Void) {
+        Regift.createGIFFromSource(source,
+                                   destinationFileURL: destination,
+                                   frameCount: frameRate,
+                                   delayTime: 0,
+                                   loopCount: 0,
+                                   size: CGSize(width: 0, height: maximumHeight)) { (result) in
+            if result != nil {
                 completion(.success(()))
             } else {
                 os_log(.error, log: .gifExport, "GIF export failed")

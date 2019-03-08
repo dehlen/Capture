@@ -6,7 +6,7 @@ import Darwin
 #endif
 
 public extension Path {
-    //MARK: Filesystem Properties
+    // MARK: Filesystem Properties
 
     /// Returns true if the path represents an actual filesystem entry.
     var exists: Bool {
@@ -34,7 +34,7 @@ public extension Path {
     var isWritable: Bool {
         return FileManager.default.isWritableFile(atPath: string)
     }
-        
+
     /// Returns true if the path represents an actual file that is also deletable by the current user.
     var isDeletable: Bool {
     #if os(Linux) && !swift(>=5.1)
@@ -60,6 +60,6 @@ public extension Path {
     var isSymlink: Bool {
         var sbuf = stat()
         lstat(string, &sbuf)
-        return (sbuf.st_mode & S_IFMT) == S_IFLNK 
+        return (sbuf.st_mode & S_IFMT) == S_IFLNK
     }
 }

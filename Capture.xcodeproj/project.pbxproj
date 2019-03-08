@@ -444,6 +444,7 @@
 				6BE5149E2126A2410068337E /* Frameworks */,
 				6BE5149F2126A2410068337E /* Resources */,
 				0B581A22222194BD006EF012 /* Carthage Copy Frameworks */,
+				0B88C3B52232D7740003899A /* Lint */,
 			);
 			buildRules = (
 			);
@@ -540,6 +541,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		0B88C3B52232D7740003899A /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rake lint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

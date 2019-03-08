@@ -34,7 +34,7 @@ public extension Bundle {
     var path: Path {
         return Path(string: bundlePath)
     }
-    
+
     /// Returns the executable for this bundle, if there is one, not all bundles have one hence `Optional`.
     var executable: Path? {
         return executablePath.flatMap(Path.init)
@@ -92,13 +92,13 @@ public extension FileHandle {
     convenience init(forReadingAt path: Path) throws {
         try self.init(forReadingFrom: path.url)
     }
-    
+
     /// Initializes this `FileHandle` for writing at the location of the provided path.
     @inlinable
     convenience init(forWritingAt path: Path) throws {
         try self.init(forWritingTo: path.url)
     }
-    
+
     /// Initializes this `FileHandle` for reading and writing at the location of the provided path.
     @inlinable
     convenience init(forUpdatingAt path: Path) throws {

@@ -79,7 +79,12 @@ extension GeneralPreferencesViewController: RecordViewDelegate {
     }
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
-        os_log(.info, log: .preferences, "Did change shortcut keycombo to modifiers: %{public}i keyCode: %{public}i", keyCombo.modifiers, keyCombo.keyCode)
+        os_log(.info,
+               log: .preferences,
+               "Did change shortcut keycombo to modifiers: %{public}i keyCode: %{public}i",
+               keyCombo.modifiers,
+               keyCombo.keyCode
+        )
         switch recordView {
         case stopRecordingShortcutRecordView:
             Current.hotKeyService.change(with: .stopRecording, keyCombo: keyCombo)

@@ -61,7 +61,7 @@ public struct Version: Hashable {
     }
 
     /// Represents `0.0.0`
-    public static let null = Version(0,0,0)
+    public static let null = Version(0, 0, 0)
 }
 
 extension Version: LosslessStringConvertible {
@@ -78,7 +78,7 @@ extension Version: LosslessStringConvertible {
         let requiredCharacters = string.prefix(upTo: requiredEndIndex)
         let requiredComponents = requiredCharacters
             .split(separator: ".", maxSplits: 2, omittingEmptySubsequences: false)
-            .compactMap{ Int($0) }
+            .compactMap { Int($0) }
 
         guard requiredComponents.count == 3 else { return nil }
 
@@ -131,13 +131,13 @@ public extension Version {
         let prereleaseStartIndex = string.firstIndex(of: "-")
         let requiredEndIndex = prereleaseStartIndex ?? string.endIndex
         let requiredCharacters = string.prefix(upTo: requiredEndIndex)
-        let maybes = requiredCharacters.split(separator: ".", maxSplits: 2, omittingEmptySubsequences: false).map{ Int($0) }
+        let maybes = requiredCharacters.split(separator: ".", maxSplits: 2, omittingEmptySubsequences: false).map { Int($0) }
 
         guard !maybes.contains(nil), 1...3 ~= maybes.count else {
             return nil
         }
 
-        var requiredComponents = maybes.map{ $0! }
+        var requiredComponents = maybes.map { $0! }
         while requiredComponents.count < 3 {
             requiredComponents.append(0)
         }

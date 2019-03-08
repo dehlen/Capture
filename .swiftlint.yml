@@ -1,0 +1,12 @@
+included:
+  - Capture
+
+excluded:
+  - Capture/AppUpdater
+
+disabled_rules:
+  - identifier_name
+
+line_length: 150
+number_separator:
+  minimum_length: 5

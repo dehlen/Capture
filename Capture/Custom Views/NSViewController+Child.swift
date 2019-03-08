@@ -28,7 +28,7 @@ extension NSViewController {
             vc.view.leadingAnchor.constraint(equalTo: targetView.leadingAnchor),
             vc.view.trailingAnchor.constraint(equalTo: targetView.trailingAnchor),
             vc.view.topAnchor.constraint(equalTo: targetView.topAnchor),
-            vc.view.bottomAnchor.constraint(equalTo: targetView.bottomAnchor),
+            vc.view.bottomAnchor.constraint(equalTo: targetView.bottomAnchor)
         ])
     }
 

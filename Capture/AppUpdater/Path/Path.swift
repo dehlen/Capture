@@ -131,7 +131,7 @@ public struct Path: Equatable, Hashable, Comparable {
         return Path(string: join_(prefix: string, appending: addendum))
     }
 
-//MARK: Properties
+// MARK: Properties
 
     /// The underlying filesystem path
     public let string: String
@@ -208,7 +208,7 @@ public struct Path: Equatable, Hashable, Comparable {
         return ["/"] + string.split(separator: "/").map(String.init)
     }
 
-//MARK: Pathing
+// MARK: Pathing
 
     /**
      Joins a path and a string to produce a new path.

@@ -32,25 +32,36 @@ struct WindowInfo {
         windowOwnerPid = item[String(kCGWindowOwnerPID)] as? pid_t
         name = item[String(kCGWindowName)] as? String ?? ""
         ownerName = item[String(kCGWindowOwnerName)] as? String ?? ""
-        layer = (item[String(kCGWindowLayer)] as! NSNumber).int32Value
-        id = (item[String(kCGWindowNumber)] as! NSNumber).uint32Value
-        alpha = (item[String(kCGWindowAlpha)] as! NSNumber).intValue
+
+        if let layerItem = item[String(kCGWindowLayer)] as? NSNumber {
+            layer = layerItem.int32Value
+        }
+
+        if let idItem = item[String(kCGWindowNumber)] as? NSNumber {
+            id = idItem.uint32Value
+        }
+
+        if let alphaItem = item[String(kCGWindowAlpha)] as? NSNumber {
+            alpha = alphaItem.intValue
+        }
 
         if let id = id {
             image = NSImage.windowImage(with: id)
         }
 
-        let bounds = item[String(kCGWindowBounds)] as! Dictionary<String, CGFloat>
-        let cgFrame = NSRect(
-            x: bounds["X"]!, y: bounds["Y"]!, width: bounds["Width"]!, height: bounds["Height"]!
-        )
-        var windowFrame = NSRectFromCGRect(cgFrame)
-        directDisplayID = directDisplayID(from: windowFrame)
-        windowFrame.origin = convertPosition(windowFrame)
-        frame = windowFrame
+        if let bounds = item[String(kCGWindowBounds)] as? [String: CGFloat] {
+            let cgFrame = NSRect(
+                x: bounds["X"]!, y: bounds["Y"]!, width: bounds["Width"]!, height: bounds["Height"]!
+            )
+            var windowFrame = NSRectFromCGRect(cgFrame)
+
+            directDisplayID = directDisplayID(from: windowFrame)
+            windowFrame.origin = convertPosition(windowFrame)
+            frame = windowFrame
+        }
     }
 
-    func convertPosition(_ frame:NSRect) -> NSPoint {
+    func convertPosition(_ frame: NSRect) -> NSPoint {
         var convertedPoint = frame.origin
         let displayBounds = CGDisplayBounds(directDisplayID)
         let x = frame.origin.x - displayBounds.origin.x
@@ -83,8 +94,6 @@ struct WindowInfo {
             return false
         }
 
-        // Too much noise
-        // os_log(.info, log: .windowHandling, "Found normal window: Name: %{public}@, OwnerName: %{public}@, Alpha: %{public}i, Frame: %{public}@, DisplayID: %{public}lu", name, ownerName, alpha, NSStringFromRect(frame), directDisplayID)
         return true
     }
 }

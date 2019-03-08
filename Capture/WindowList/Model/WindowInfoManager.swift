@@ -12,9 +12,12 @@ class WindowInfoManager {
         for i in 0..<CFArrayGetCount(windowInfosRef) {
             let lineUnsafePointer: UnsafeRawPointer = CFArrayGetValueAtIndex(windowInfosRef, i)
             let lineRef = unsafeBitCast(lineUnsafePointer, to: CFDictionary.self)
-            let dic = lineRef as Dictionary<NSObject, AnyObject>
+            let dict = lineRef as [NSObject: AnyObject]
 
-            let info = WindowInfo(item: dic as! [String : AnyObject])
+            guard let item = dict as? [String: AnyObject] else {
+                fatalError("Could not get WindowInfo dictionary.")
+            }
+            let info = WindowInfo(item: item)
             if info.isNormalWindow {
                 items.append(info)
             }

@@ -11,6 +11,7 @@ task :setup => [
 	:pre_setup,
 	:check_for_homebrew, 
 	:update_homebrew,
+	:check_for_swiftlint,
 	:install_bundler_gem,
 	:install_ruby_gems,
 	:install_carthage,
@@ -25,7 +26,7 @@ task :setup_with_unit_test => [
 
 # Pre-setup steps
 task :pre_setup do 
-	puts "iOS project setup ..."
+	puts "macOS project setup ..."
 end
 
 # Check if Homebrew is available
@@ -42,6 +43,16 @@ end
 task :update_homebrew do 
 	puts "Updating Homebrew ..."
 	sh "brew update"
+end
+
+# Check if SwiftLint is available
+task :check_for_swiftlint do
+	puts "Checking SwiftLint ..."
+	if not command?('swiftlint')
+		STDERR.puts "SwiftLint not found. Installing now..."
+		sh "brew install swiftlint"
+		exit
+	end
 end
 
 # Install Bundler Gem
@@ -69,6 +80,11 @@ end
 # Install Carthage dependencies
 task :install_carthage_dependencies do
     sh "carthage update --no-use-binaries --platform osx --cache-builds"
+end
+
+# Run SwiftLint
+task :lint do
+  sh 'swiftlint'
 end
 
 # Run fastlane unit tests

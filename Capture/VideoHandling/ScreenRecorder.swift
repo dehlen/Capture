@@ -9,7 +9,7 @@ public func recordScreen(destination: URL) throws -> Recorder {
     return try Recorder.init(destination: destination, displayId: CGMainDisplayID(), cropRect: nil, audioDevice: nil)
 }
 
-public enum RecorderError : String,Error {
+public enum RecorderError: String, Error {
     case invalidDisplay = "The display id passed in is invalid"
     case invalidAudioDevice = "The audio device is invalid"
     case couldNotAddScreen = "Could not add screen to input"
@@ -71,7 +71,7 @@ public class Recorder: NSObject {
         }
     }
 
-    public func start()  {
+    public func start() {
         session.startRunning()
         output.startRecording(to: destination, recordingDelegate: self)
     }
@@ -91,12 +91,20 @@ public class Recorder: NSObject {
 }
 
 extension Recorder: AVCaptureFileOutputRecordingDelegate {
-    public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+    public func fileOutput(_ output: AVCaptureFileOutput,
+                           didFinishRecordingTo outputFileURL: URL,
+                           from connections: [AVCaptureConnection],
+                           error: Error?) {
     }
 
-    public func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
+    public func capture(_ captureOutput: AVCaptureFileOutput!,
+                        didStartRecordingToOutputFileAt fileURL: URL!,
+                        fromConnections connections: [Any]!) {
     }
 
-    public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+    public func capture(_ captureOutput: AVCaptureFileOutput!,
+                        didFinishRecordingToOutputFileAt outputFileURL: URL!,
+                        fromConnections connections: [Any]!,
+                        error: Error!) {
     }
 }

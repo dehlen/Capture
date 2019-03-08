@@ -1,4 +1,4 @@
-extension Path: CustomStringConvertible {    
+extension Path: CustomStringConvertible {
     /// Returns `Path.string`
     public var description: String {
         return string

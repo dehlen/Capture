@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Path {
-    //MARK: Filesystem Attributes
+    // MARK: Filesystem Attributes
 
     /**
      Returns the creation-time of the file.
@@ -40,7 +40,7 @@ public extension Path {
         try FileManager.default.setAttributes([.posixPermissions: octal], ofItemAtPath: string)
         return self
     }
-    
+
     /**
      Applies the macOS filesystem “lock” attribute.
      - Note: If file is already locked, does nothing.

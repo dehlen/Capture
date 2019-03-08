@@ -4,15 +4,15 @@ extension NSValueTransformerName {
 	static let pathFromFilePathOrURLTransformerName = NSValueTransformerName(rawValue: "PathFromFilePathOrURLTransformer")
 }
 
-class PathFromFilePathOrURLTransformer : ValueTransformer {
+class PathFromFilePathOrURLTransformer: ValueTransformer {
 	override class func transformedValueClass() -> AnyClass {
 		return NSURL.self
 	}
-	
+
 	override class func allowsReverseTransformation() -> Bool {
 		return true
 	}
-	
+
 	override func transformedValue(_ value: Any?) -> Any? {
 		guard let pathWithTilde = value as? String else {
 			return value
@@ -23,7 +23,7 @@ class PathFromFilePathOrURLTransformer : ValueTransformer {
 
         return url
 	}
-	
+
 	override func reverseTransformedValue(_ value: Any?) -> Any? {
 		switch value {
 		case nil:
