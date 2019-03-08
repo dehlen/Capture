@@ -2,12 +2,23 @@ import Cocoa
 import AVFoundation
 import Magnet
 import os
+import AboutWindowFramework
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var preferencesWindowController: NSWindowController? = {
         let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
         return storyboard.instantiateInitialController() as? NSWindowController
+    }()
+
+    lazy var aboutWindowControllerConfig: AboutWindowControllerConfig = {
+        let website = URL(string: "https://github.com/dehlen/Capture")
+
+        return AboutWindowControllerConfig(creditsButtonTitle: "credits".localized, eula: nil, eulaButtonTitle: "eula".localized, url: website, hasShadow: true)
+    }()
+
+    lazy var aboutWindowController: AboutWindowController = {
+        return AboutWindowController.create(with: aboutWindowControllerConfig)
     }()
 
     let updater = AppUpdater(owner: "dehlen", repo: "Capture")
@@ -56,5 +67,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func showPreferences(_ sender: Any) {
         os_log(.info, log: .preferences, "Preferences shown")
         preferencesWindowController?.showWindow(sender)
+    }
+
+    @IBAction func showAboutWindow(_ sender:AnyObject) {
+        aboutWindowController.showWindow(self)
     }
 }

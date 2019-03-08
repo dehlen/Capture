@@ -21,3 +21,5 @@
 "alreadyUpToDate" = "Capture is already up to date. Thank you for using Capture ❤️";
 "updateFailed" = "Checking for an update failed: %@";
 "alreadyUpToDateTitle" = "Already up to date!";
+"credits" = "Acknowledgments";
+"eula" = "License Agreement";

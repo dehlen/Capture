@@ -497,7 +497,7 @@ DQ
                                         <menuItem title="About Capture" id="psl-us-pmZ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="orderFrontStandardAboutPanel:" target="ItY-BJ-7uN" id="Gqh-xU-ehK"/>
+                                                <action selector="showAboutWindow:" target="JCF-qm-ehu" id="0en-aO-c4E"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="o35-Bz-ZzH"/>

@@ -67,6 +67,9 @@
 		0B94455B222815EC0058D5DD /* GIFOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B944558222815EC0058D5DD /* GIFOptionViewController.swift */; };
 		0B94455C222815EC0058D5DD /* VideoOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B944559222815EC0058D5DD /* VideoOptionViewController.swift */; };
 		0B94455D222815EC0058D5DD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94455A222815EC0058D5DD /* LoadingViewController.swift */; };
+		0BAACBAA223266DB00405ABF /* AboutWindowFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */; };
+		0BAACBAD2232670700405ABF /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0BAACBAB2232670600405ABF /* Credits.rtf */; };
+		0BAACBAE2232670700405ABF /* EULA.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0BAACBAC2232670700405ABF /* EULA.rtf */; };
 		0BD239EB2219A43B003AF068 /* UserInterfaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EA2219A43B003AF068 /* UserInterfaceError.swift */; };
 		0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */; };
 		0BD239EF2219A477003AF068 /* ErrorMessageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */; };
@@ -142,6 +145,9 @@
 		0B944558222815EC0058D5DD /* GIFOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFOptionViewController.swift; sourceTree = "<group>"; };
 		0B944559222815EC0058D5DD /* VideoOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOptionViewController.swift; sourceTree = "<group>"; };
 		0B94455A222815EC0058D5DD /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AboutWindowFramework.framework; path = Carthage/Build/Mac/AboutWindowFramework.framework; sourceTree = "<group>"; };
+		0BAACBAB2232670600405ABF /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		0BAACBAC2232670700405ABF /* EULA.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = EULA.rtf; sourceTree = "<group>"; };
 		0BD239E822199E09003AF068 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = System/Library/Frameworks/Automator.framework; sourceTree = SDKROOT; };
 		0BD239EA2219A43B003AF068 /* UserInterfaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceError.swift; sourceTree = "<group>"; };
 		0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
@@ -163,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BAACBAA223266DB00405ABF /* AboutWindowFramework.framework in Frameworks */,
 				0B3D7A7422310A52000F8C85 /* PMKFoundation.framework in Frameworks */,
 				0B3D7A5322310967000F8C85 /* PromiseKit.framework in Frameworks */,
 				0B581A362222141B006EF012 /* RegiftOSX.framework in Frameworks */,
@@ -372,6 +379,7 @@
 		0BD239E722199E09003AF068 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */,
 				0B3D7A7322310A52000F8C85 /* PMKFoundation.framework */,
 				0B3D7A5222310967000F8C85 /* PromiseKit.framework */,
 				0B581A352222141B006EF012 /* RegiftOSX.framework */,
@@ -406,6 +414,8 @@
 				6BE514A42126A2410068337E /* AppDelegate.swift */,
 				0BE418B4221AE59600B8E85D /* CaptureApplication.swift */,
 				0B581A2F22219CC0006EF012 /* Constants.swift */,
+				0BAACBAB2232670600405ABF /* Credits.rtf */,
+				0BAACBAC2232670700405ABF /* EULA.rtf */,
 				0B3D7A72223109E4000F8C85 /* AppUpdater */,
 				0B202B22221B27D300435657 /* Container */,
 				0BC8320C221A08CE00FD8CF4 /* Custom Views */,
@@ -489,9 +499,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B64CDA32218E42C004F6321 /* Localizable.strings in Resources */,
+				0BAACBAD2232670700405ABF /* Credits.rtf in Resources */,
 				6BE514A72126A2430068337E /* Assets.xcassets in Resources */,
 				6BE514B52126A4E60068337E /* CollectionViewItem.xib in Resources */,
 				0B4309AF22198FAA00766DB0 /* Preferences.storyboard in Resources */,
+				0BAACBAE2232670700405ABF /* EULA.rtf in Resources */,
 				0B64CD7D2218BA99004F6321 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +524,7 @@
 				"$(SRCROOT)/Carthage/Build/Mac/RegiftOSX.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/PromiseKit.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/PMKFoundation.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/AboutWindowFramework.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputFileListPaths = (
@@ -522,6 +535,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RegiftOSX.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PromiseKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PMKFoundation.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AboutWindowFramework.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
