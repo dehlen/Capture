@@ -35,7 +35,9 @@ If you find a bug or have an idea for an enhancement don't hesitate to file an i
 Please go to https://captureapp.dev and download the latest version or simply go to the releases tab and download the version you want. If you have macOS Developer account you can also build the application from source of course.
 
 ## Build
+To setup the project just run rake setup. This will install all the needed dependencies. After that you can open the Xcode project. There is also rake setup_with_unit_test which executes the unit tests after installing the needed tools. 
 
+Furthermore the project will run [SwiftLint](https://github.com/realm/SwiftLint) as a Custom Build Phase. We also make use of [fastlane](https://fastlane.tools) to run the unit test target.
 
 ## Alternatives
 - QuickTime
