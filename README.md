@@ -7,6 +7,10 @@ Capture is a native macOS application to record your screen. What makes this app
 
 I wrote this application because at my workplace we often attach a GIF to a Pull Request in order to present a completed feature to the reviewers.
 
+## See it in action
+<a href="https://captureapp.dev/static/captureapp.mp4" target="_blank"><img src="https://captureapp.dev/static/captureapp.png" 
+alt="Capture Screen Video" width="480" border="10" /></a>
+
 ## Caveats
 - Currently only GIF export is allowed
 - Stopping a recording is not possible via a menu item
