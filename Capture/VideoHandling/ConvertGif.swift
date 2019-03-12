@@ -12,7 +12,7 @@ enum ConvertGif {
             return Int(Current.defaults[.gifHeight] ?? "480") ?? 480
         }
         static var defaultFrameRate: Int {
-            return Int(Current.defaults[.gifFrameRate] ?? "20") ?? 20
+            return Int(Current.defaults[.gifFrameRate] ?? "30") ?? 30
         }
     }
 

@@ -28,7 +28,7 @@ class GIFOptionViewController: NSViewController {
 
     @objc dynamic var gifFrameRate: String {
         get {
-            return String(Current.defaults[.gifFrameRate] ?? "20")
+            return String(Current.defaults[.gifFrameRate] ?? "30")
         }
         set {
             Current.defaults[.gifFrameRate] = newValue
