@@ -15,6 +15,14 @@ class ContainerViewController: NSViewController {
         addLoadingIndicator()
     }
 
+    static func create(videoUrl: URL) -> ContainerViewController {
+        guard let containerViewController = NSStoryboard.main?.instantiateController(withIdentifier: "ContainerViewController") as? ContainerViewController else {
+            fatalError("Could not create ContainerViewController")
+        }
+        containerViewController.videoUrl = videoUrl
+        return containerViewController
+    }
+
     private func setupFirstPage() {
         guard let videoUrl = videoUrl else { return }
         replacePage(with: VideoPlayerViewController.create(with: videoUrl, delegate: self))

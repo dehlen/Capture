@@ -40,6 +40,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+        let url = URL(fileURLWithPath: filename)
+        openExportWindow(file: url)
+        return true
+    }
+
+    private func openExportWindow(file: URL) {
+        let containerViewController = ContainerViewController.create(videoUrl: file)
+        let window = NSWindow(contentViewController: containerViewController)
+        window.makeKeyAndOrderFront(NSApp)
+    }
+
+    @IBAction private func openVideo(_ sender: Any) {
+        let dialog = NSOpenPanel()
+        dialog.title                   = "Choose a video file"
+        dialog.showsResizeIndicator    = true
+        dialog.showsHiddenFiles        = false
+        dialog.canChooseDirectories    = false
+        dialog.canCreateDirectories    = false
+        dialog.allowsMultipleSelection = false
+        dialog.allowedFileTypes        = ["public.movie"]
+
+        if dialog.runModal() == NSApplication.ModalResponse.OK {
+            if let result = dialog.url {
+                openExportWindow(file: result)
+            }
+        }
+    }
+
     private func setupPreferenceDefaults() {
         os_log(.info, log: .app, "Setting preference defaults")
         Current.defaults.register(defaults: [

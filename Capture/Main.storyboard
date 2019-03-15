@@ -259,7 +259,7 @@
         <scene sceneID="16m-PV-kGq">
             <objects>
                 <customObject id="9g9-wM-2Cd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController id="wTd-mG-kcM" customClass="ContainerViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="ContainerViewController" storyboardIdentifier="ContainerViewController" id="wTd-mG-kcM" customClass="ContainerViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="yTO-gI-n1D">
                         <rect key="frame" x="0.0" y="0.0" width="680" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -542,7 +542,11 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="ASk-7q-Iqz">
                                     <items>
-                                        <menuItem title="New" keyEquivalent="n" id="H0R-rE-gmQ"/>
+                                        <menuItem title="Open Video" keyEquivalent="o" id="H0R-rE-gmQ">
+                                            <connections>
+                                                <action selector="openVideo:" target="JCF-qm-ehu" id="rOg-wL-dub"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="b8h-hW-Hb9"/>
                                         <menuItem title="Close" keyEquivalent="w" id="dOI-Th-Lu5">
                                             <connections>
