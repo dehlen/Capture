@@ -42,20 +42,30 @@ class WindowListViewController: NSViewController {
 
     private func setupObserver() {
         Current.notificationCenter.addObserver(self, selector: #selector(stopRecording), name: .shouldStopRecording, object: nil)
+        Current.notificationCenter.addObserver(self, selector: #selector(recordVideo), name: .shouldStartRecording, object: nil)
+        Current.notificationCenter.addObserver(self, selector: #selector(stopSelection), name: .shouldStopSelection, object: nil)
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (_) in
             self.refresh()
         }
     }
 
-    @objc func stopRecording() {
-        recordingButton.isRecording = false
-        guard let currentRecorder = currentRecorder else { return }
+    private func updateSelectedWindow() {
+        if let updatedWindow = WindowInfoManager.updateWindow(windowInfo: self.selectedWindow) {
+            self.selectedWindow = updatedWindow
+        }
+    }
+
+    @objc private func stopRecording() {
+        stopSelection()
+        performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
+    }
+
+    @objc private func stopSelection() {
         cutoutWindow?.orderOut(nil)
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        currentRecorder.stop()
+        view.window?.makeKeyAndOrderFront(NSApp)
+        currentRecorder?.stop()
         selectedWindow = nil
         collectionView.deselectAll(nil)
-        performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
     }
 
     private func startRecording() {
@@ -64,31 +74,41 @@ class WindowListViewController: NSViewController {
         AXIsProcessTrustedWithOptions(myDict)
 
         if AXIsProcessTrustedWithOptions(myDict) {
-            if let updatedWindow = WindowInfoManager.updateWindow(windowInfo: self.selectedWindow) {
-                self.selectedWindow = updatedWindow
+            updateSelectedWindow()
+            #warning("make cutout window draggable over display borders - this probably means multiple windows 1 per screen")
+            var fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
+            var frame = NSRect(x: fullScreenBounds.width / 2 - 250, y: fullScreenBounds.height / 2 - 250, width: 500, height: 500)
+
+            if let selectedWindow = self.selectedWindow, let selectedWindowId = selectedWindow.id {
+                frame = selectedWindow.frame
+                fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
+                WindowInfoManager.switchToApp(withWindowId: selectedWindowId)
             }
+            view.window?.orderOut(NSApp)
+            cutoutWindow = CutoutWindow(contentRect: fullScreenBounds, styleMask: .borderless, backing: .buffered, defer: true, cutout: frame)
+            cutoutWindow?.makeKeyAndOrderFront(nil)
 
-            guard let selectedWindow = self.selectedWindow, let id = selectedWindow.id else { return }
-            do {
-                recordingButton.isRecording = true
-                let videoOutputUrl = DirectoryHandler.videoDestination
-                currentVideoOutputUrl = videoOutputUrl
-                currentRecorder = try recordScreen(
-                    destination: videoOutputUrl,
-                    displayId: selectedWindow.directDisplayID,
-                    cropRect: selectedWindow.frame,
-                    audioDevice: nil
-                )
-                WindowInfoManager.switchToApp(withWindowId: id)
+        }
+    }
 
-                let fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
-                cutoutWindow = CutoutWindow.create(with: fullScreenBounds, cutout: selectedWindow.frame)
-                cutoutWindow?.makeKeyAndOrderFront(nil)
 
-                currentRecorder?.start()
-            } catch let error {
-                print(error)
-            }
+    @objc private func recordVideo() {
+        guard let cutoutWindow = self.cutoutWindow else { return }
+        let cutoutFrame = cutoutWindow.cutoutFrame
+        cutoutWindow.orderOut(NSApp)
+        do {
+            let videoOutputUrl = DirectoryHandler.videoDestination
+            currentVideoOutputUrl = videoOutputUrl
+            currentRecorder = try recordScreen(
+                destination: videoOutputUrl,
+                displayId: cutoutWindow.directDisplayId,
+                cropRect: cutoutFrame,
+                audioDevice: nil
+            )
+            currentRecorder?.start()
+
+        } catch let error {
+            print(error)
         }
     }
 
@@ -101,11 +121,12 @@ class WindowListViewController: NSViewController {
     }
 
     @IBAction func toggleRecording(_ sender: Any) {
-        guard selectedWindow != nil else {
-            presentError(NSError.create(from: UserInterfaceError.selectWindow))
+        guard let currentRecorder = currentRecorder else {
+            startRecording()
             return
         }
-        if !recordingButton.isRecording {
+
+        if !currentRecorder.session.isRunning {
             startRecording()
         } else {
             stopRecording()
