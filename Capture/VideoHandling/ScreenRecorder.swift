@@ -18,8 +18,9 @@ public enum RecorderError: String, Error {
 }
 
 public class Recorder: NSObject {
+    let session: AVCaptureSession
+
     private let destination: URL
-    private let session: AVCaptureSession
     private let output: AVCaptureMovieFileOutput
 
     public init(destination: URL, displayId: CGDirectDisplayID, cropRect: CGRect?, audioDevice: AVCaptureDevice?) throws {
