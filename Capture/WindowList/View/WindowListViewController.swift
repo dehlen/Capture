@@ -77,7 +77,7 @@ class WindowListViewController: NSViewController {
 
         if AXIsProcessTrustedWithOptions(myDict) {
             updateSelectedWindow()
-            #warning("make cutout window draggable over display borders - this probably means multiple windows 1 per screen")
+            #warning("make cutout window draggable over display borders - this probably means multiple windows;s 1 per screen")
             var fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
             var frame = NSRect(x: fullScreenBounds.width / 2 - 250, y: fullScreenBounds.height / 2 - 250, width: 500, height: 500)
 
