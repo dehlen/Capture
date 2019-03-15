@@ -19,6 +19,8 @@ class WindowListViewController: NSViewController {
     private var currentVideoOutputUrl: URL?
     private var cutoutWindow: CutoutWindow?
     private var timer: Timer?
+    private var statusItem: NSStatusItem?
+
     private var dataSource = CollectionViewDataSource<WindowInfo>.make(for: []) {
         didSet {
             collectionView.reloadData()
@@ -88,9 +90,23 @@ class WindowListViewController: NSViewController {
             cutoutWindow = CutoutWindow(contentRect: fullScreenBounds, styleMask: .borderless, backing: .buffered, defer: true, cutout: frame)
             cutoutWindow?.makeKeyAndOrderFront(nil)
 
+            addStatusBarItem()
         }
     }
 
+    private func addStatusBarItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        guard let statusItem = statusItem else { return }
+        statusItem.button?.image = NSImage(imageLiteralResourceName: "stopRecording")
+        statusItem.button?.target = self
+        statusItem.button?.action = #selector(statusBarItemClicked)
+    }
+
+    @objc private func statusBarItemClicked() {
+        guard let statusItem = statusItem else { return }
+        NSStatusBar.system.removeStatusItem(statusItem)
+        stopRecording()
+    }
 
     @objc private func recordVideo() {
         guard let cutoutWindow = self.cutoutWindow else { return }
