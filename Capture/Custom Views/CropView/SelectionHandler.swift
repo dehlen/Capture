@@ -12,7 +12,7 @@ class SelectionHandler: CAShapeLayer {
 
         self.lineWidth = 2.0
         self.strokeColor = NSColor.white.cgColor
-        self.fillColor = NSColor(calibratedRed: 0.1054, green: 0.4531, blue: 0.7929, alpha: 1.0).cgColor
+        self.fillColor = NSColor.gray.cgColor
     }
 
     required init?(coder aDecoder: NSCoder) {

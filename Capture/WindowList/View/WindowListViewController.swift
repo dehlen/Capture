@@ -111,7 +111,7 @@ class WindowListViewController: NSViewController {
     @objc private func recordVideo() {
         guard let cutoutWindow = self.cutoutWindow else { return }
         let cutoutFrame = cutoutWindow.cutoutFrame
-        cutoutWindow.orderOut(NSApp)
+        cutoutWindow.recordingStarted()
         do {
             let videoOutputUrl = DirectoryHandler.videoDestination
             currentVideoOutputUrl = videoOutputUrl

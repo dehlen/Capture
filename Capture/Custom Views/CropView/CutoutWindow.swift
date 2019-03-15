@@ -37,4 +37,9 @@ class CutoutWindow: NSWindow {
 
         return CGMainDisplayID()
     }
+
+    func recordingStarted() {
+        ignoresMouseEvents = true
+        cropView.recordingStarted()
+    }
 }

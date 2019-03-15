@@ -50,6 +50,14 @@ class CropView: NSView {
         }
     }
 
+    func recordingStarted() {
+        overlayBox.isHidden = true
+        recordingButton.isHidden = true
+        selectionHandlers.forEach { $0.removeFromSuperlayer() }
+        cropBox = cropBox.insetBy(dx: -4, dy: -4)
+        updateSelectionBox()
+    }
+
     private func addRecordingButton() {
         recordingButton.isHidden = true
         addSubview(recordingButton)
@@ -207,7 +215,7 @@ class CropView: NSView {
         recordingButton.isHidden = true
     }
 
-    fileprivate func updateCropBox() {
+    private func updateSelectionBox() {
         let path = CGMutablePath()
         path.move(to: CGPoint(x: cropBox.origin.x, y: cropBox.origin.y))
         path.addLine(to: CGPoint(x: cropBox.origin.x, y: cropBox.origin.y + cropBox.size.height))
@@ -215,6 +223,10 @@ class CropView: NSView {
         path.addLine(to: CGPoint(x: cropBox.origin.x + cropBox.size.width, y: cropBox.origin.y))
         path.closeSubpath()
         selectionBox.path = path
+    }
+
+    fileprivate func updateCropBox() {
+        updateSelectionBox()
 
         let overlay = NSBezierPath(rect: frame)
         let inner = NSBezierPath(rect: cropBox)

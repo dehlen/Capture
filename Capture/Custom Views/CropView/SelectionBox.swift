@@ -8,7 +8,7 @@ class SelectionBox: CAShapeLayer {
 
         self.lineWidth = 0.5
         self.lineJoin = CAShapeLayerLineJoin.round
-        self.strokeColor = NSColor.black.cgColor
+        self.strokeColor = NSColor.red.cgColor
         self.fillColor = NSColor.clear.cgColor
         self.lineDashPattern = [5, 5]
     }
