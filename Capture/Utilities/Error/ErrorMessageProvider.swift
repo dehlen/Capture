@@ -2,9 +2,7 @@ import Foundation
 
 struct ErrorMessageProvider {
     static func string(for error: Error) -> String {
-        if let error = error as? UserInterfaceError {
-            return string(for: error)
-        } else if let error = error as? GifConversionError {
+        if let error = error as? GifConversionError {
             return string(for: error)
         } else if let error = error as? VideoPlayerError {
             return string(for: error)
@@ -12,13 +10,6 @@ struct ErrorMessageProvider {
             return string(for: error)
         }
         return error.localizedDescription
-    }
-
-    private static func string(for error: UserInterfaceError) -> String {
-        switch error {
-        case .selectWindow:
-            return "selectWindowError".localized
-        }
     }
 
     private static func string(for error: GifConversionError) -> String {

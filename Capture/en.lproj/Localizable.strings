@@ -8,7 +8,6 @@
 "newGifTitle" = "GIF successfully created";
 "newGifSubtitle" = "The recording was saved as an GIF on your desktop.";
 "Open" = "Open";
-"selectWindowError" = "Please select a window before starting a screen recording. Simply select a window by left-clicking on it.";
 "ConvertToGif" = "Convert To GIF";
 "genericError" = "Something went wrong. We are actually clueless what happend 🤷‍♀️🤷‍♂️";
 "successMessage" = "Congratulations! Your screen recording was successfully exported as a GIF and can be found at: %@. You can just click the button below to quickly navigate to the new file.";
