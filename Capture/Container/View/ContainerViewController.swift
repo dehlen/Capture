@@ -9,10 +9,21 @@ class ContainerViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = Bundle.main.displayName
         view.window?.title = Bundle.main.displayName ?? "Capture"
+
         setupFirstPage()
         addLoadingIndicator()
+    }
+
+    static func create(videoUrl: URL) -> ContainerViewController {
+        guard let containerViewController = NSStoryboard.main?.instantiateController(withIdentifier: "ContainerViewController")
+            as? ContainerViewController else {
+            fatalError("Could not create ContainerViewController")
+        }
+        containerViewController.videoUrl = videoUrl
+        return containerViewController
     }
 
     private func setupFirstPage() {
@@ -53,10 +64,4 @@ extension ContainerViewController: ContainerViewControllerDelegate {
     func requestReplace(new: NSViewController) {
         replacePage(with: new)
     }
-}
-
-protocol ContainerViewControllerDelegate: class {
-    func requestLoadingIndicator()
-    func dismissLoadingIndicator()
-    func requestReplace(new: NSViewController)
 }

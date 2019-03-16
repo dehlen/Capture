@@ -5,7 +5,6 @@ import os
 import PromiseKit
 
 class GeneralPreferencesViewController: PreferencesViewController {
-
     // MARK: - Properties
     @IBOutlet private weak var stopRecordingShortcutRecordView: RecordView!
     @IBOutlet private weak var updateActivityIndicator: NSProgressIndicator!
@@ -19,7 +18,8 @@ class GeneralPreferencesViewController: PreferencesViewController {
         prepareHotKeys()
     }
 
-    @IBAction func userRequestedAnExplicitUpdateCheck(_ sender: NSButton) {
+    // MARK: - Actions
+    @IBAction private func userRequestedAnExplicitUpdateCheck(_ sender: NSButton) {
         let delegate = NSApplication.shared.delegate as? AppDelegate
 
         updateActivityIndicator.startAnimation(nil)
@@ -31,7 +31,7 @@ class GeneralPreferencesViewController: PreferencesViewController {
             sender.isEnabled = true
 
             if error.isCancelled {
-                showAlert(title: "alreadyUpToDateTitle".localized, message: ErrorMessageProvider.string(for: AppUpdaterError.alreadyUpToDate))
+                Alerts.showAlert(title: "alreadyUpToDateTitle".localized, message: ErrorMessageProvider.string(for: AppUpdaterError.alreadyUpToDate))
             } else {
                 self.presentError(NSError.create(from: AppUpdaterError.failure(error.localizedDescription)))
             }

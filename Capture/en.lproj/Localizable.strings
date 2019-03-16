@@ -8,7 +8,6 @@
 "newGifTitle" = "GIF successfully created";
 "newGifSubtitle" = "The recording was saved as an GIF on your desktop.";
 "Open" = "Open";
-"selectWindowError" = "Please select a window before starting a screen recording. Simply select a window by left-clicking on it.";
 "ConvertToGif" = "Convert To GIF";
 "genericError" = "Something went wrong. We are actually clueless what happend 🤷‍♀️🤷‍♂️";
 "successMessage" = "Congratulations! Your screen recording was successfully exported as a GIF and can be found at: %@. You can just click the button below to quickly navigate to the new file.";
@@ -23,3 +22,8 @@
 "alreadyUpToDateTitle" = "Already up to date!";
 "credits" = "Acknowledgments";
 "eula" = "License Agreement";
+"chooseVideoFile" = "Choose a video file";
+"cancel" = "Cancel";
+"accessibilityPermissionTitle" = "Accessibility Permissions needed";
+"accessibilityPermissionMessage" = "This application needs accessibility permission in order to work. The permission is needed to create a recording of your screen. Please go to the Settings by clicking the button below and set the checkbox for Capture.";
+"openSystemSettings" = "Open System Settings";

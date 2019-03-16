@@ -118,7 +118,7 @@
                 </viewController>
                 <customObject id="IA5-T1-rcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110" y="701"/>
+            <point key="canvasLocation" x="-74" y="701"/>
         </scene>
         <!--Video Option View Controller-->
         <scene sceneID="qVJ-hu-kTj">
@@ -253,13 +253,13 @@
                 <customObject id="rWb-fA-dkx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="zG3-NZ-cFk"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="1132.5"/>
+            <point key="canvasLocation" x="-74" y="1186"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="16m-PV-kGq">
             <objects>
                 <customObject id="9g9-wM-2Cd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController id="wTd-mG-kcM" customClass="ContainerViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="ContainerViewController" storyboardIdentifier="ContainerViewController" id="wTd-mG-kcM" customClass="ContainerViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="yTO-gI-n1D">
                         <rect key="frame" x="0.0" y="0.0" width="680" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -298,7 +298,7 @@
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="POy-Em-gSW">
                                         <rect key="frame" x="8" y="0.0" width="40" height="30"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="trim" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="UsF-Bt-VBL">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="trim" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="UsF-Bt-VBL">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -309,7 +309,7 @@
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RdH-vj-UUY">
                                         <rect key="frame" x="68" y="0.0" width="40" height="30"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="settings" imagePosition="below" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ulo-cR-tke">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="settings" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ulo-cR-tke">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -385,7 +385,7 @@ DQ
                 </viewController>
                 <customObject id="gFj-7p-2R0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1491" y="960"/>
+            <point key="canvasLocation" x="1266" y="955"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="noa-eg-Bue">
@@ -410,7 +410,7 @@ DQ
                 </viewController>
                 <customObject id="NMi-a0-c0C" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="1208"/>
+            <point key="canvasLocation" x="1265" y="211"/>
         </scene>
         <!--Finish View Controller-->
         <scene sceneID="bAk-EQ-YoS">
@@ -482,7 +482,7 @@ DQ
                 </viewController>
                 <customObject id="xpo-xT-UQD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1497" y="588"/>
+            <point key="canvasLocation" x="1272" y="583"/>
         </scene>
         <!--Application-->
         <scene sceneID="LVC-wt-En8">
@@ -542,7 +542,11 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="ASk-7q-Iqz">
                                     <items>
-                                        <menuItem title="New" keyEquivalent="n" id="H0R-rE-gmQ"/>
+                                        <menuItem title="Open Video" keyEquivalent="o" id="H0R-rE-gmQ">
+                                            <connections>
+                                                <action selector="openVideo:" target="JCF-qm-ehu" id="rOg-wL-dub"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="b8h-hW-Hb9"/>
                                         <menuItem title="Close" keyEquivalent="w" id="dOI-Th-Lu5">
                                             <connections>
@@ -630,7 +634,7 @@ DQ
                 <customObject id="ItY-BJ-7uN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="JCF-qm-ehu" customClass="AppDelegate" customModule="Capture" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-115" y="-132"/>
+            <point key="canvasLocation" x="-74" y="-184"/>
         </scene>
         <!--GIFOptionViewController-->
         <scene sceneID="q7p-Dl-Vnv">
@@ -762,7 +766,7 @@ DQ
                 </viewController>
                 <customObject id="PEU-nj-djR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447" y="1150"/>
+            <point key="canvasLocation" x="1265" y="1343"/>
         </scene>
     </scenes>
     <resources>

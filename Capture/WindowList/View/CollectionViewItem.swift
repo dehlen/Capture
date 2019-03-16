@@ -1,9 +1,9 @@
 import Cocoa
 
 class CollectionViewItem: NSCollectionViewItem {
-    @IBOutlet weak var iconImageView: NSImageView!
-    @IBOutlet weak var titleLabel: NSTextField!
-    @IBOutlet weak var appIconImageView: NSImageView!
+    @IBOutlet private weak var iconImageView: NSImageView!
+    @IBOutlet private weak var titleLabel: NSTextField!
+    @IBOutlet private weak var appIconImageView: NSImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -14,5 +14,11 @@ class CollectionViewItem: NSCollectionViewItem {
         willSet {
             view.layer?.backgroundColor = newValue ? NSColor.blue.cgColor : NSColor.clear.cgColor
         }
+    }
+
+    func configure(image: NSImage?, title: String, appIcon: NSImage?) {
+        iconImageView.image = image
+        titleLabel.stringValue = title
+        appIconImageView.image = appIcon
     }
 }
