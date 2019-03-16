@@ -6,13 +6,16 @@ import AboutWindowFramework
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    // MARK: - Variables
+    let updater = AppUpdater(owner: Constants.Repo.owner, repo: Constants.Repo.name)
+
     lazy var preferencesWindowController: NSWindowController? = {
         let storyboard = NSStoryboard(name: "Preferences", bundle: nil)
         return storyboard.instantiateInitialController() as? NSWindowController
     }()
 
     lazy var aboutWindowControllerConfig: AboutWindowControllerConfig = {
-        let website = URL(string: "https://github.com/dehlen/Capture")
+        let website = URL(string: Constants.Repo.url)
 
         return AboutWindowControllerConfig(creditsButtonTitle: "credits".localized,
                                            eula: nil,
@@ -25,14 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return AboutWindowController.create(with: aboutWindowControllerConfig)
     }()
 
-    let updater = AppUpdater(owner: "dehlen", repo: "Capture")
-
+    // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         os_log(.info, log: .app, "Application did finish launching")
         setupPreferenceDefaults()
+        askForAccessibilityPermission()
         ValueTransformerFactory.registerAll()
         Current.hotKeyService.setupDefaultHotKeys()
-        askForAccessibilityPermission()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -45,28 +47,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         openExportWindow(file: url)
         return true
     }
+}
 
+// MARK: - Actions
+extension AppDelegate {
+    @IBAction private func showPreferences(_ sender: Any) {
+        os_log(.info, log: .preferences, "Preferences shown")
+        preferencesWindowController?.showWindow(sender)
+    }
+
+    @IBAction private func showAboutWindow(_ sender: AnyObject) {
+        aboutWindowController.showWindow(self)
+    }
+
+    @IBAction private func openVideo(_ sender: Any) {
+        Alerts.showOpenDialog { (result) in
+            openExportWindow(file: result)
+        }
+    }
+}
+
+// MARK: - Functions
+extension AppDelegate {
     private func openExportWindow(file: URL) {
         let containerViewController = ContainerViewController.create(videoUrl: file)
         let window = NSWindow(contentViewController: containerViewController)
         window.makeKeyAndOrderFront(NSApp)
-    }
-
-    @IBAction private func openVideo(_ sender: Any) {
-        let dialog = NSOpenPanel()
-        dialog.title                   = "Choose a video file"
-        dialog.showsResizeIndicator    = true
-        dialog.showsHiddenFiles        = false
-        dialog.canChooseDirectories    = false
-        dialog.canCreateDirectories    = false
-        dialog.allowsMultipleSelection = false
-        dialog.allowedFileTypes        = ["public.movie"]
-
-        if dialog.runModal() == NSApplication.ModalResponse.OK {
-            if let result = dialog.url {
-                openExportWindow(file: result)
-            }
-        }
     }
 
     private func setupPreferenceDefaults() {
@@ -80,15 +86,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .showMouseCursor: true,
             .showMouseClicks: true,
             .saveVideo: true
-        ])
+            ])
 
         let keyCombo = KeyCombo(keyCode: 15, carbonModifiers: 4352)
-            if let data = keyCombo?.archive() {
-                Current.defaults.register(defaults: [
-                    Constants.HotKey.stopRecordingKeyCombo: data
-                ])
-        }
-    }
 
     private func askForAccessibilityPermission() {
         os_log(.info, log: .app, "Ask for accessibility control")
@@ -96,13 +96,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
         AXIsProcessTrustedWithOptions(myDict)
     }
-
-    @IBAction func showPreferences(_ sender: Any) {
-        os_log(.info, log: .preferences, "Preferences shown")
-        preferencesWindowController?.showWindow(sender)
-    }
-
-    @IBAction func showAboutWindow(_ sender: AnyObject) {
-        aboutWindowController.showWindow(self)
+        if let data = keyCombo?.archive() {
+            Current.defaults.register(defaults: [
+                Constants.HotKey.stopRecordingKeyCombo: data
+            ])
+        }
     }
 }

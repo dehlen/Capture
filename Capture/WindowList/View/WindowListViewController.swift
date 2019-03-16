@@ -1,11 +1,6 @@
 import AppKit
 
-extension NSNotification.Name {
-    static let shouldStopRecording = NSNotification.Name("on-should-stop-recording")
-    static let shouldStartRecording = NSNotification.Name("on-should-start-recording")
-    static let shouldStopSelection = NSNotification.Name("on-should-stop-selection")
-}
-
+#warning("refactor")
 class WindowListViewController: NSViewController {
     static let showContainer = "showContainer"
 
@@ -51,23 +46,18 @@ class WindowListViewController: NSViewController {
         }
     }
 
+    private func refresh() {
+        let selectionIndexPaths = collectionView.selectionIndexPaths
+        windowListViewModel.reloadWindows()
+        dataSource = .make(for: windowListViewModel.windows)
+        collectionView.dataSource = dataSource
+        collectionView.selectItems(at: selectionIndexPaths, scrollPosition: .nearestHorizontalEdge)
+    }
+
     private func updateSelectedWindow() {
         if let updatedWindow = WindowInfoManager.updateWindow(windowInfo: self.selectedWindow) {
             self.selectedWindow = updatedWindow
         }
-    }
-
-    @objc private func stopRecording() {
-        stopSelection()
-        performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
-    }
-
-    @objc private func stopSelection() {
-        cutoutWindow?.orderOut(nil)
-        view.window?.makeKeyAndOrderFront(NSApp)
-        currentRecorder?.stop()
-        selectedWindow = nil
-        collectionView.deselectAll(nil)
     }
 
     private func startRecording() {
@@ -94,18 +84,12 @@ class WindowListViewController: NSViewController {
         }
     }
 
-    private func addStatusBarItem() {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        guard let statusItem = statusItem else { return }
-        statusItem.button?.image = NSImage(imageLiteralResourceName: "stopRecording")
-        statusItem.button?.target = self
-        statusItem.button?.action = #selector(statusBarItemClicked)
-    }
-
-    @objc private func statusBarItemClicked() {
-        guard let statusItem = statusItem else { return }
-        NSStatusBar.system.removeStatusItem(statusItem)
-        stopRecording()
+    @objc private func stopSelection() {
+        cutoutWindow?.orderOut(nil)
+        view.window?.makeKeyAndOrderFront(NSApp)
+        currentRecorder?.stop()
+        selectedWindow = nil
+        collectionView.deselectAll(nil)
     }
 
     @objc private func recordVideo() {
@@ -128,15 +112,40 @@ class WindowListViewController: NSViewController {
         }
     }
 
-    private func refresh() {
-        let selectionIndexPaths = collectionView.selectionIndexPaths
-        windowListViewModel.reloadWindows()
-        dataSource = .make(for: windowListViewModel.windows)
-        collectionView.dataSource = dataSource
-        collectionView.selectItems(at: selectionIndexPaths, scrollPosition: .nearestHorizontalEdge)
+    @objc private func stopRecording() {
+        stopSelection()
+        performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
     }
 
-    @IBAction func toggleRecording(_ sender: Any) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        guard let videoUrl = self.currentVideoOutputUrl else { return }
+        if segue.identifier == WindowListViewController.showContainer {
+            guard let containerViewController = segue.destinationController as? ContainerViewController else { return }
+            containerViewController.videoUrl = videoUrl
+        }
+    }
+}
+
+// MARK: - StatusBar
+extension WindowListViewController {
+    private func addStatusBarItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        guard let statusItem = statusItem else { return }
+        statusItem.button?.image = NSImage(imageLiteralResourceName: "stopRecording")
+        statusItem.button?.target = self
+        statusItem.button?.action = #selector(statusBarItemClicked)
+    }
+
+    @objc private func statusBarItemClicked() {
+        guard let statusItem = statusItem else { return }
+        NSStatusBar.system.removeStatusItem(statusItem)
+        stopRecording()
+    }
+}
+
+// MARK: - Actions
+extension WindowListViewController {
+    @IBAction private func toggleRecording(_ sender: Any) {
         guard let currentRecorder = currentRecorder else {
             startRecording()
             return
@@ -149,17 +158,9 @@ class WindowListViewController: NSViewController {
         }
     }
 
-    @IBAction func showOptions(_ sender: Any) {
+    @IBAction private func showOptions(_ sender: Any) {
         optionsButton.state = .on
         performSegue(withIdentifier: "showOptionsPopover", sender: nil)
-    }
-
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard let videoUrl = self.currentVideoOutputUrl else { return }
-        if segue.identifier == WindowListViewController.showContainer {
-            guard let containerViewController = segue.destinationController as? ContainerViewController else { return }
-            containerViewController.videoUrl = videoUrl
-        }
     }
 }
 

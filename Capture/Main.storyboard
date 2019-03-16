@@ -118,7 +118,7 @@
                 </viewController>
                 <customObject id="IA5-T1-rcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110" y="701"/>
+            <point key="canvasLocation" x="-74" y="701"/>
         </scene>
         <!--Video Option View Controller-->
         <scene sceneID="qVJ-hu-kTj">
@@ -253,7 +253,7 @@
                 <customObject id="rWb-fA-dkx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="zG3-NZ-cFk"/>
             </objects>
-            <point key="canvasLocation" x="-59" y="1132.5"/>
+            <point key="canvasLocation" x="-74" y="1186"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="16m-PV-kGq">
@@ -385,7 +385,7 @@ DQ
                 </viewController>
                 <customObject id="gFj-7p-2R0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1491" y="960"/>
+            <point key="canvasLocation" x="1266" y="955"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="noa-eg-Bue">
@@ -410,7 +410,7 @@ DQ
                 </viewController>
                 <customObject id="NMi-a0-c0C" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="1208"/>
+            <point key="canvasLocation" x="1265" y="211"/>
         </scene>
         <!--Finish View Controller-->
         <scene sceneID="bAk-EQ-YoS">
@@ -482,7 +482,7 @@ DQ
                 </viewController>
                 <customObject id="xpo-xT-UQD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1497" y="588"/>
+            <point key="canvasLocation" x="1272" y="583"/>
         </scene>
         <!--Application-->
         <scene sceneID="LVC-wt-En8">
@@ -634,7 +634,7 @@ DQ
                 <customObject id="ItY-BJ-7uN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="JCF-qm-ehu" customClass="AppDelegate" customModule="Capture" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-115" y="-132"/>
+            <point key="canvasLocation" x="-74" y="-184"/>
         </scene>
         <!--GIFOptionViewController-->
         <scene sceneID="q7p-Dl-Vnv">
@@ -766,7 +766,7 @@ DQ
                 </viewController>
                 <customObject id="PEU-nj-djR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447" y="1150"/>
+            <point key="canvasLocation" x="1265" y="1343"/>
         </scene>
     </scenes>
     <resources>

@@ -1,31 +1,22 @@
 import Cocoa
-// import os
 
 struct WindowInfo {
-    var order: Int?
-    var id: CGWindowID?
-    var name = ""
+    private var order: Int?
+    private var layer: Int32 = 0
+    private var alpha: Int = 0
+    private var windowOwnerPid: pid_t?
+
     var ownerName = ""
-    var layer: Int32 = 0
+    var name = ""
+    var id: CGWindowID?
     var frame = NSRect.zero
     var image: NSImage = NSImage()
-    var alpha: Int = 0
     var directDisplayID = CGMainDisplayID()
-
-    private var windowOwnerPid: pid_t?
 
     var appIconImage: NSImage? {
         guard let windowOwnerPid = windowOwnerPid else { return nil }
         let runningApplication = NSRunningApplication(processIdentifier: windowOwnerPid)
         return runningApplication?.icon
-    }
-
-    func directDisplayID(from frame: CGRect) -> CGDirectDisplayID {
-        let unsafeDirectDisplayID = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: 1)
-        unsafeDirectDisplayID.pointee = 1
-        CGGetDisplaysWithRect(frame, 2, unsafeDirectDisplayID, nil)
-        let directDisplayID = unsafeDirectDisplayID.pointee as CGDirectDisplayID
-        return directDisplayID
     }
 
     init(item: [String: AnyObject]) {
@@ -61,17 +52,6 @@ struct WindowInfo {
         }
     }
 
-    func convertPosition(_ frame: NSRect) -> NSPoint {
-        var convertedPoint = frame.origin
-        let displayBounds = CGDisplayBounds(directDisplayID)
-        let x = frame.origin.x - displayBounds.origin.x
-        let y = displayBounds.height - displayBounds.origin.y - frame.origin.y - frame.height
-
-        convertedPoint.x = x
-        convertedPoint.y = y
-        return convertedPoint
-    }
-
     var isNormalWindow: Bool {
         if alpha <= 0 {
             return false
@@ -96,17 +76,23 @@ struct WindowInfo {
 
         return true
     }
-}
 
-private extension NSImage {
-    static func windowImage(with windowId: CGWindowID) -> NSImage {
-        if let screenShot = CGWindowListCreateImage(CGRect.null, .optionIncludingWindow, CGWindowID(windowId), CGWindowImageOption()) {
-            let bitmapRep = NSBitmapImageRep(cgImage: screenShot)
-            let image = NSImage()
-            image.addRepresentation(bitmapRep)
-            return image
-        } else {
-            return NSImage()
-        }
+    private func directDisplayID(from frame: CGRect) -> CGDirectDisplayID {
+        let unsafeDirectDisplayID = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: 1)
+        unsafeDirectDisplayID.pointee = 1
+        CGGetDisplaysWithRect(frame, 2, unsafeDirectDisplayID, nil)
+        let directDisplayID = unsafeDirectDisplayID.pointee as CGDirectDisplayID
+        return directDisplayID
+    }
+
+    private func convertPosition(_ frame: NSRect) -> NSPoint {
+        var convertedPoint = frame.origin
+        let displayBounds = CGDisplayBounds(directDisplayID)
+        let x = frame.origin.x - displayBounds.origin.x
+        let y = displayBounds.height - displayBounds.origin.y - frame.origin.y - frame.height
+
+        convertedPoint.x = x
+        convertedPoint.y = y
+        return convertedPoint
     }
 }

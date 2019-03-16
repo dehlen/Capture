@@ -1,13 +1,9 @@
 import AppKit
 import os
 
-enum FinishState {
-    case success(_ gifOutputUrl: URL?)
-    case failure(_ message: String)
-}
-
 class FinishViewController: NSViewController {
     private var state: FinishState = .failure("genericError".localized)
+
     @IBOutlet private weak var revealInFinderButton: NSButton!
     @IBOutlet private weak var messageLabel: NSTextField!
     @IBOutlet private weak var imageView: NSImageView!
@@ -40,7 +36,7 @@ class FinishViewController: NSViewController {
         }
     }
 
-    @IBAction func revealInFinder(_ sender: Any) {
+    @IBAction private func revealInFinder(_ sender: Any) {
         os_log(.info, log: .exportContainer, "Reveal in Finder triggered")
 
         switch state {
