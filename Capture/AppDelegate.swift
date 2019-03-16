@@ -32,7 +32,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         os_log(.info, log: .app, "Application did finish launching")
         setupPreferenceDefaults()
-        askForAccessibilityPermission()
         ValueTransformerFactory.registerAll()
         Current.hotKeyService.setupDefaultHotKeys()
     }
@@ -89,13 +88,6 @@ extension AppDelegate {
             ])
 
         let keyCombo = KeyCombo(keyCode: 15, carbonModifiers: 4352)
-
-    private func askForAccessibilityPermission() {
-        os_log(.info, log: .app, "Ask for accessibility control")
-        let promptFlag = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
-        let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
-        AXIsProcessTrustedWithOptions(myDict)
-    }
         if let data = keyCombo?.archive() {
             Current.defaults.register(defaults: [
                 Constants.HotKey.stopRecordingKeyCombo: data

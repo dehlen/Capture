@@ -1,6 +1,10 @@
 import Foundation
 
 struct Constants {
+    struct SystemPreferences {
+        static let bundleIdentifier = "com.apple.systempreferences"
+        static let urlScheme = "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
+    }
     struct Repo {
         static let owner = "dehlen"
         static let name = "Capture"

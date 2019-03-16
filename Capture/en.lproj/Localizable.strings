@@ -23,3 +23,7 @@
 "credits" = "Acknowledgments";
 "eula" = "License Agreement";
 "chooseVideoFile" = "Choose a video file";
+"cancel" = "Cancel";
+"accessibilityPermissionTitle" = "Accessibility Permissions needed";
+"accessibilityPermissionMessage" = "This application needs accessibility permission in order to work. The permission is needed to create a recording of your screen. Please go to the Settings by clicking the button below and set the checkbox for Capture.";
+"openSystemSettings" = "Open System Settings";

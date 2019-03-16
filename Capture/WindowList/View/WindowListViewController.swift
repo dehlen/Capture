@@ -61,11 +61,7 @@ class WindowListViewController: NSViewController {
     }
 
     private func startRecording() {
-        let promptFlag = kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString
-        let myDict: CFDictionary = NSDictionary(dictionary: [promptFlag: true])
-        AXIsProcessTrustedWithOptions(myDict)
-
-        if AXIsProcessTrustedWithOptions(myDict) {
+        if hasAccessibilityPermission() {
             updateSelectedWindow()
             #warning("make cutout window draggable over display borders - this probably means multiple windows;s 1 per screen")
             var fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
@@ -81,6 +77,8 @@ class WindowListViewController: NSViewController {
             cutoutWindow?.makeKeyAndOrderFront(nil)
 
             addStatusBarItem()
+        } else {
+            askForAccessibilityPermission()
         }
     }
 
