@@ -85,7 +85,6 @@ class WindowListViewController: NSViewController {
     @objc private func stopSelection() {
         cutoutWindow?.orderOut(nil)
         view.window?.makeKeyAndOrderFront(NSApp)
-        currentRecorder?.stop()
         selectedWindow = nil
         collectionView.deselectAll(nil)
     }
@@ -112,6 +111,10 @@ class WindowListViewController: NSViewController {
 
     @objc private func stopRecording() {
         stopSelection()
+        guard let currentRecorder = currentRecorder else {
+            return
+        }
+        currentRecorder.stop()
         performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
     }
 
