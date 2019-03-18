@@ -83,6 +83,7 @@ class WindowListViewController: NSViewController {
     }
 
     @objc private func stopSelection() {
+        removeStatusBarItem()
         cutoutWindow?.orderOut(nil)
         view.window?.makeKeyAndOrderFront(NSApp)
         selectedWindow = nil
@@ -137,9 +138,13 @@ extension WindowListViewController {
         statusItem.button?.action = #selector(statusBarItemClicked)
     }
 
-    @objc private func statusBarItemClicked() {
+    private func removeStatusBarItem() {
         guard let statusItem = statusItem else { return }
         NSStatusBar.system.removeStatusItem(statusItem)
+    }
+
+    @objc private func statusBarItemClicked() {
+        removeStatusBarItem()
         stopRecording()
     }
 }
