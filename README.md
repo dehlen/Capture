@@ -1,6 +1,6 @@
 # Capture
 <p align="center">
-   <img width="256" height="256" src="./icon.png">
+   <img width="256" height="256" src="./Capture.png">
 </p>
 
 Capture is a native macOS application to record your screen. What makes this application special is, that you can choose from a list of currently open windows and Capture will automatically set the recorded frame to the window frame. The application also works for multiple displays and gives you a handful of useful features concerning the export, quality of the recorded video and more. By default Capture will export to GIF. 
