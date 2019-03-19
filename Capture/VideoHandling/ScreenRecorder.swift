@@ -3,7 +3,6 @@ import os
 
 public class Recorder: NSObject {
     let session: AVCaptureSession
-
     private let destination: URL
     private let output: AVCaptureMovieFileOutput
 
@@ -14,6 +13,8 @@ public class Recorder: NSObject {
         guard let input = AVCaptureScreenInput.init(displayID: displayId) else {
             throw RecorderError.invalidDisplay
         }
+
+        // input.minFrameDuration = CMTimeMake(1, Int32(fps))
 
         if let cropRect = cropRect {
             input.cropRect = cropRect

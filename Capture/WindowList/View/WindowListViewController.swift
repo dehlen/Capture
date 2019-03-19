@@ -54,6 +54,7 @@ class WindowListViewController: NSViewController {
 
     private func showWindowList() {
         cutoutWindow?.orderOut(nil)
+        cutoutWindow = nil
         view.window?.makeKeyAndOrderFront(NSApp)
     }
 
@@ -116,6 +117,7 @@ class WindowListViewController: NSViewController {
             return
         }
         currentRecorder.stop()
+        self.currentRecorder = nil
         showContainer()
     }
 
