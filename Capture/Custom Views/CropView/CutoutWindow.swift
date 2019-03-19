@@ -1,7 +1,7 @@
 import AppKit
 
 class CutoutWindow: NSWindow {
-    private var cropView: CropView = CropView(frame: .zero)
+    private var cropView: CropView?
 
     convenience init(contentRect: NSRect,
                      styleMask style: NSWindow.StyleMask,
@@ -11,7 +11,7 @@ class CutoutWindow: NSWindow {
         self.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
         cropView = CropView(frame: contentRect)
         contentView = cropView
-        cropView.showCrop(at: cutout)
+        cropView?.showCrop(at: cutout)
     }
 
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
@@ -26,7 +26,7 @@ class CutoutWindow: NSWindow {
     }
 
     var cutoutFrame: NSRect {
-        return cropView.cropBox
+        return cropView?.cropBox ?? .zero
     }
 
     var directDisplayId: CGDirectDisplayID {
@@ -39,7 +39,7 @@ class CutoutWindow: NSWindow {
 
     func recordingStarted() {
         ignoresMouseEvents = true
-        cropView.recordingStarted()
+        cropView?.recordingStarted()
     }
 }
 
