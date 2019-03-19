@@ -14,7 +14,6 @@ class CropView: NSView {
 
     private(set) var cropBox: NSRect = .zero
     private var startingPoint: NSPoint = .zero
-    private var isRecordingStarted: Bool = false
 
     private lazy var recordingButton: FlatButton = {
         let recordingButton = FlatButton(title: "Start Recording", target: self, action: #selector(recordingButtonPressed))
@@ -52,15 +51,6 @@ class CropView: NSView {
         }
     }
 
-    func recordingStarted() {
-        isRecordingStarted = true
-        overlayBox.isHidden = true
-        recordingButton.isHidden = true
-        selectionHandlers.forEach { $0.removeFromSuperlayer() }
-        cropBox = cropBox.insetBy(dx: -4, dy: -4)
-        updateSelectionBox()
-    }
-
     private func addRecordingButton() {
         recordingButton.isHidden = true
         addSubview(recordingButton)
@@ -94,9 +84,7 @@ class CropView: NSView {
     }
 
     private func stop() {
-        if !isRecordingStarted {
-            Current.notificationCenter.post(name: .shouldStopSelection, object: nil)
-        }
+        Current.notificationCenter.post(name: .shouldStopSelection, object: nil)
     }
 
     private func cancel() {
