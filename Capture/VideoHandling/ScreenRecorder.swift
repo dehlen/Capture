@@ -5,7 +5,7 @@ public class Recorder: NSObject {
     let session: AVCaptureSession
     private let destination: URL
     private let output: AVCaptureMovieFileOutput
-    #warning("recorder fails when crop frame is too small")
+
     public init(destination: URL, displayId: CGDirectDisplayID, cropRect: CGRect?, audioDevice: AVCaptureDevice?) throws {
         self.destination = destination
         session = AVCaptureSession()
