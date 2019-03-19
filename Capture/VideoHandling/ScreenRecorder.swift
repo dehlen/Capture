@@ -5,7 +5,7 @@ public class Recorder: NSObject {
     let session: AVCaptureSession
     private let destination: URL
     private let output: AVCaptureMovieFileOutput
-
+    #warning("recorder fails when crop frame is too small")
     public init(destination: URL, displayId: CGDirectDisplayID, cropRect: CGRect?, audioDevice: AVCaptureDevice?) throws {
         self.destination = destination
         session = AVCaptureSession()
@@ -81,7 +81,6 @@ extension Recorder: AVCaptureFileOutputRecordingDelegate {
                            didFinishRecordingTo outputFileURL: URL,
                            from connections: [AVCaptureConnection],
                            error: Error?) {
-        print(error)
     }
 
     public func capture(_ captureOutput: AVCaptureFileOutput!,
@@ -93,6 +92,5 @@ extension Recorder: AVCaptureFileOutputRecordingDelegate {
                         didFinishRecordingToOutputFileAt outputFileURL: URL!,
                         fromConnections connections: [Any]!,
                         error: Error!) {
-        print(error)
     }
 }
