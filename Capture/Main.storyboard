@@ -78,7 +78,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="toggleRecording:" target="uaI-qh-UhH" id="xUX-Ns-cbt"/>
+                                    <action selector="recordingButtonPressed:" target="uaI-qh-UhH" id="MS6-qn-d8n"/>
                                 </connections>
                             </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kAs-MG-hLH">
@@ -113,7 +113,6 @@
                         <outlet property="collectionView" destination="II8-pA-cSp" id="EW0-rL-dVg"/>
                         <outlet property="optionsButton" destination="kAs-MG-hLH" id="jjm-kL-dds"/>
                         <outlet property="recordingButton" destination="HSQ-T7-A50" id="Z9o-9d-wYq"/>
-                        <segue destination="wTd-mG-kcM" kind="show" identifier="showContainer" id="7e5-he-qGJ"/>
                     </connections>
                 </viewController>
                 <customObject id="IA5-T1-rcM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -10,7 +10,6 @@ class Alerts {
     }
 
     static func showAlert(title: String, message: String, action: Action) {
-        #warning("check if firstButton is correct and check whether buttons are shown")
         let alert = NSAlert.init()
         alert.messageText = title
         alert.informativeText = message

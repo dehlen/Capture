@@ -90,6 +90,10 @@
 		0BE418B5221AE59600B8E85D /* CaptureApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE418B4221AE59600B8E85D /* CaptureApplication.swift */; };
 		0BE418BC221AF3B200B8E85D /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE418BB221AF3B200B8E85D /* ContainerViewController.swift */; };
 		0BE418C0221AFE9B00B8E85D /* NSViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE418BF221AFE9B00B8E85D /* NSViewController+Child.swift */; };
+		0BF2E7F82240D88700A3F64F /* StatusBarItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2E7F72240D88700A3F64F /* StatusBarItemController.swift */; };
+		0BF2E7FA2240E6DD00A3F64F /* WindowListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2E7F92240E6DD00A3F64F /* WindowListViewControllerDelegate.swift */; };
+		0BF2E7FC2240E6FC00A3F64F /* StatusBarItemControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2E7FB2240E6FC00A3F64F /* StatusBarItemControllerDelegate.swift */; };
+		0BF2E7FE2240E8C300A3F64F /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2E7FD2240E8C300A3F64F /* CGRect+Extension.swift */; };
 		6BE514A52126A2410068337E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE514A42126A2410068337E /* AppDelegate.swift */; };
 		6BE514A72126A2430068337E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BE514A62126A2430068337E /* Assets.xcassets */; };
 		6BE514B42126A4E60068337E /* CollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE514B22126A4E60068337E /* CollectionViewItem.swift */; };
@@ -182,6 +186,10 @@
 		0BE418B4221AE59600B8E85D /* CaptureApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureApplication.swift; sourceTree = "<group>"; };
 		0BE418BB221AF3B200B8E85D /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		0BE418BF221AFE9B00B8E85D /* NSViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Child.swift"; sourceTree = "<group>"; };
+		0BF2E7F72240D88700A3F64F /* StatusBarItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItemController.swift; sourceTree = "<group>"; };
+		0BF2E7F92240E6DD00A3F64F /* WindowListViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		0BF2E7FB2240E6FC00A3F64F /* StatusBarItemControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItemControllerDelegate.swift; sourceTree = "<group>"; };
+		0BF2E7FD2240E8C300A3F64F /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
 		6BE514A12126A2410068337E /* Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BE514A42126A2410068337E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BE514A62126A2430068337E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -335,6 +343,9 @@
 				6BE514B32126A4E60068337E /* CollectionViewItem.xib */,
 				0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */,
 				0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */,
+				0BF2E7F92240E6DD00A3F64F /* WindowListViewControllerDelegate.swift */,
+				0BF2E7F72240D88700A3F64F /* StatusBarItemController.swift */,
+				0BF2E7FB2240E6FC00A3F64F /* StatusBarItemControllerDelegate.swift */,
 				0B64CD822218BD51004F6321 /* WindowListViewModel.swift */,
 			);
 			path = View;
@@ -346,6 +357,7 @@
 				0BBE2D06223D3BAA00C174CE /* Action.swift */,
 				0B3D7A7522311676000F8C85 /* Alerts.swift */,
 				0B4309A8221926C500766DB0 /* BundleExtension.swift */,
+				0BF2E7FD2240E8C300A3F64F /* CGRect+Extension.swift */,
 				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
 				0B4E8125223BFBDD00247B63 /* NotificationNames.swift */,
 				0B64CD9B2218DE1B004F6321 /* Result.swift */,
@@ -636,6 +648,7 @@
 				0B4E8124223BF67800247B63 /* NSImage+CGWindowID.swift in Sources */,
 				0B581A2A222199EA006EF012 /* HotKeyService.swift in Sources */,
 				0B64CD972218DD5A004F6321 /* ConvertGif.swift in Sources */,
+				0BF2E7FC2240E6FC00A3F64F /* StatusBarItemControllerDelegate.swift in Sources */,
 				0B3D7A7622311676000F8C85 /* Alerts.swift in Sources */,
 				0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */,
 				0BD75025223AA48800FD2567 /* NSBezierPath+Additions.swift in Sources */,
@@ -665,6 +678,7 @@
 				0B64CD852218BE38004F6321 /* CollectionViewDataSource.swift in Sources */,
 				0B4E811C223BF45600247B63 /* ContainerViewControllerDelegate.swift in Sources */,
 				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
+				0BF2E7F82240D88700A3F64F /* StatusBarItemController.swift in Sources */,
 				0BBE2D07223D3BAA00C174CE /* Action.swift in Sources */,
 				0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */,
 				0B581A2C22219B1E006EF012 /* HotKeyType.swift in Sources */,
@@ -676,10 +690,12 @@
 				0BD75023223AA08100FD2567 /* OverlayBox.swift in Sources */,
 				0B3D7A69223109DD000F8C85 /* Path+Attributes.swift in Sources */,
 				0B3D7A5D223109CC000F8C85 /* Version+Range.swift in Sources */,
+				0BF2E7FA2240E6DD00A3F64F /* WindowListViewControllerDelegate.swift in Sources */,
 				0BD75020223AA08000FD2567 /* Foundation+Additions.swift in Sources */,
 				0B3D7A5A223109CC000F8C85 /* Version+Foundation.swift in Sources */,
 				0BD7501E223AA08000FD2567 /* SelectionBox.swift in Sources */,
 				0B3D7A5B223109CC000F8C85 /* Version+Codable.swift in Sources */,
+				0BF2E7FE2240E8C300A3F64F /* CGRect+Extension.swift in Sources */,
 				0BE418C0221AFE9B00B8E85D /* NSViewController+Child.swift in Sources */,
 				0B4309B122198FAA00766DB0 /* PreferencesViewController.swift in Sources */,
 				0BD7501F223AA08000FD2567 /* SelectionHandler.swift in Sources */,

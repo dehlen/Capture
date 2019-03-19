@@ -30,9 +30,8 @@ class CutoutWindow: NSWindow {
     }
 
     var directDisplayId: CGDirectDisplayID {
-        #warning("check if this works!")
-        if NSScreen.screens.count > 1, let screenNumber = screen?.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber {
-            return CGDirectDisplayID(screenNumber.intValue)
+        if NSScreen.screens.count > 1, let displayId = screen?.displayID {
+            return displayId
         }
 
         return CGMainDisplayID()
@@ -41,5 +40,11 @@ class CutoutWindow: NSWindow {
     func recordingStarted() {
         ignoresMouseEvents = true
         cropView.recordingStarted()
+    }
+}
+
+public extension NSScreen {
+    public var displayID: CGDirectDisplayID? {
+        return deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID
     }
 }

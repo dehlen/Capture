@@ -80,6 +80,7 @@ extension Recorder: AVCaptureFileOutputRecordingDelegate {
                            didFinishRecordingTo outputFileURL: URL,
                            from connections: [AVCaptureConnection],
                            error: Error?) {
+        print(error)
     }
 
     public func capture(_ captureOutput: AVCaptureFileOutput!,
@@ -91,5 +92,6 @@ extension Recorder: AVCaptureFileOutputRecordingDelegate {
                         didFinishRecordingToOutputFileAt outputFileURL: URL!,
                         fromConnections connections: [Any]!,
                         error: Error!) {
+        print(error)
     }
 }

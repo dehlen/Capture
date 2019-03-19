@@ -1,20 +1,16 @@
 import AppKit
 
-#warning("refactor")
 class WindowListViewController: NSViewController {
-    static let showContainer = "showContainer"
-
     @IBOutlet private weak var collectionView: NSCollectionView!
     @IBOutlet private weak var recordingButton: RecordingButton!
     @IBOutlet private weak var optionsButton: NSButton!
 
     private var windowListViewModel = WindowListViewModel()
+    private var statusBarItemController = StatusBarItemController()
     private var selectedWindow: WindowInfo?
     private var currentRecorder: Recorder?
     private var currentVideoOutputUrl: URL?
     private var cutoutWindow: CutoutWindow?
-    private var timer: Timer?
-    private var statusItem: NSStatusItem?
 
     private var dataSource = CollectionViewDataSource<WindowInfo>.make(for: []) {
         didSet {
@@ -27,6 +23,8 @@ class WindowListViewController: NSViewController {
 
         setupCollectionView()
         setupObserver()
+        windowListViewModel.delegate = self
+        statusBarItemController.delegate = self
     }
 
     private func setupCollectionView() {
@@ -34,24 +32,12 @@ class WindowListViewController: NSViewController {
                                 forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CollectionViewItem"))
         collectionView.collectionViewLayout = CollectionViewLayoutFactory.createGridLayout()
         collectionView.delegate = self
-        refresh()
     }
 
     private func setupObserver() {
         Current.notificationCenter.addObserver(self, selector: #selector(stopRecording), name: .shouldStopRecording, object: nil)
         Current.notificationCenter.addObserver(self, selector: #selector(recordVideo), name: .shouldStartRecording, object: nil)
         Current.notificationCenter.addObserver(self, selector: #selector(stopSelection), name: .shouldStopSelection, object: nil)
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (_) in
-            self.refresh()
-        }
-    }
-
-    private func refresh() {
-        let selectionIndexPaths = collectionView.selectionIndexPaths
-        windowListViewModel.reloadWindows()
-        dataSource = .make(for: windowListViewModel.windows)
-        collectionView.dataSource = dataSource
-        collectionView.selectItems(at: selectionIndexPaths, scrollPosition: .nearestHorizontalEdge)
     }
 
     private func updateSelectedWindow() {
@@ -60,40 +46,54 @@ class WindowListViewController: NSViewController {
         }
     }
 
-    private func startRecording() {
-        if hasAccessibilityPermission() {
-            updateSelectedWindow()
-            #warning("make cutout window draggable over display borders - this probably means multiple windows;s 1 per screen")
-            var fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
-            var frame = NSRect(x: fullScreenBounds.width / 2 - 250, y: fullScreenBounds.height / 2 - 250, width: 500, height: 500)
+    private func showCutoutWindow(contentRect: CGRect, cutout: CGRect) {
+        view.window?.orderOut(NSApp)
+        cutoutWindow = CutoutWindow(contentRect: contentRect, styleMask: .borderless, backing: .buffered, defer: true, cutout: cutout)
+        cutoutWindow?.makeKeyAndOrderFront(nil)
+    }
 
-            if let selectedWindow = self.selectedWindow, let selectedWindowId = selectedWindow.id {
-                frame = selectedWindow.frame
-                fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
-                WindowInfoManager.switchToApp(withWindowId: selectedWindowId)
-            }
-            view.window?.orderOut(NSApp)
-            cutoutWindow = CutoutWindow(contentRect: fullScreenBounds, styleMask: .borderless, backing: .buffered, defer: true, cutout: frame)
-            cutoutWindow?.makeKeyAndOrderFront(nil)
+    private func showWindowList() {
+        cutoutWindow?.orderOut(nil)
+        view.window?.makeKeyAndOrderFront(NSApp)
+    }
 
-            addStatusBarItem()
-        } else {
+    private func deselectWindows() {
+        selectedWindow = nil
+        collectionView.deselectAll(nil)
+    }
+
+    private func startSelection() {
+        guard hasAccessibilityPermission() else {
             askForAccessibilityPermission()
+            return
         }
+
+        updateSelectedWindow()
+        #warning("make cutout window draggable over display borders - this probably means multiple windows;s 1 per screen")
+
+        var fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
+        var frame = fullScreenBounds.centerRect(withSize: 500)
+        if let selectedWindow = self.selectedWindow, let selectedWindowId = selectedWindow.id {
+            frame = selectedWindow.frame
+            fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
+            WindowInfoManager.switchToApp(withWindowId: selectedWindowId)
+        }
+
+        showCutoutWindow(contentRect: fullScreenBounds, cutout: frame)
+        statusBarItemController.addStopRecordingItem()
     }
 
     @objc private func stopSelection() {
-        removeStatusBarItem()
-        cutoutWindow?.orderOut(nil)
-        view.window?.makeKeyAndOrderFront(NSApp)
-        selectedWindow = nil
-        collectionView.deselectAll(nil)
+        statusBarItemController.removeStopRecordingItem()
+        showWindowList()
+        deselectWindows()
     }
 
     @objc private func recordVideo() {
         guard let cutoutWindow = self.cutoutWindow else { return }
         let cutoutFrame = cutoutWindow.cutoutFrame
         cutoutWindow.recordingStarted()
+
         do {
             let videoOutputUrl = DirectoryHandler.videoDestination
             currentVideoOutputUrl = videoOutputUrl
@@ -116,51 +116,41 @@ class WindowListViewController: NSViewController {
             return
         }
         currentRecorder.stop()
-        performSegue(withIdentifier: WindowListViewController.showContainer, sender: nil)
+        showContainer()
     }
 
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+    private func showContainer() {
         guard let videoUrl = self.currentVideoOutputUrl else { return }
-        if segue.identifier == WindowListViewController.showContainer {
-            guard let containerViewController = segue.destinationController as? ContainerViewController else { return }
-            containerViewController.videoUrl = videoUrl
-        }
+        let containerViewController = ContainerViewController.create(videoUrl: videoUrl)
+        presentAsModalWindow(containerViewController)
+    }
+}
+
+// MARK: - WindowListViewControllerDelegate
+extension WindowListViewController: WindowListViewControllerDelegate {
+    func didRefreshWindowList() {
+        let selectionIndexPaths = collectionView.selectionIndexPaths
+        dataSource = .make(for: windowListViewModel.windows)
+        collectionView.dataSource = dataSource
+        collectionView.selectItems(at: selectionIndexPaths, scrollPosition: .nearestHorizontalEdge)
     }
 }
 
 // MARK: - StatusBar
-extension WindowListViewController {
-    private func addStatusBarItem() {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        guard let statusItem = statusItem else { return }
-        statusItem.button?.image = NSImage(imageLiteralResourceName: "stopRecording")
-        statusItem.button?.target = self
-        statusItem.button?.action = #selector(statusBarItemClicked)
-    }
-
-    private func removeStatusBarItem() {
-        guard let statusItem = statusItem else { return }
-        NSStatusBar.system.removeStatusItem(statusItem)
-    }
-
-    @objc private func statusBarItemClicked() {
-        removeStatusBarItem()
+extension WindowListViewController: StatusBarItemControllerDelegate {
+    func didClickStatusBarItem() {
+        statusBarItemController.removeStopRecordingItem()
         stopRecording()
     }
 }
 
 // MARK: - Actions
 extension WindowListViewController {
-    @IBAction private func toggleRecording(_ sender: Any) {
-        guard let currentRecorder = currentRecorder else {
-            startRecording()
-            return
-        }
+    @IBAction private func recordingButtonPressed(_ sender: Any) {
+        let isRunning = currentRecorder?.session.isRunning ?? false
 
-        if !currentRecorder.session.isRunning {
-            startRecording()
-        } else {
-            stopRecording()
+        if !isRunning {
+            startSelection()
         }
     }
 
@@ -175,5 +165,9 @@ extension WindowListViewController: NSCollectionViewDelegate {
         if let item = indexPaths.first?.item {
             selectedWindow = windowListViewModel.window(at: item)
         }
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        deselectWindows()
     }
 }
