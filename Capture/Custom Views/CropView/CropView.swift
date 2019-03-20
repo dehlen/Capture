@@ -2,7 +2,6 @@ import Cocoa
 import QuartzCore
 import Carbon.HIToolbox
 
-#warning("refactor")
 class CropView: NSView {
     private let selectionBox = SelectionBox()
     private let selectionHandlers = [SelectionHandler(), SelectionHandler(), SelectionHandler(), SelectionHandler()]
