@@ -177,7 +177,6 @@ extension VideoPlayerViewController {
         })
     }
 
-
     private func handleSuccesfulGifExport(with gifOutputUrl: URL) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.delegate?.requestReplace(new: FinishViewController.create(state: .success(gifOutputUrl)))
