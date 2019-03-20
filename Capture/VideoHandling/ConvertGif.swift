@@ -22,6 +22,7 @@ enum ConvertGif {
                         frameRate: Int = Constants.defaultFrameRate,
                         maximumHeight: Int = Constants.maximumHeight,
                         duration: Float,
+                        progressHandler: ((Double) -> Void)? = nil,
                         completion: @escaping (Result<Void>) -> Void) {
         Regift.createGIFFromSource(source,
                                    destinationFileURL: destination,
@@ -30,6 +31,7 @@ enum ConvertGif {
                                    frameRate: frameRate,
                                    loopCount: 0,
                                    size: CGSize(width: 0, height: maximumHeight),
+                                   progress: progressHandler,
                                    completion: { (result) in
             if result != nil {
                 completion(.success(()))

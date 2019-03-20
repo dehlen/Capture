@@ -10,6 +10,7 @@ enum VideoPlayerError: Error {
 
 class VideoPlayerViewController: NSViewController {
     typealias URLHandler = ((Result<URL>) -> Void)
+    typealias ProgressHandler = ((Double) -> Void)
 
     @IBOutlet private weak var playerView: AVPlayerView!
     @IBOutlet private weak var trimButton: NSButton!
@@ -65,7 +66,7 @@ class VideoPlayerViewController: NSViewController {
         return videoOutputUrl.deletingPathExtension().deletingLastPathComponent().appendingPathComponent(fileName + "-trimmed".mov)
     }
 
-    private func convertVideoToGif(then handler: @escaping URLHandler) {
+    private func convertVideoToGif(progressHandler: @escaping ProgressHandler, then handler: @escaping URLHandler) {
         guard let trimmedVideoOutputUrl = trimmedOutputUrl() else { return }
         guard let exportFolderUrl = DirectoryHandler.exportFolder else { return }
 
@@ -75,7 +76,7 @@ class VideoPlayerViewController: NSViewController {
             return
         }
         let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
-        ConvertGif.convert(at: trimmedVideoOutputUrl, to: gifOutputUrl, duration: duration) { (result) in
+        ConvertGif.convert(at: trimmedVideoOutputUrl, to: gifOutputUrl, duration: duration, progressHandler: progressHandler) { (result) in
             switch result {
             case .success:
                 handler(.success(gifOutputUrl))
@@ -136,7 +137,9 @@ extension VideoPlayerViewController {
                 if Current.defaults[.saveVideo] == true {
                     DirectoryHandler.copy(from: videoUrl)
                 }
-                self.convertVideoToGif { convertResult in
+                self.convertVideoToGif(progressHandler: { (progress) in
+                    self.delegate?.exportProgressDidChange(progress: progress)
+                }, then: { convertResult in
                     DispatchQueue.main.async {
                         sender.isEnabled = true
                         switch convertResult {
@@ -150,7 +153,7 @@ extension VideoPlayerViewController {
                             self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
                         }
                     }
-                }
+                })
             case .failure(let error):
                 DispatchQueue.main.async {
                     sender.isEnabled = true

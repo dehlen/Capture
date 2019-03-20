@@ -391,25 +391,37 @@ DQ
             <objects>
                 <viewController identifier="LoadingViewController" storyboardIdentifier="LoadingViewController" id="DUP-1J-nBE" customClass="LoadingViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="DKA-mt-Jqz">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="347"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="E4T-YU-oCd">
-                                <rect key="frame" x="209" y="134" width="32" height="32"/>
+                                <rect key="frame" x="209" y="158" width="32" height="32"/>
                             </progressIndicator>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NAF-bN-ycj">
+                                <rect key="frame" x="193" y="90" width="65" height="48"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="0 %" id="vGF-Ds-fvd">
+                                    <font key="font" metaFont="systemThin" size="40"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="NAF-bN-ycj" firstAttribute="centerX" secondItem="DKA-mt-Jqz" secondAttribute="centerX" id="8Vd-aF-A2E"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NAF-bN-ycj" secondAttribute="bottom" constant="20" id="Dkm-bG-ZcL"/>
+                            <constraint firstItem="NAF-bN-ycj" firstAttribute="top" secondItem="E4T-YU-oCd" secondAttribute="bottom" constant="20" id="Ig7-JR-T6G"/>
                             <constraint firstItem="E4T-YU-oCd" firstAttribute="centerX" secondItem="DKA-mt-Jqz" secondAttribute="centerX" id="bev-Hv-G43"/>
                             <constraint firstItem="E4T-YU-oCd" firstAttribute="centerY" secondItem="DKA-mt-Jqz" secondAttribute="centerY" id="inX-mj-Wz7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="progressIndicator" destination="E4T-YU-oCd" id="Xk0-T6-YPu"/>
+                        <outlet property="progressLabel" destination="NAF-bN-ycj" id="sgz-pJ-lud"/>
                     </connections>
                 </viewController>
                 <customObject id="NMi-a0-c0C" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1265" y="211"/>
+            <point key="canvasLocation" x="1279" y="187.5"/>
         </scene>
         <!--Finish View Controller-->
         <scene sceneID="bAk-EQ-YoS">

@@ -5,7 +5,7 @@ class ContainerViewController: NSViewController {
 
     @IBOutlet private weak var containerView: NSView!
     private var currentViewController: NSViewController?
-    private var loadingViewController: NSViewController?
+    private var loadingViewController: LoadingViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class ContainerViewController: NSViewController {
 
     private func addLoadingIndicator() {
         loadingViewController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "LoadingViewController") as? NSViewController
+            .instantiateController(withIdentifier: "LoadingViewController") as? LoadingViewController
         loadingViewController?.view.wantsLayer = true
         loadingViewController?.view.layer?.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.5).cgColor
         embed(loadingViewController!, container: containerView)
@@ -63,5 +63,9 @@ extension ContainerViewController: ContainerViewControllerDelegate {
 
     func requestReplace(new: NSViewController) {
         replacePage(with: new)
+    }
+
+    func exportProgressDidChange(progress: Double) {
+        loadingViewController?.progress = progress
     }
 }
