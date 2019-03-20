@@ -17,6 +17,7 @@ class VideoPlayerViewController: NSViewController {
 
     private var didCallBeginTrimming: Bool = false
     private var beginTrimmingObserver: NSKeyValueObservation?
+    private var naturalVideoSize: CGSize = .zero
 
     @objc dynamic var selectedFramerateIndex: Int {
         get {
@@ -26,7 +27,6 @@ class VideoPlayerViewController: NSViewController {
             Current.defaults[.selectedFramerateIndex] = newValue
         }
     }
-
 
     static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
@@ -49,9 +49,11 @@ class VideoPlayerViewController: NSViewController {
         }
 
         loadVideo(at: videoUrl)
+        calculateNaturalVideoSize()
+        setupUI()
     }
 
-    func loadVideo(at videoUrl: URL) {
+    private func loadVideo(at videoUrl: URL) {
         let player = AVPlayer(url: videoUrl)
         playerView.player = player
         beginTrimmingObserver = playerView.observe(\AVPlayerView.canBeginTrimming, options: .new) { playerView, change in
@@ -62,12 +64,17 @@ class VideoPlayerViewController: NSViewController {
                 }
             }
         }
+    }
 
-        let item = player.currentItem
+    private func calculateNaturalVideoSize() {
+        let item = playerView.player?.currentItem
         let tracks = item?.asset.tracks(withMediaType: .video)
-        let naturalSize = tracks?.first?.naturalSize ?? .zero
-        heightTextField.stringValue = String(format: "%.0f", naturalSize.height)
-        widthTextField.stringValue = String(format: "%.0f", naturalSize.width)
+        naturalVideoSize = tracks?.first?.naturalSize ?? .zero
+    }
+
+    private func setupUI() {
+        heightTextField.stringValue = String(format: "%.0f", naturalVideoSize.height)
+        widthTextField.stringValue = String(format: "%.0f", naturalVideoSize.width)
         heightTextField.delegate = self
         widthTextField.delegate = self
     }
@@ -81,14 +88,14 @@ class VideoPlayerViewController: NSViewController {
     private func convertVideoToGif(progressHandler: @escaping ProgressHandler, then handler: @escaping URLHandler) {
         guard let trimmedVideoOutputUrl = trimmedOutputUrl() else { return }
         guard let exportFolderUrl = DirectoryHandler.exportFolder else { return }
-
-        let gifOutputUrl = exportFolderUrl.appendingPathComponent(trimmedVideoOutputUrl.path.fileName.gif)
         guard let asset = playerView.player?.currentItem?.asset else {
             handler(.failure(GifConversionError.missingAsset))
             return
         }
-        let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
+
         DispatchQueue.main.async {
+            let gifOutputUrl = exportFolderUrl.appendingPathComponent(trimmedVideoOutputUrl.path.fileName.gif)
+            let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
             let frameRate = Int(self.fpsSegmentedControl.label(forSegment: self.fpsSegmentedControl.selectedSegment) ?? "30") ?? 30
             let width = Int(self.widthTextField.stringValue) ?? 0
             let height = Int(self.heightTextField.stringValue) ?? 480
@@ -145,6 +152,7 @@ class VideoPlayerViewController: NSViewController {
 }
 
 extension VideoPlayerViewController {
+    /// Triggered via First Responder Chain
     @IBAction func toggleTrimming(_ sender: Any) {
         if playerView.canBeginTrimming {
             playerView.beginTrimming(completionHandler: nil)
@@ -202,17 +210,19 @@ extension VideoPlayerViewController: NSTextFieldDelegate {
         let item = playerView.player?.currentItem
         let tracks = item?.asset.tracks(withMediaType: .video)
         let naturalSize = tracks?.first?.naturalSize ?? .zero
-        let aspectRatio = naturalSize.width / naturalSize.height
+        let aspectRatio: Double = Double(naturalSize.width / naturalSize.height)
+        let heightValue = Double(height) ?? 0
 
-        return Int((CGFloat(Double(height) ?? 0)) * aspectRatio)
+        return Int(heightValue * aspectRatio)
     }
 
     private func aspectRatioHeight(width: String) -> Int {
         let item = playerView.player?.currentItem
         let tracks = item?.asset.tracks(withMediaType: .video)
         let naturalSize = tracks?.first?.naturalSize ?? .zero
-        let aspectRatio = naturalSize.height / naturalSize.width
+        let aspectRatio: Double = Double(naturalSize.height / naturalSize.width)
+        let widthValue = Double(width) ?? 0
 
-        return Int((CGFloat(Double(width) ?? 0)) * aspectRatio)
+        return Int(widthValue * aspectRatio)
     }
 }
