@@ -2,7 +2,6 @@ import AppKit
 import AVKit
 import os
 
-#warning("refactor")
 class VideoPlayerViewController: NSViewController {
     typealias URLHandler = ((Result<URL>) -> Void)
     typealias ProgressHandler = ((Double) -> Void)
@@ -20,7 +19,12 @@ class VideoPlayerViewController: NSViewController {
 
     private var didCallBeginTrimming: Bool = false
     private var beginTrimmingObserver: NSKeyValueObservation?
-    private var naturalVideoSize: CGSize = .zero
+    private var naturalVideoSize: CGSize = CGSize(width: 1, height: 1)
+    private var trimmedOutputUrl: URL? {
+        guard let videoOutputUrl = videoUrl else { return nil }
+        let fileName = videoOutputUrl.path.fileName
+        return videoOutputUrl.deletingPathExtension().deletingLastPathComponent().appendingPathComponent(fileName + "-trimmed".mov)
+    }
 
     @IBOutlet private weak var playerView: AVPlayerView!
     @IBOutlet private weak var heightTextField: NSTextField!
@@ -86,14 +90,8 @@ class VideoPlayerViewController: NSViewController {
         widthTextField.delegate = self
     }
 
-    private func trimmedOutputUrl() -> URL? {
-        guard let videoOutputUrl = videoUrl else { return nil }
-        let fileName = videoOutputUrl.path.fileName
-        return videoOutputUrl.deletingPathExtension().deletingLastPathComponent().appendingPathComponent(fileName + "-trimmed".mov)
-    }
-
     private func convertVideoToGif(progressHandler: @escaping ProgressHandler, then handler: @escaping URLHandler) {
-        guard let trimmedVideoOutputUrl = trimmedOutputUrl() else { return }
+        guard let trimmedVideoOutputUrl = trimmedOutputUrl else { return }
         guard let exportFolderUrl = DirectoryHandler.exportFolder else { return }
         guard let asset = playerView.player?.currentItem?.asset else {
             handler(.failure(GifConversionError.missingAsset))
@@ -129,7 +127,7 @@ class VideoPlayerViewController: NSViewController {
             handler(.failure(VideoPlayerError.noCurrentItem))
             return
         }
-        guard let outputUrl = trimmedOutputUrl() else {
+        guard let outputUrl = trimmedOutputUrl else {
             os_log(.info, log: .videoPlayer, "Video file could not be found")
             handler(.failure(VideoPlayerError.missingFile))
             return
