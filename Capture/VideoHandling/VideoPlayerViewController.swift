@@ -7,18 +7,8 @@ class VideoPlayerViewController: NSViewController {
     typealias URLHandler = ((Result<URL>) -> Void)
     typealias ProgressHandler = ((Double) -> Void)
 
-    @IBOutlet private weak var playerView: AVPlayerView!
-    @IBOutlet private weak var heightTextField: NSTextField!
-    @IBOutlet private weak var widthTextField: NSTextField!
-    @IBOutlet private weak var fpsSegmentedControl: NSSegmentedControl!
-
     var videoUrl: URL?
     weak var delegate: ContainerViewControllerDelegate?
-
-    private var didCallBeginTrimming: Bool = false
-    private var beginTrimmingObserver: NSKeyValueObservation?
-    private var naturalVideoSize: CGSize = .zero
-
     @objc dynamic var selectedFramerateIndex: Int {
         get {
             return Current.defaults[.selectedFramerateIndex] ?? 1
@@ -27,6 +17,15 @@ class VideoPlayerViewController: NSViewController {
             Current.defaults[.selectedFramerateIndex] = newValue
         }
     }
+
+    private var didCallBeginTrimming: Bool = false
+    private var beginTrimmingObserver: NSKeyValueObservation?
+    private var naturalVideoSize: CGSize = .zero
+
+    @IBOutlet private weak var playerView: AVPlayerView!
+    @IBOutlet private weak var heightTextField: NSTextField!
+    @IBOutlet private weak var widthTextField: NSTextField!
+    @IBOutlet private weak var fpsSegmentedControl: NSSegmentedControl!
 
     static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
@@ -67,9 +66,17 @@ class VideoPlayerViewController: NSViewController {
     }
 
     private func calculateNaturalVideoSize() {
-        let item = playerView.player?.currentItem
-        let tracks = item?.asset.tracks(withMediaType: .video)
-        naturalVideoSize = tracks?.first?.naturalSize ?? .zero
+        naturalVideoSize = playerView.naturalSize
+    }
+
+    private func calculateAspectRatioSize(width: Double, height: Double) -> NSSize {
+        let naturalSize = playerView.naturalSize
+        let widthAspectRatio = Double(naturalSize.width / naturalSize.height)
+        let heightAspectRatio = Double(naturalSize.height / naturalSize.width)
+        let widthValue = height * widthAspectRatio
+        let heightValue = width * heightAspectRatio
+
+        return CGSize(width: widthValue, height: heightValue)
     }
 
     private func setupUI() {
@@ -199,30 +206,11 @@ extension VideoPlayerViewController {
 extension VideoPlayerViewController: NSTextFieldDelegate {
     func controlTextDidChange(_ obj: Notification) {
         guard let textField = obj.object as? NSTextField else { return }
+        let aspectRatioSize = calculateAspectRatioSize(width: widthTextField.numberValue, height: heightTextField.numberValue)
         if textField == heightTextField {
-            widthTextField.stringValue = "\(aspectRatioWidth(height: heightTextField.stringValue))"
+            widthTextField.stringValue = String(format: "%.0f", aspectRatioSize.width)
         } else if textField == widthTextField {
-            heightTextField.stringValue = "\(aspectRatioHeight(width: widthTextField.stringValue))"
+            heightTextField.stringValue = String(format: "%.0f", aspectRatioSize.height)
         }
-    }
-
-    private func aspectRatioWidth(height: String) -> Int {
-        let item = playerView.player?.currentItem
-        let tracks = item?.asset.tracks(withMediaType: .video)
-        let naturalSize = tracks?.first?.naturalSize ?? .zero
-        let aspectRatio: Double = Double(naturalSize.width / naturalSize.height)
-        let heightValue = Double(height) ?? 0
-
-        return Int(heightValue * aspectRatio)
-    }
-
-    private func aspectRatioHeight(width: String) -> Int {
-        let item = playerView.player?.currentItem
-        let tracks = item?.asset.tracks(withMediaType: .video)
-        let naturalSize = tracks?.first?.naturalSize ?? .zero
-        let aspectRatio: Double = Double(naturalSize.height / naturalSize.width)
-        let widthValue = Double(width) ?? 0
-
-        return Int(widthValue * aspectRatio)
     }
 }
