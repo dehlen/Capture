@@ -16,7 +16,7 @@
 "conversionFailed" = "The recorded video could not be exported to a GIF. Please try again with a different recording.";
 "noCurrentItem" = "The video player does not know which video file to export. Therefore the operation failed.";
 "missingFile" = "The video file could not be found and therefore the export failed. Please try again with a different recording.";
-"exportFailed" = "The GIF export failed. Please try again with a different recording.";
+"exportFailed" = "The GIF export failed: %@";
 "alreadyUpToDate" = "Capture is already up to date. Thank you for using Capture ❤️";
 "updateFailed" = "Checking for an update failed: %@";
 "alreadyUpToDateTitle" = "Already up to date!";

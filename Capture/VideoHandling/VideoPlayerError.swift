@@ -3,5 +3,5 @@ import Foundation
 enum VideoPlayerError: Error {
     case noCurrentItem
     case missingFile
-    case exportFailed
+    case exportFailed(reason: String)
 }

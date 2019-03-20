@@ -27,8 +27,8 @@ struct ErrorMessageProvider {
             return "noCurrentItem".localized
         case .missingFile:
             return "missingFile".localized
-        case .exportFailed:
-            return "exportFailed".localized
+        case .exportFailed(let reason):
+            return String(format: "exportFailed".localized, reason)
         }
     }
 

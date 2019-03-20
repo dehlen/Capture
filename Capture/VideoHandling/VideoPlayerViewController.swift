@@ -145,11 +145,14 @@ class VideoPlayerViewController: NSViewController {
 
         exportSession.exportAsynchronously {
             os_log(.info, log: .videoPlayer, "Export Status changed %{public}i", exportSession.status.rawValue)
+            if let error = exportSession.error {
+                os_log(.error, log: .videoPlayer, "Export Status failed %{public}@", error.localizedDescription)
+            }
             switch exportSession.status {
             case .completed:
                 handler(.success(outputUrl))
             case .cancelled, .failed, .unknown:
-                handler(.failure(VideoPlayerError.exportFailed))
+                handler(.failure(VideoPlayerError.exportFailed(reason: exportSession.error?.localizedDescription ?? "")))
             default: ()
             }
         }
