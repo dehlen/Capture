@@ -4,6 +4,7 @@ import os
 
 enum GifConversionError: Error {
     case conversionFailed
+    case missingAsset
 }
 
 enum ConvertGif {
@@ -20,19 +21,22 @@ enum ConvertGif {
                         to destination: URL,
                         frameRate: Int = Constants.defaultFrameRate,
                         maximumHeight: Int = Constants.maximumHeight,
+                        duration: Float,
                         completion: @escaping (Result<Void>) -> Void) {
         Regift.createGIFFromSource(source,
                                    destinationFileURL: destination,
-                                   frameCount: frameRate,
-                                   delayTime: 0,
+                                   startTime: 0,
+                                   duration: duration,
+                                   frameRate: frameRate,
                                    loopCount: 0,
-                                   size: CGSize(width: 0, height: maximumHeight)) { (result) in
+                                   size: CGSize(width: 0, height: maximumHeight),
+                                   completion: { (result) in
             if result != nil {
                 completion(.success(()))
             } else {
                 os_log(.error, log: .gifExport, "GIF export failed")
                 completion(.failure(GifConversionError.conversionFailed))
             }
-        }
+        })
     }
 }

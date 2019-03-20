@@ -16,6 +16,8 @@ struct ErrorMessageProvider {
         switch error {
         case .conversionFailed:
             return "conversionFailed".localized
+        case .missingAsset:
+            return "missingAsset".localized
         }
     }
 

@@ -70,7 +70,12 @@ class VideoPlayerViewController: NSViewController {
         guard let exportFolderUrl = DirectoryHandler.exportFolder else { return }
 
         let gifOutputUrl = exportFolderUrl.appendingPathComponent(trimmedVideoOutputUrl.path.fileName.gif)
-        ConvertGif.convert(at: trimmedVideoOutputUrl, to: gifOutputUrl) { (result) in
+        guard let asset = playerView.player?.currentItem?.asset else {
+            handler(.failure(GifConversionError.missingAsset))
+            return
+        }
+        let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
+        ConvertGif.convert(at: trimmedVideoOutputUrl, to: gifOutputUrl, duration: duration) { (result) in
             switch result {
             case .success:
                 handler(.success(gifOutputUrl))
