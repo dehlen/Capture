@@ -70,6 +70,7 @@
 		0B8DCAEB22428E0E00F863A8 /* VideoPlayerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAEA22428E0E00F863A8 /* VideoPlayerError.swift */; };
 		0B8DCAED2242944100F863A8 /* AVPlayerView+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAEC2242944100F863A8 /* AVPlayerView+AspectRatio.swift */; };
 		0B8DCAEF2242954800F863A8 /* NSTextField+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAEE2242954800F863A8 /* NSTextField+Number.swift */; };
+		0B8DCAF12242A23700F863A8 /* AVPlayerItem+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAF02242A23700F863A8 /* AVPlayerItem+Export.swift */; };
 		0B94455C222815EC0058D5DD /* VideoOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B944559222815EC0058D5DD /* VideoOptionViewController.swift */; };
 		0B94455D222815EC0058D5DD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94455A222815EC0058D5DD /* LoadingViewController.swift */; };
 		0BAACBAA223266DB00405ABF /* AboutWindowFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */; };
@@ -166,6 +167,7 @@
 		0B8DCAEA22428E0E00F863A8 /* VideoPlayerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerError.swift; sourceTree = "<group>"; };
 		0B8DCAEC2242944100F863A8 /* AVPlayerView+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerView+AspectRatio.swift"; sourceTree = "<group>"; };
 		0B8DCAEE2242954800F863A8 /* NSTextField+Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Number.swift"; sourceTree = "<group>"; };
+		0B8DCAF02242A23700F863A8 /* AVPlayerItem+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+Export.swift"; sourceTree = "<group>"; };
 		0B944559222815EC0058D5DD /* VideoOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOptionViewController.swift; sourceTree = "<group>"; };
 		0B94455A222815EC0058D5DD /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AboutWindowFramework.framework; path = Carthage/Build/Mac/AboutWindowFramework.framework; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				0BBE2D06223D3BAA00C174CE /* Action.swift */,
 				0B3D7A7522311676000F8C85 /* Alerts.swift */,
 				0B8DCAEC2242944100F863A8 /* AVPlayerView+AspectRatio.swift */,
+				0B8DCAF02242A23700F863A8 /* AVPlayerItem+Export.swift */,
 				0B4309A8221926C500766DB0 /* BundleExtension.swift */,
 				0BF2E7FD2240E8C300A3F64F /* CGRect+Extension.swift */,
 				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
@@ -633,6 +636,7 @@
 				0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */,
 				0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */,
 				0B4309A7221916C500766DB0 /* VideoPlayerViewController.swift in Sources */,
+				0B8DCAF12242A23700F863A8 /* AVPlayerItem+Export.swift in Sources */,
 				0B3D7A6E223109DD000F8C85 /* Path+FileManager.swift in Sources */,
 				0B4309A9221926C500766DB0 /* BundleExtension.swift in Sources */,
 				0B3276D32219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift in Sources */,
