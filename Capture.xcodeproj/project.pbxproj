@@ -12,7 +12,6 @@
 		0B3151882227C52500025C6B /* OSLog+Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3151872227C52500025C6B /* OSLog+Definitions.swift */; };
 		0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */; };
 		0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CB2219DAA30028F007 /* Preferences.swift */; };
-		0B3276CE2219E47A0028F007 /* NumberValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */; };
 		0B3276D02219E6810028F007 /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CF2219E6810028F007 /* GeneralPreferencesViewController.swift */; };
 		0B3276D32219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */; };
 		0B3276D52219F0E10028F007 /* PopUpButtonLikePathControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */; };
@@ -68,7 +67,7 @@
 		0B64CD972218DD5A004F6321 /* ConvertGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD962218DD5A004F6321 /* ConvertGif.swift */; };
 		0B64CD9C2218DE1B004F6321 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD9B2218DE1B004F6321 /* Result.swift */; };
 		0B64CDA32218E42C004F6321 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CDA52218E42C004F6321 /* Localizable.strings */; };
-		0B94455B222815EC0058D5DD /* GIFOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B944558222815EC0058D5DD /* GIFOptionViewController.swift */; };
+		0B8DCAEB22428E0E00F863A8 /* VideoPlayerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAEA22428E0E00F863A8 /* VideoPlayerError.swift */; };
 		0B94455C222815EC0058D5DD /* VideoOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B944559222815EC0058D5DD /* VideoOptionViewController.swift */; };
 		0B94455D222815EC0058D5DD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94455A222815EC0058D5DD /* LoadingViewController.swift */; };
 		0BAACBAA223266DB00405ABF /* AboutWindowFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */; };
@@ -106,7 +105,6 @@
 		0B3151872227C52500025C6B /* OSLog+Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Definitions.swift"; sourceTree = "<group>"; };
 		0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		0B3276CB2219DAA30028F007 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberValueTransformer.swift; sourceTree = "<group>"; };
 		0B3276CF2219E6810028F007 /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
 		0B3276D12219E94C0028F007 /* Capture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Capture.entitlements; sourceTree = "<group>"; };
 		0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathFromFilePathOrURLTransformer.swift; sourceTree = "<group>"; };
@@ -163,7 +161,7 @@
 		0B64CD962218DD5A004F6321 /* ConvertGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertGif.swift; sourceTree = "<group>"; };
 		0B64CD9B2218DE1B004F6321 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0B64CDA42218E42C004F6321 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0B944558222815EC0058D5DD /* GIFOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFOptionViewController.swift; sourceTree = "<group>"; };
+		0B8DCAEA22428E0E00F863A8 /* VideoPlayerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerError.swift; sourceTree = "<group>"; };
 		0B944559222815EC0058D5DD /* VideoOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOptionViewController.swift; sourceTree = "<group>"; };
 		0B94455A222815EC0058D5DD /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AboutWindowFramework.framework; path = Carthage/Build/Mac/AboutWindowFramework.framework; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 		0B94456022287E650058D5DD /* Options */ = {
 			isa = PBXGroup;
 			children = (
-				0B944558222815EC0058D5DD /* GIFOptionViewController.swift */,
 				0B944559222815EC0058D5DD /* VideoOptionViewController.swift */,
 			);
 			path = Options;
@@ -380,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */,
-				0B3276CD2219E47A0028F007 /* NumberValueTransformer.swift */,
 				0B3276DA2219F7360028F007 /* ValueTransformerFactory.swift */,
 			);
 			path = ValueTransformer;
@@ -416,6 +412,7 @@
 				0B4E811F223BF62500247B63 /* RecorderError.swift */,
 				0B4309A6221916C500766DB0 /* VideoPlayerViewController.swift */,
 				0B4E8121223BF64600247B63 /* recordScreen.swift */,
+				0B8DCAEA22428E0E00F863A8 /* VideoPlayerError.swift */,
 			);
 			path = VideoHandling;
 			sourceTree = "<group>";
@@ -630,11 +627,9 @@
 				0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */,
 				0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */,
 				0B4309A7221916C500766DB0 /* VideoPlayerViewController.swift in Sources */,
-				0B94455B222815EC0058D5DD /* GIFOptionViewController.swift in Sources */,
 				0B3D7A6E223109DD000F8C85 /* Path+FileManager.swift in Sources */,
 				0B4309A9221926C500766DB0 /* BundleExtension.swift in Sources */,
 				0B3276D32219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift in Sources */,
-				0B3276CE2219E47A0028F007 /* NumberValueTransformer.swift in Sources */,
 				0BD239EF2219A477003AF068 /* ErrorMessageProvider.swift in Sources */,
 				0B64CD832218BD51004F6321 /* WindowListViewModel.swift in Sources */,
 				0B64CD932218DA3F004F6321 /* DirectoryHandler.swift in Sources */,
@@ -703,6 +698,7 @@
 				0B4E8122223BF64600247B63 /* recordScreen.swift in Sources */,
 				0B202B1D221B11CE00435657 /* FinishViewController.swift in Sources */,
 				0B3D7A6A223109DD000F8C85 /* Path+CommonDirectories.swift in Sources */,
+				0B8DCAEB22428E0E00F863A8 /* VideoPlayerError.swift in Sources */,
 				0B94455C222815EC0058D5DD /* VideoOptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

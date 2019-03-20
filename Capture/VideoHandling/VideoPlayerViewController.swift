@@ -2,23 +2,31 @@ import AppKit
 import AVKit
 import os
 
-enum VideoPlayerError: Error {
-    case noCurrentItem
-    case missingFile
-    case exportFailed
-}
-
+#warning("refactor")
 class VideoPlayerViewController: NSViewController {
     typealias URLHandler = ((Result<URL>) -> Void)
     typealias ProgressHandler = ((Double) -> Void)
 
     @IBOutlet private weak var playerView: AVPlayerView!
-    @IBOutlet private weak var trimButton: NSButton!
+    @IBOutlet private weak var heightTextField: NSTextField!
+    @IBOutlet private weak var widthTextField: NSTextField!
+    @IBOutlet private weak var fpsSegmentedControl: NSSegmentedControl!
+
     var videoUrl: URL?
     weak var delegate: ContainerViewControllerDelegate?
 
     private var didCallBeginTrimming: Bool = false
     private var beginTrimmingObserver: NSKeyValueObservation?
+
+    @objc dynamic var selectedFramerateIndex: Int {
+        get {
+            return Current.defaults[.selectedFramerateIndex] ?? 1
+        }
+        set {
+            Current.defaults[.selectedFramerateIndex] = newValue
+        }
+    }
+
 
     static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
@@ -48,16 +56,20 @@ class VideoPlayerViewController: NSViewController {
         playerView.player = player
         beginTrimmingObserver = playerView.observe(\AVPlayerView.canBeginTrimming, options: .new) { playerView, change in
             if change.newValue == true {
-                self.trimButton.contentTintColor = NSColor.labelColor
-
                 if !self.didCallBeginTrimming {
                     self.didCallBeginTrimming = true
                     self.playerView.beginTrimming(completionHandler: nil)
                 }
-            } else {
-                self.trimButton.contentTintColor = NSColor.controlAccentColor
             }
         }
+
+        let item = player.currentItem
+        let tracks = item?.asset.tracks(withMediaType: .video)
+        let naturalSize = tracks?.first?.naturalSize ?? .zero
+        heightTextField.stringValue = String(format: "%.0f", naturalSize.height)
+        widthTextField.stringValue = String(format: "%.0f", naturalSize.width)
+        heightTextField.delegate = self
+        widthTextField.delegate = self
     }
 
     private func trimmedOutputUrl() -> URL? {
@@ -76,12 +88,23 @@ class VideoPlayerViewController: NSViewController {
             return
         }
         let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
-        ConvertGif.convert(at: trimmedVideoOutputUrl, to: gifOutputUrl, duration: duration, progressHandler: progressHandler) { (result) in
-            switch result {
-            case .success:
-                handler(.success(gifOutputUrl))
-            case .failure(let error):
-                handler(.failure(error))
+        DispatchQueue.main.async {
+            let frameRate = Int(self.fpsSegmentedControl.label(forSegment: self.fpsSegmentedControl.selectedSegment) ?? "30") ?? 30
+            let width = Int(self.widthTextField.stringValue) ?? 0
+            let height = Int(self.heightTextField.stringValue) ?? 480
+            ConvertGif.convert(at: trimmedVideoOutputUrl,
+                               to: gifOutputUrl,
+                               frameRate: frameRate,
+                               width: width,
+                               maximumHeight: height,
+                               duration: duration,
+                               progressHandler: progressHandler) { (result) in
+                switch result {
+                case .success:
+                    handler(.success(gifOutputUrl))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
             }
         }
     }
@@ -89,12 +112,12 @@ class VideoPlayerViewController: NSViewController {
     private func exportVideo(then handler: @escaping URLHandler) {
         guard let playerItem = playerView.player?.currentItem else {
             os_log(.info, log: .videoPlayer, "VideoPlayer current item is nil")
-            handler(.failure(NSError.create(from: VideoPlayerError.noCurrentItem)))
+            handler(.failure(VideoPlayerError.noCurrentItem))
             return
         }
         guard let outputUrl = trimmedOutputUrl() else {
             os_log(.info, log: .videoPlayer, "Video file could not be found")
-            handler(.failure(NSError.create(from: VideoPlayerError.missingFile)))
+            handler(.failure(VideoPlayerError.missingFile))
             return
         }
 
@@ -114,7 +137,7 @@ class VideoPlayerViewController: NSViewController {
             case .completed:
                 handler(.success(outputUrl))
             case .cancelled, .failed, .unknown:
-                handler(.failure(NSError.create(from: VideoPlayerError.exportFailed)))
+                handler(.failure(VideoPlayerError.exportFailed))
             default: ()
             }
         }
@@ -157,10 +180,39 @@ extension VideoPlayerViewController {
             case .failure(let error):
                 DispatchQueue.main.async {
                     sender.isEnabled = true
-                    let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
+                    let errorMessage = ErrorMessageProvider.string(for: error)
                     self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
                 }
             }
         }
+    }
+}
+
+extension VideoPlayerViewController: NSTextFieldDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        guard let textField = obj.object as? NSTextField else { return }
+        if textField == heightTextField {
+            widthTextField.stringValue = "\(aspectRatioWidth(height: heightTextField.stringValue))"
+        } else if textField == widthTextField {
+            heightTextField.stringValue = "\(aspectRatioHeight(width: widthTextField.stringValue))"
+        }
+    }
+
+    private func aspectRatioWidth(height: String) -> Int {
+        let item = playerView.player?.currentItem
+        let tracks = item?.asset.tracks(withMediaType: .video)
+        let naturalSize = tracks?.first?.naturalSize ?? .zero
+        let aspectRatio = naturalSize.width / naturalSize.height
+
+        return Int((CGFloat(Double(height) ?? 0)) * aspectRatio)
+    }
+
+    private func aspectRatioHeight(width: String) -> Int {
+        let item = playerView.player?.currentItem
+        let tracks = item?.asset.tracks(withMediaType: .video)
+        let naturalSize = tracks?.first?.naturalSize ?? .zero
+        let aspectRatio = naturalSize.height / naturalSize.width
+
+        return Int((CGFloat(Double(width) ?? 0)) * aspectRatio)
     }
 }

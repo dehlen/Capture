@@ -2,7 +2,6 @@ import Foundation
 
 class ValueTransformerFactory {
     private static let valueTransformers: [NSValueTransformerName: ValueTransformer] = [
-        .numberValueTransformerName: NumberValueTransformer(),
         .pathFromFilePathOrURLTransformerName: PathFromFilePathOrURLTransformer()
     ]
 

@@ -62,6 +62,7 @@ extension ContainerViewController: ContainerViewControllerDelegate {
     }
 
     func requestReplace(new: NSViewController) {
+        dismissLoadingIndicator()
         replacePage(with: new)
     }
 

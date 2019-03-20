@@ -79,9 +79,7 @@ extension AppDelegate {
         Current.defaults.register(defaults: [
             .exportUrl: DirectoryHandler.desktopUrl!.path,
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
-            .gifFrameRate: 30,
-            .gifHeight: 480,
-            .gifWidth: 0,
+            .selectedFramerateIndex: 1,
             .showMouseCursor: true,
             .showMouseClicks: true,
             .saveVideo: true
