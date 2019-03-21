@@ -70,18 +70,11 @@ class CropView: NSView {
     }
 
     private func registerKeyEvents() {
-        case kVK_Space:
-            selectFullScreen()
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
         }
     }
-    private func selectFullScreen() {
-        guard let fullScreenFrame = window?.frame else { return }
-        showCrop(at: fullScreenFrame)
-    }
-
 
     override func keyDown(with event: NSEvent) {
         switch Int(event.keyCode) {
