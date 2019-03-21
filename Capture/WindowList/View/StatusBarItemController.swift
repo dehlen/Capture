@@ -15,6 +15,7 @@ class StatusBarItemController {
     func removeStopRecordingItem() {
         guard let statusItem = statusItem else { return }
         NSStatusBar.system.removeStatusItem(statusItem)
+        self.statusItem = nil
     }
 
     @objc private func statusBarItemClicked() {
