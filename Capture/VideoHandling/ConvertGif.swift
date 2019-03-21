@@ -4,35 +4,41 @@ import os
 
 enum GifConversionError: Error {
     case conversionFailed
+    case missingAsset
 }
 
 enum ConvertGif {
     enum Constants {
-        static var maximumHeight: Int {
-            return Int(Current.defaults[.gifHeight] ?? "480") ?? 480
-        }
+        static var gifFramerates: [Int] = [15, 30, 60]
         static var defaultFrameRate: Int {
-            return Int(Current.defaults[.gifFrameRate] ?? "30") ?? 30
+            let index = Current.defaults[.selectedFramerateIndex] ?? 1
+            return index >= 0 && index < gifFramerates.count ? gifFramerates[index] : gifFramerates[1]
         }
     }
 
     static func convert(at source: URL,
                         to destination: URL,
                         frameRate: Int = Constants.defaultFrameRate,
-                        maximumHeight: Int = Constants.maximumHeight,
+                        width: Int = 0,
+                        maximumHeight: Int = 480,
+                        duration: Float,
+                        progressHandler: ((Double) -> Void)? = nil,
                         completion: @escaping (Result<Void>) -> Void) {
         Regift.createGIFFromSource(source,
                                    destinationFileURL: destination,
-                                   frameCount: frameRate,
-                                   delayTime: 0,
+                                   startTime: 0,
+                                   duration: duration,
+                                   frameRate: frameRate,
                                    loopCount: 0,
-                                   size: CGSize(width: 0, height: maximumHeight)) { (result) in
+                                   size: CGSize(width: width, height: maximumHeight),
+                                   progress: progressHandler,
+                                   completion: { (result) in
             if result != nil {
                 completion(.success(()))
             } else {
                 os_log(.error, log: .gifExport, "GIF export failed")
                 completion(.failure(GifConversionError.conversionFailed))
             }
-        }
+        })
     }
 }

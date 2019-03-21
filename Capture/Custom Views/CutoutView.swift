@@ -1,22 +1,4 @@
-import AppKit
-
-class CutoutWindow: NSWindow {
-    override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
-        super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
-
-        backgroundColor = .clear
-        isOpaque = false
-        hasShadow = false
-        level = NSWindow.Level.statusBar
-        ignoresMouseEvents = true
-    }
-
-    static func create(with rect: NSRect, cutout: NSRect) -> CutoutWindow {
-        let window = CutoutWindow(contentRect: rect, styleMask: .borderless, backing: .buffered, defer: true)
-        window.contentView?.addSubview(CutoutView(frame: NSRect(x: 0, y: 0, width: rect.size.width, height: rect.size.height), cutout: cutout))
-        return window
-    }
-}
+import Cocoa
 
 class CutoutView: NSView {
     var cutout: NSRect = .zero
@@ -39,7 +21,7 @@ class CutoutView: NSView {
         )
 
         let path = NSBezierPath(roundedRect: cropLineFrame, xRadius: 0, yRadius: 0)
-        layer.path = path.cgPath
+        layer.path = path.CGPath
         layer.strokeColor = NSColor.red.cgColor
         layer.lineDashPattern = nil
         layer.lineCap = CAShapeLayerLineCap.round

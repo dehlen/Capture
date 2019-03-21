@@ -1,9 +1,26 @@
 import Foundation
 
-struct WindowListViewModel {
+class WindowListViewModel {
     var windows: [WindowInfo] = []
+    weak var delegate: WindowListViewControllerDelegate? {
+        didSet {
+            refresh()
+        }
+    }
+    private var timer: Timer?
 
-    mutating func reloadWindows() {
+    init() {
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (_) in
+            self.refresh()
+        }
+    }
+
+    private func refresh() {
+        reloadWindows()
+        delegate?.didRefreshWindowList()
+    }
+
+    private func reloadWindows() {
         windows.removeAll()
 
         windows = WindowInfoManager.allWindows()

@@ -1,25 +1,9 @@
 import AVFoundation
 import os
 
-public func recordScreen(destination: URL, displayId: CGDirectDisplayID, cropRect: CGRect?, audioDevice: AVCaptureDevice?) throws -> Recorder {
-    return try Recorder.init(destination: destination, displayId: displayId, cropRect: cropRect, audioDevice: audioDevice)
-}
-
-public func recordScreen(destination: URL) throws -> Recorder {
-    return try Recorder.init(destination: destination, displayId: CGMainDisplayID(), cropRect: nil, audioDevice: nil)
-}
-
-public enum RecorderError: String, Error {
-    case invalidDisplay = "The display id passed in is invalid"
-    case invalidAudioDevice = "The audio device is invalid"
-    case couldNotAddScreen = "Could not add screen to input"
-    case couldNotAddMic = "Could not mic to input"
-    case couldNotAddOutput = "Could not add output"
-}
-
 public class Recorder: NSObject {
+    let session: AVCaptureSession
     private let destination: URL
-    private let session: AVCaptureSession
     private let output: AVCaptureMovieFileOutput
 
     public init(destination: URL, displayId: CGDirectDisplayID, cropRect: CGRect?, audioDevice: AVCaptureDevice?) throws {
@@ -29,6 +13,8 @@ public class Recorder: NSObject {
         guard let input = AVCaptureScreenInput.init(displayID: displayId) else {
             throw RecorderError.invalidDisplay
         }
+
+        // input.minFrameDuration = CMTimeMake(1, Int32(fps))
 
         if let cropRect = cropRect {
             input.cropRect = cropRect

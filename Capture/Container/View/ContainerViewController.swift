@@ -5,14 +5,25 @@ class ContainerViewController: NSViewController {
 
     @IBOutlet private weak var containerView: NSView!
     private var currentViewController: NSViewController?
-    private var loadingViewController: NSViewController?
+    private var loadingViewController: LoadingViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = Bundle.main.displayName
         view.window?.title = Bundle.main.displayName ?? "Capture"
+
         setupFirstPage()
         addLoadingIndicator()
+    }
+
+    static func create(videoUrl: URL) -> ContainerViewController {
+        guard let containerViewController = NSStoryboard.main?.instantiateController(withIdentifier: "ContainerViewController")
+            as? ContainerViewController else {
+            fatalError("Could not create ContainerViewController")
+        }
+        containerViewController.videoUrl = videoUrl
+        return containerViewController
     }
 
     private func setupFirstPage() {
@@ -31,7 +42,7 @@ class ContainerViewController: NSViewController {
 
     private func addLoadingIndicator() {
         loadingViewController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "LoadingViewController") as? NSViewController
+            .instantiateController(withIdentifier: "LoadingViewController") as? LoadingViewController
         loadingViewController?.view.wantsLayer = true
         loadingViewController?.view.layer?.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.5).cgColor
         embed(loadingViewController!, container: containerView)
@@ -51,12 +62,11 @@ extension ContainerViewController: ContainerViewControllerDelegate {
     }
 
     func requestReplace(new: NSViewController) {
+        dismissLoadingIndicator()
         replacePage(with: new)
     }
-}
 
-protocol ContainerViewControllerDelegate: class {
-    func requestLoadingIndicator()
-    func dismissLoadingIndicator()
-    func requestReplace(new: NSViewController)
+    func exportProgressDidChange(progress: Double) {
+        loadingViewController?.progress = progress
+    }
 }
