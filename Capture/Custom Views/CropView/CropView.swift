@@ -3,6 +3,8 @@ import QuartzCore
 import Carbon.HIToolbox
 
 class CropView: NSView {
+    weak var delegate: CropViewDelegate?
+
     private let selectionBox = SelectionBox()
     private let selectionHandlers = [SelectionHandler(), SelectionHandler(), SelectionHandler(), SelectionHandler()]
     private let overlayBox = OverlayBox()
@@ -11,7 +13,14 @@ class CropView: NSView {
     private var selectionResizingIsActive = -1
     private var selectionMovingIsActive = false
 
-    private(set) var cropBox: NSRect = .zero
+    private(set) var cropBox: NSRect = .zero {
+        didSet {
+            if oldValue == .zero && cropBox != .zero {
+                guard let cutoutWindow = window as? CutoutWindow else { return }
+                delegate?.didSelectNewCropView(on: cutoutWindow)
+            }
+        }
+    }
     private var startingPoint: NSPoint = .zero
 
     private lazy var recordingButton: FlatButton = {
@@ -56,37 +65,38 @@ class CropView: NSView {
     }
 
     @objc func recordingButtonPressed() {
-        Current.notificationCenter.post(name: .shouldStartRecording, object: nil)
+        guard let cutoutWindow = window as? CutoutWindow else { return }
+        delegate?.shouldStartRecording(cutoutWindow: cutoutWindow)
     }
 
     private func registerKeyEvents() {
+        case kVK_Space:
+            selectFullScreen()
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
         }
     }
-
-    override func keyDown(with event: NSEvent) {
-        switch Int(event.keyCode) {
-        case kVK_Escape:
-            stop()
-        case kVK_Space:
-            selectFullScreen()
-        default:
-            super.keyDown(with: event)
-        }
-    }
-
     private func selectFullScreen() {
         guard let fullScreenFrame = window?.frame else { return }
         showCrop(at: fullScreenFrame)
     }
 
-    private func stop() {
-        Current.notificationCenter.post(name: .shouldStopSelection, object: nil)
+
+    override func keyDown(with event: NSEvent) {
+        switch Int(event.keyCode) {
+        case kVK_Escape:
+            stop()
+        default:
+            super.keyDown(with: event)
+        }
     }
 
-    private func cancel() {
+    private func stop() {
+        delegate?.shouldCancelSelection()
+    }
+
+    func cancel() {
         clearCropBox()
         selectionIsActive = false
         updateCropBox()

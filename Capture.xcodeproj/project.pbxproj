@@ -52,6 +52,7 @@
 		0B581A2E22219C6A006EF012 /* NSCoding+Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */; };
 		0B581A3022219CC0006EF012 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B581A2F22219CC0006EF012 /* Constants.swift */; };
 		0B581A362222141B006EF012 /* RegiftOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B581A352222141B006EF012 /* RegiftOSX.framework */; };
+		0B586FCB2243DAF100BD1DC9 /* CropViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B586FCA2243DAF100BD1DC9 /* CropViewDelegate.swift */; };
 		0B64CD7D2218BA99004F6321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B64CD7C2218BA98004F6321 /* Main.storyboard */; };
 		0B64CD7F2218BAF5004F6321 /* WindowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */; };
 		0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */; };
@@ -151,6 +152,7 @@
 		0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCoding+Archive.swift"; sourceTree = "<group>"; };
 		0B581A2F22219CC0006EF012 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B581A352222141B006EF012 /* RegiftOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RegiftOSX.framework; path = Carthage/Build/Mac/RegiftOSX.framework; sourceTree = "<group>"; };
+		0B586FCA2243DAF100BD1DC9 /* CropViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewDelegate.swift; sourceTree = "<group>"; };
 		0B64CD7C2218BA98004F6321 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0B64CD7E2218BAF5004F6321 /* WindowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowListViewController.swift; sourceTree = "<group>"; };
 		0B64CD802218BD00004F6321 /* CollectionViewLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutFactory.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 			children = (
 				0BD7502C223AC04C00FD2567 /* CutoutWindow.swift */,
 				0BD75015223AA08000FD2567 /* CropView.swift */,
+				0B586FCA2243DAF100BD1DC9 /* CropViewDelegate.swift */,
 				0BD75014223AA08000FD2567 /* Cursors.swift */,
 				0BD75018223AA08000FD2567 /* Foundation+Additions.swift */,
 				0BD75024223AA48800FD2567 /* NSBezierPath+Additions.swift */,
@@ -679,6 +682,7 @@
 				0B64CD912218D9E1004F6321 /* World.swift in Sources */,
 				0B64CD8B2218D215004F6321 /* WindowInfoManager.swift in Sources */,
 				0B3D7A6F223109DD000F8C85 /* Path.swift in Sources */,
+				0B586FCB2243DAF100BD1DC9 /* CropViewDelegate.swift in Sources */,
 				0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */,
 				0B581A3022219CC0006EF012 /* Constants.swift in Sources */,
 				0B202B21221B263800435657 /* NSView+Animation.swift in Sources */,
