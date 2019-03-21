@@ -71,6 +71,8 @@
 		0B8DCAED2242944100F863A8 /* AVPlayerView+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAEC2242944100F863A8 /* AVPlayerView+AspectRatio.swift */; };
 		0B8DCAEF2242954800F863A8 /* NSTextField+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAEE2242954800F863A8 /* NSTextField+Number.swift */; };
 		0B8DCAF12242A23700F863A8 /* AVPlayerItem+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAF02242A23700F863A8 /* AVPlayerItem+Export.swift */; };
+		0B8DCAF3224376A300F863A8 /* CutoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAF2224376A300F863A8 /* CutoutView.swift */; };
+		0B8DCAF5224376BB00F863A8 /* NSScreen+DirectDisplayID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8DCAF4224376BB00F863A8 /* NSScreen+DirectDisplayID.swift */; };
 		0B94455C222815EC0058D5DD /* VideoOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B944559222815EC0058D5DD /* VideoOptionViewController.swift */; };
 		0B94455D222815EC0058D5DD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B94455A222815EC0058D5DD /* LoadingViewController.swift */; };
 		0BAACBAA223266DB00405ABF /* AboutWindowFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */; };
@@ -168,6 +170,8 @@
 		0B8DCAEC2242944100F863A8 /* AVPlayerView+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerView+AspectRatio.swift"; sourceTree = "<group>"; };
 		0B8DCAEE2242954800F863A8 /* NSTextField+Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Number.swift"; sourceTree = "<group>"; };
 		0B8DCAF02242A23700F863A8 /* AVPlayerItem+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+Export.swift"; sourceTree = "<group>"; };
+		0B8DCAF2224376A300F863A8 /* CutoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutoutView.swift; sourceTree = "<group>"; };
+		0B8DCAF4224376BB00F863A8 /* NSScreen+DirectDisplayID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+DirectDisplayID.swift"; sourceTree = "<group>"; };
 		0B944559222815EC0058D5DD /* VideoOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoOptionViewController.swift; sourceTree = "<group>"; };
 		0B94455A222815EC0058D5DD /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		0BAACBA9223266DB00405ABF /* AboutWindowFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AboutWindowFramework.framework; path = Carthage/Build/Mac/AboutWindowFramework.framework; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 				0B64CD922218DA3F004F6321 /* DirectoryHandler.swift */,
 				0B4E8125223BFBDD00247B63 /* NotificationNames.swift */,
 				0B8DCAEE2242954800F863A8 /* NSTextField+Number.swift */,
+				0B8DCAF4224376BB00F863A8 /* NSScreen+DirectDisplayID.swift */,
 				0B64CD9B2218DE1B004F6321 /* Result.swift */,
 				0B64CD942218DA7D004F6321 /* StringExtension.swift */,
 				0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */,
@@ -409,6 +414,7 @@
 				0B64CD882218C936004F6321 /* RecordingButton.swift */,
 				0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */,
 				0BD7502E223BA83500FD2567 /* FlatButton.swift */,
+				0B8DCAF2224376A300F863A8 /* CutoutView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -683,6 +689,7 @@
 				0B4E8120223BF62500247B63 /* RecorderError.swift in Sources */,
 				0B64CD852218BE38004F6321 /* CollectionViewDataSource.swift in Sources */,
 				0B4E811C223BF45600247B63 /* ContainerViewControllerDelegate.swift in Sources */,
+				0B8DCAF5224376BB00F863A8 /* NSScreen+DirectDisplayID.swift in Sources */,
 				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
 				0BF2E7F82240D88700A3F64F /* StatusBarItemController.swift in Sources */,
 				0BBE2D07223D3BAA00C174CE /* Action.swift in Sources */,
@@ -703,6 +710,7 @@
 				0B3D7A5B223109CC000F8C85 /* Version+Codable.swift in Sources */,
 				0BF2E7FE2240E8C300A3F64F /* CGRect+Extension.swift in Sources */,
 				0B8DCAED2242944100F863A8 /* AVPlayerView+AspectRatio.swift in Sources */,
+				0B8DCAF3224376A300F863A8 /* CutoutView.swift in Sources */,
 				0BE418C0221AFE9B00B8E85D /* NSViewController+Child.swift in Sources */,
 				0B4309B122198FAA00766DB0 /* PreferencesViewController.swift in Sources */,
 				0BD7501F223AA08000FD2567 /* SelectionHandler.swift in Sources */,
