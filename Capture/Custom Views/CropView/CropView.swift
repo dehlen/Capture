@@ -268,7 +268,7 @@ class CropView: NSView {
     }
 
     private func mouseOnRecordingButton(_ coordinate: NSPoint) -> Bool {
-        if !recordingButton.isHidden && recordingButton.frame.contains(coordinate) {
+        if !recordingButton.isHidden && recordingButton.frame.insetBy(dx: -50, dy: -50).contains(coordinate) {
             return true
         }
 
