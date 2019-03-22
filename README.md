@@ -13,9 +13,9 @@ alt="Capture Screen Video" width="480" border="10" /></a>
 
 ## Caveats
 - Currently only GIF export is allowed
-- Stopping a recording is not possible via a menu item
+- Stopping a recording is not possible via a menu item [👨‍💻 available in develop]
 - There is no way to specify audio sources
-- You can only select an open window. The selected recording frame is not resizable.
+- You can only select an open window. The selected recording frame is not resizable. [👨‍💻 available in develop]
 
 ## Dependencies
 
