@@ -25,7 +25,7 @@ class CropView: NSView {
     private var startingPoint: NSPoint = .zero
 
     private lazy var recordingButton: FlatButton = {
-        let recordingButton = FlatButton(title: "Start Recording", target: self, action: #selector(recordingButtonPressed))
+        let recordingButton = FlatButton(title: "startRecording".localized, target: self, action: #selector(recordingButtonPressed))
         recordingButton.activeBorderColor = .lightGray
         recordingButton.activeButtonColor = .darkGray
         recordingButton.activeTextColor = .lightGray
@@ -37,7 +37,7 @@ class CropView: NSView {
     }()
 
     private lazy var fullscreenButton: FlatButton = {
-        let fullscreenButton = FlatButton(title: "Toggle Fullscreen", target: self, action: #selector(fullscreenButtonPressed))
+        let fullscreenButton = FlatButton(title: "toggleFullscreen".localized, target: self, action: #selector(fullscreenButtonPressed))
         fullscreenButton.activeBorderColor = .lightGray
         fullscreenButton.activeButtonColor = .darkGray
         fullscreenButton.activeTextColor = .lightGray
