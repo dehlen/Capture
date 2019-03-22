@@ -46,17 +46,17 @@ class WindowListViewController: NSViewController {
 
     private func showCutoutWindow(cutout: CGRect) {
         view.window?.orderOut(NSApp)
-
         cutoutWindows.removeAll()
         for screen in NSScreen.screens {
             let fullscreenBounds = CGDisplayBounds(screen.displayID ?? CGMainDisplayID())
-            var cutoutFrame: NSRect = .zero
-            if screen == NSScreen.main {
-                cutoutFrame = cutout
-            }
-            let cutoutWindow = CutoutWindow(contentRect: fullscreenBounds, styleMask: .borderless, backing: .buffered, defer: true, cutout: cutoutFrame, cropViewDelegate: self)
+            let cutoutWindow = CutoutWindow(contentRect: fullscreenBounds,
+                                            styleMask: .borderless,
+                                            backing: .buffered,
+                                            defer: true,
+                                            cropViewDelegate: self)
             if screen == NSScreen.main {
                 cutoutWindow.makeKeyAndOrderFront(NSApp)
+                cutoutWindow.showCrop(at: fullscreenBounds.centerRect(withSize: 500), initial: true)
             } else {
                 cutoutWindow.orderFront(NSApp)
             }
@@ -119,7 +119,7 @@ class WindowListViewController: NSViewController {
             currentRecorder = try recordScreen(
                 destination: videoOutputUrl,
                 displayId: cutoutWindow.directDisplayId,
-                cropRect: cutoutFrame,
+                cropRect: cutoutFrame == .zero ? nil : cutoutFrame,
                 audioDevice: nil
             )
             currentRecorder?.start()
@@ -202,6 +202,9 @@ extension WindowListViewController: CropViewDelegate {
     }
 
     func shouldCancelSelection() {
-        stopSelection()
+        let isRunning = currentRecorder?.session.isRunning ?? false
+        if !isRunning {
+            stopSelection()
+        }
     }
 }
