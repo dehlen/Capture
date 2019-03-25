@@ -7,12 +7,23 @@ class CollectionViewItem: NSCollectionViewItem {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.appIconImageView.alphaValue = 0.5
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        appIconImageView.alphaValue = 0.5
+        view.wantsLayer = true
+    }
+
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        view.layer?.cornerRadius = 10
     }
 
     override var isSelected: Bool {
         willSet {
-            view.layer?.backgroundColor = newValue ? NSColor.blue.cgColor : NSColor.clear.cgColor
+            view.layer?.backgroundColor = newValue ? NSColor.unemphasizedSelectedContentBackgroundColor.cgColor : NSColor.clear.cgColor
         }
     }
 

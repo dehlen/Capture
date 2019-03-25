@@ -10,7 +10,7 @@ class WindowListViewController: NSViewController {
     private var selectedWindow: WindowInfo?
     private var currentRecorder: Recorder?
     private var currentVideoOutputUrl: URL?
-    private var cutoutWindow: CutoutWindow?
+    private var cutoutWindows: [CutoutWindow] = []
 
     private var dataSource = CollectionViewDataSource<WindowInfo>.make(for: []) {
         didSet {
@@ -36,8 +36,6 @@ class WindowListViewController: NSViewController {
 
     private func setupObserver() {
         Current.notificationCenter.addObserver(self, selector: #selector(stopRecording), name: .shouldStopRecording, object: nil)
-        Current.notificationCenter.addObserver(self, selector: #selector(recordVideo), name: .shouldStartRecording, object: nil)
-        Current.notificationCenter.addObserver(self, selector: #selector(stopSelection), name: .shouldStopSelection, object: nil)
     }
 
     private func updateSelectedWindow() {
@@ -46,15 +44,46 @@ class WindowListViewController: NSViewController {
         }
     }
 
-    private func showCutoutWindow(contentRect: CGRect, cutout: CGRect) {
+    private func showCutoutWindow(cutout: CGRect) {
         view.window?.orderOut(NSApp)
-        cutoutWindow = CutoutWindow(contentRect: contentRect, styleMask: .borderless, backing: .buffered, defer: true, cutout: cutout)
-        cutoutWindow?.makeKeyAndOrderFront(nil)
+        cutoutWindows.removeAll()
+        for screen in NSScreen.screens {
+            let fullscreenBounds = CGDisplayBounds(screen.displayID ?? CGMainDisplayID())
+            var frame = fullscreenBounds.centerRect(withSize: 500)
+            let cutoutWindow = CutoutWindow(contentRect: fullscreenBounds,
+                                            styleMask: .borderless,
+                                            backing: .buffered,
+                                            defer: true,
+                                            cropViewDelegate: self)
+            if let selectedWindow = selectedWindow {
+                if screen.displayID == selectedWindow.directDisplayID {
+                    frame = selectedWindow.frame
+                    cutoutWindow.makeKeyAndOrderFront(NSApp)
+                    cutoutWindow.showCrop(at: frame, initial: true)
+                } else {
+                    cutoutWindow.orderFront(NSApp)
+                }
+            } else if screen == NSScreen.main {
+                cutoutWindow.makeKeyAndOrderFront(NSApp)
+                cutoutWindow.showCrop(at: frame, initial: true)
+            } else {
+                cutoutWindow.orderFront(NSApp)
+            }
+            cutoutWindows.append(cutoutWindow)
+        }
+    }
+
+    private func closeCutoutWindow(_ cutoutWindow: CutoutWindow) {
+        let old_isReleasedWhenClosed = cutoutWindow.isReleasedWhenClosed
+        cutoutWindow.isReleasedWhenClosed = false
+        cutoutWindow.close()
+        cutoutWindow.isReleasedWhenClosed = old_isReleasedWhenClosed
     }
 
     private func showWindowList() {
-        cutoutWindow?.orderOut(nil)
-        cutoutWindow = nil
+        for window in cutoutWindows {
+            closeCutoutWindow(window)
+        }
         view.window?.makeKeyAndOrderFront(NSApp)
     }
 
@@ -71,15 +100,14 @@ class WindowListViewController: NSViewController {
 
         updateSelectedWindow()
 
-        var fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
+        let fullScreenBounds = CGDisplayBounds(CGMainDisplayID())
         var frame = fullScreenBounds.centerRect(withSize: 500)
         if let selectedWindow = self.selectedWindow, let selectedWindowId = selectedWindow.id {
             frame = selectedWindow.frame
-            fullScreenBounds = CGDisplayBounds(selectedWindow.directDisplayID)
             WindowInfoManager.switchToApp(withWindowId: selectedWindowId)
         }
 
-        showCutoutWindow(contentRect: fullScreenBounds, cutout: frame)
+        showCutoutWindow(cutout: frame)
         statusBarItemController.addStopRecordingItem()
     }
 
@@ -89,9 +117,9 @@ class WindowListViewController: NSViewController {
         deselectWindows()
     }
 
-    @objc private func recordVideo() {
-        guard let cutoutWindow = self.cutoutWindow else { return }
+    @objc private func recordVideo(in cutoutWindow: CutoutWindow) {
         let cutoutFrame = cutoutWindow.cutoutFrame
+        cutoutWindows.filter { $0 != cutoutWindow}.forEach { closeCutoutWindow($0) }
         cutoutWindow.recordingStarted()
 
         do {
@@ -100,7 +128,7 @@ class WindowListViewController: NSViewController {
             currentRecorder = try recordScreen(
                 destination: videoOutputUrl,
                 displayId: cutoutWindow.directDisplayId,
-                cropRect: cutoutFrame,
+                cropRect: cutoutFrame == .zero ? nil : cutoutFrame,
                 audioDevice: nil
             )
             currentRecorder?.start()
@@ -170,5 +198,22 @@ extension WindowListViewController: NSCollectionViewDelegate {
 
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
         deselectWindows()
+    }
+}
+
+extension WindowListViewController: CropViewDelegate {
+    func shouldStartRecording(cutoutWindow: CutoutWindow) {
+        recordVideo(in: cutoutWindow)
+    }
+
+    func didSelectNewCropView(on cutoutWindow: CutoutWindow) {
+        cutoutWindows.filter { $0 != cutoutWindow }.forEach { $0.cancel() }
+    }
+
+    func shouldCancelSelection() {
+        let isRunning = currentRecorder?.session.isRunning ?? false
+        if !isRunning {
+            stopSelection()
+        }
     }
 }

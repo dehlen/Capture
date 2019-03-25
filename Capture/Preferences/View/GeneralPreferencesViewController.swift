@@ -8,6 +8,7 @@ class GeneralPreferencesViewController: PreferencesViewController {
     // MARK: - Properties
     @IBOutlet private weak var stopRecordingShortcutRecordView: RecordView!
     @IBOutlet private weak var updateActivityIndicator: NSProgressIndicator!
+    @IBOutlet private weak var pathControl: NSPathControl!
 
     // MARK: - Initialize
     override func loadView() {
@@ -16,6 +17,12 @@ class GeneralPreferencesViewController: PreferencesViewController {
         stopRecordingShortcutRecordView.delegate = self
         setupColors()
         prepareHotKeys()
+        setupPathControl()
+    }
+
+    private func setupPathControl() {
+        let currentExportFolder = DirectoryHandler.exportFolder
+        pathControl.url = currentExportFolder
     }
 
     // MARK: - Actions
@@ -41,6 +48,16 @@ class GeneralPreferencesViewController: PreferencesViewController {
             sender.isEnabled = true
         }
     }
+
+    @IBAction func chooseDirectory(_ sender: Any) {
+        SandboxDirectoryAccess.shared.openFolderSelection(then: { url in
+            if let url = url {
+                self.pathControl.url = url
+                SandboxDirectoryAccess.shared.saveBookmarksData()
+                Current.defaults[.exportUrl] = url.standardizedFileURL.path
+            }
+        })
+    }
 }
 
 // MARK: - Shortcut
@@ -51,7 +68,6 @@ private extension GeneralPreferencesViewController {
         stopRecordingShortcutRecordView.borderColor = NSColor(white: 0.27, alpha: 1.0)
         stopRecordingShortcutRecordView.borderWidth = 1
         stopRecordingShortcutRecordView.cornerRadius = 17
-
     }
 
     func prepareHotKeys() {

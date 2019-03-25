@@ -132,11 +132,11 @@ extension VideoPlayerViewController {
 
     private func convertVideoToGif(progressHandler: @escaping ProgressHandler, then handler: @escaping URLHandler) {
         guard let trimmedVideoOutputUrl = trimmedOutputUrl else { return }
-        guard let exportFolderUrl = DirectoryHandler.exportFolder else { return }
         guard let asset = playerView.player?.currentItem?.asset else {
             handler(.failure(GifConversionError.missingAsset))
             return
         }
+        let exportFolderUrl = DirectoryHandler.exportFolder
 
         DispatchQueue.main.async {
             let gifOutputUrl = exportFolderUrl.appendingPathComponent(trimmedVideoOutputUrl.path.fileName.gif)

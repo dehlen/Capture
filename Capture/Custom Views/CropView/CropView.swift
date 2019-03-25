@@ -2,7 +2,11 @@ import Cocoa
 import QuartzCore
 import Carbon.HIToolbox
 
+//swiftlint:disable:next type_body_length
 class CropView: NSView {
+    weak var delegate: CropViewDelegate?
+    var isInFullscreen = false
+
     private let selectionBox = SelectionBox()
     private let selectionHandlers = [SelectionHandler(), SelectionHandler(), SelectionHandler(), SelectionHandler()]
     private let overlayBox = OverlayBox()
@@ -10,12 +14,19 @@ class CropView: NSView {
     private var selectionIsActive = false
     private var selectionResizingIsActive = -1
     private var selectionMovingIsActive = false
-
-    private(set) var cropBox: NSRect = .zero
+    private var previousCropBox: NSRect = .zero
+    private(set) var cropBox: NSRect = .zero {
+        didSet {
+            if oldValue == .zero && cropBox != .zero {
+                guard let cutoutWindow = window as? CutoutWindow else { return }
+                delegate?.didSelectNewCropView(on: cutoutWindow)
+            }
+        }
+    }
     private var startingPoint: NSPoint = .zero
 
     private lazy var recordingButton: FlatButton = {
-        let recordingButton = FlatButton(title: "Start Recording", target: self, action: #selector(recordingButtonPressed))
+        let recordingButton = FlatButton(title: "startRecording".localized, target: self, action: #selector(recordingButtonPressed))
         recordingButton.activeBorderColor = .lightGray
         recordingButton.activeButtonColor = .darkGray
         recordingButton.activeTextColor = .lightGray
@@ -26,37 +37,69 @@ class CropView: NSView {
         return recordingButton
     }()
 
+    private lazy var fullscreenButton: FlatButton = {
+        let fullscreenButton = FlatButton(title: "toggleFullscreen".localized, target: self, action: #selector(fullscreenButtonPressed))
+        fullscreenButton.activeBorderColor = .lightGray
+        fullscreenButton.activeButtonColor = .darkGray
+        fullscreenButton.activeTextColor = .lightGray
+        fullscreenButton.borderColor = .white
+        fullscreenButton.buttonColor = .darkGray
+        fullscreenButton.textColor = .white
+        fullscreenButton.cornerRadius = fullscreenButton.frame.height / 2
+        return fullscreenButton
+    }()
+
+    private lazy var buttonStackView: NSStackView = {
+        let stackView = NSStackView(views: [recordingButton, fullscreenButton])
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        stackView.orientation = .vertical
+        return stackView
+    }()
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
 
         clearCropBox()
         registerKeyEvents()
-        addRecordingButton()
+        addButtons()
     }
 
     required init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func showCrop(at frame: NSRect) {
+    func showCrop(at frame: NSRect, initial: Bool) {
         DispatchQueue.main.async {
-            self.clickDown(at: frame.origin)
-            self.move(to: frame.origin)
-            self.clickUp()
-            self.clickDown(at: frame.origin)
-            self.selectionResizingIsActive = 2
-            self.move(to: NSPoint(x: frame.origin.x + frame.size.width, y: frame.origin.y + frame.size.height))
-            self.clickUp()
+            if initial {
+                self.initializeCropBox(coordinate: frame.origin)
+            }
+            self.cropBox = frame
+            self.updateCropBox()
         }
     }
 
-    private func addRecordingButton() {
-        recordingButton.isHidden = true
-        addSubview(recordingButton)
+    private func addButtons() {
+        buttonStackView.isHidden = true
+        addSubview(buttonStackView)
     }
 
     @objc func recordingButtonPressed() {
-        Current.notificationCenter.post(name: .shouldStartRecording, object: nil)
+        guard let cutoutWindow = window as? CutoutWindow else { return }
+        delegate?.shouldStartRecording(cutoutWindow: cutoutWindow)
+    }
+
+    @objc func fullscreenButtonPressed() {
+        guard let window = window else { return }
+        isInFullscreen.toggle()
+        if isInFullscreen {
+            fullscreenButton.textColor = NSColor.controlAccentColor
+            previousCropBox = cropBox
+            showCrop(at: window.frame, initial: false)
+        } else {
+            fullscreenButton.textColor = NSColor.white
+            showCrop(at: previousCropBox, initial: false)
+        }
     }
 
     private func registerKeyEvents() {
@@ -70,23 +113,16 @@ class CropView: NSView {
         switch Int(event.keyCode) {
         case kVK_Escape:
             stop()
-        case kVK_Space:
-            selectFullScreen()
         default:
             super.keyDown(with: event)
         }
     }
 
-    private func selectFullScreen() {
-        guard let fullScreenFrame = window?.frame else { return }
-        showCrop(at: fullScreenFrame)
-    }
-
     private func stop() {
-        Current.notificationCenter.post(name: .shouldStopSelection, object: nil)
+        delegate?.shouldCancelSelection()
     }
 
-    private func cancel() {
+    func cancel() {
         clearCropBox()
         selectionIsActive = false
         updateCropBox()
@@ -101,7 +137,7 @@ class CropView: NSView {
     }
 
     private func clickDown(at coordinate: NSPoint) {
-        if mouseOnRecordingButton(coordinate) {
+        if mouseOnButtons(coordinate) {
             return
         }
         if selectionIsActive {
@@ -162,19 +198,23 @@ class CropView: NSView {
             cropBox.origin = startingPoint
             startingPoint = coordinate
         } else {
-            selectionIsActive = true
-            spanCropBox(startingPoint, endPoint: coordinate)
-            layer?.insertSublayer(overlayBox, below: recordingButton.layer)
-            layer?.addSublayer(selectionBox)
-            selectionBox.initializeAnimation()
-
-            layer?.addSublayer(selectionHandlers[0])
-            layer?.addSublayer(selectionHandlers[1])
-            layer?.addSublayer(selectionHandlers[2])
-            layer?.addSublayer(selectionHandlers[3])
+            initializeCropBox(coordinate: coordinate)
         }
 
         updateCropBox()
+    }
+
+    private func initializeCropBox(coordinate: NSPoint) {
+        selectionIsActive = true
+        spanCropBox(startingPoint, endPoint: coordinate)
+        layer?.insertSublayer(overlayBox, below: buttonStackView.layer)
+        layer?.addSublayer(selectionBox)
+        selectionBox.initializeAnimation()
+
+        layer?.addSublayer(selectionHandlers[0])
+        layer?.addSublayer(selectionHandlers[1])
+        layer?.addSublayer(selectionHandlers[2])
+        layer?.addSublayer(selectionHandlers[3])
     }
 
     override func mouseUp(with theEvent: NSEvent) {
@@ -204,7 +244,7 @@ class CropView: NSView {
 
         cropBox = .zero
         selectionIsActive = false
-        recordingButton.isHidden = true
+        buttonStackView.isHidden = true
     }
 
     private func updateSelectionBox() {
@@ -231,19 +271,19 @@ class CropView: NSView {
         selectionHandlers[2].location = cropBox.topRight()
         selectionHandlers[3].location = cropBox.topLeft()
 
-        positionRecordingButton()
+        positionButtons()
     }
 
-    private func positionRecordingButton() {
-        recordingButton.isHidden = false
+    private func positionButtons() {
+        buttonStackView.isHidden = false
 
-        if cropBox.width < recordingButton.frame.width || cropBox.height < recordingButton.frame.height {
-            recordingButton.frame.origin.x = cropBox.midX - recordingButton.frame.width / 2
-            recordingButton.frame.origin.y = cropBox.minY - recordingButton.frame.height - 10
+        if cropBox.width < buttonStackView.frame.width || cropBox.height < buttonStackView.frame.height {
+            buttonStackView.frame.origin.x = cropBox.midX - buttonStackView.frame.width / 2
+            buttonStackView.frame.origin.y = cropBox.minY - buttonStackView.frame.height - 10
 
         } else {
-            recordingButton.frame.origin.x = cropBox.midX - recordingButton.frame.width / 2
-            recordingButton.frame.origin.y = cropBox.midY - recordingButton.frame.height / 2
+            buttonStackView.frame.origin.x = cropBox.midX - buttonStackView.frame.width / 2
+            buttonStackView.frame.origin.y = cropBox.midY - buttonStackView.frame.height / 2
         }
     }
 
@@ -267,8 +307,8 @@ class CropView: NSView {
         return false
     }
 
-    private func mouseOnRecordingButton(_ coordinate: NSPoint) -> Bool {
-        if !recordingButton.isHidden && recordingButton.frame.insetBy(dx: -50, dy: -50).contains(coordinate) {
+    private func mouseOnButtons(_ coordinate: NSPoint) -> Bool {
+        if !buttonStackView.isHidden && buttonStackView.frame.insetBy(dx: -50, dy: -50).contains(coordinate) {
             return true
         }
 

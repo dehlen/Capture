@@ -29,3 +29,5 @@
 "openSystemSettings" = "Open System Settings";
 "missingAsset" = "The recorded video could not be exported to a GIF. Please try again.";
 "unknown" = "Reason unknown";
+"startRecording" = "Start Recording";
+"toggleFullscreen" = "Toggle Fullscreen";
