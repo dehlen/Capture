@@ -32,11 +32,7 @@ class VideoPlayerViewController: NSViewController {
     @IBOutlet private weak var fpsSegmentedControl: NSSegmentedControl!
 
     static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        guard let viewController = storyboard.instantiateController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController else {
-            fatalError("Could not instantiate VideoPlayerViewController")
-        }
-
+        let viewController = VideoPlayerViewController(nibName: nil, bundle: nil)
         viewController.videoUrl = videoUrl
         viewController.delegate = delegate
         return viewController
