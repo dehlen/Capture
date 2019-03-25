@@ -24,7 +24,8 @@ class CropView: NSView {
         }
     }
     private var startingPoint: NSPoint = .zero
-
+    private var eventMonitor: Any?
+    
     private lazy var recordingButton: FlatButton = {
         let recordingButton = FlatButton(title: "startRecording".localized, target: self, action: #selector(recordingButtonPressed))
         recordingButton.activeBorderColor = .lightGray
@@ -103,7 +104,7 @@ class CropView: NSView {
     }
 
     private func registerKeyEvents() {
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+        eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
         }
@@ -119,7 +120,14 @@ class CropView: NSView {
     }
 
     private func stop() {
+        removeEventMonitor()
         delegate?.shouldCancelSelection()
+    }
+
+    private func removeEventMonitor() {
+        if let eventMonitor = eventMonitor {
+            NSEvent.removeMonitor(eventMonitor)
+        }
     }
 
     func cancel() {
