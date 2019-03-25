@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if flag {
             return false
         } else {
-            sender.windows.first?.orderFront(sender)
+            sender.windows.first?.makeKeyAndOrderFront(sender)
             return true
         }
     }
