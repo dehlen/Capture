@@ -9,10 +9,7 @@ class FinishViewController: NSViewController {
     @IBOutlet private weak var imageView: NSImageView!
 
     static func create(state: FinishState) -> FinishViewController {
-        guard let viewController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "FinishViewController") as? FinishViewController else {
-                fatalError("Could not instantiate FinishViewController")
-        }
+        let viewController = FinishViewController(nibName: nil, bundle: nil)
         viewController.state = state
         return viewController
     }
