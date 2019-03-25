@@ -25,7 +25,7 @@ class CropView: NSView {
     }
     private var startingPoint: NSPoint = .zero
     private var eventMonitor: Any?
-    
+
     private lazy var recordingButton: FlatButton = {
         let recordingButton = FlatButton(title: "startRecording".localized, target: self, action: #selector(recordingButtonPressed))
         recordingButton.activeBorderColor = .lightGray
