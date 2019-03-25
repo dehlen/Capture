@@ -49,14 +49,23 @@ class WindowListViewController: NSViewController {
         cutoutWindows.removeAll()
         for screen in NSScreen.screens {
             let fullscreenBounds = CGDisplayBounds(screen.displayID ?? CGMainDisplayID())
+            var frame = fullscreenBounds.centerRect(withSize: 500)
             let cutoutWindow = CutoutWindow(contentRect: fullscreenBounds,
                                             styleMask: .borderless,
                                             backing: .buffered,
                                             defer: true,
                                             cropViewDelegate: self)
-            if screen == NSScreen.main {
+            if let selectedWindow = selectedWindow {
+                if screen.displayID == selectedWindow.directDisplayID {
+                    frame = selectedWindow.frame
+                    cutoutWindow.makeKeyAndOrderFront(NSApp)
+                    cutoutWindow.showCrop(at: frame, initial: true)
+                } else {
+                    cutoutWindow.orderFront(NSApp)
+                }
+            } else if screen == NSScreen.main {
                 cutoutWindow.makeKeyAndOrderFront(NSApp)
-                cutoutWindow.showCrop(at: fullscreenBounds.centerRect(withSize: 500), initial: true)
+                cutoutWindow.showCrop(at: frame, initial: true)
             } else {
                 cutoutWindow.orderFront(NSApp)
             }
