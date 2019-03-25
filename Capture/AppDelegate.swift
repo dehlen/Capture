@@ -46,6 +46,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         openExportWindow(file: url)
         return true
     }
+
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if flag {
+            return false
+        } else {
+            sender.windows.first?.orderFront(sender)
+            return true
+        }
+    }
 }
 
 // MARK: - Actions
