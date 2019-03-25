@@ -2,6 +2,7 @@ import Cocoa
 import QuartzCore
 import Carbon.HIToolbox
 
+//swiftlint:disable:next type_body_length
 class CropView: NSView {
     weak var delegate: CropViewDelegate?
     var isInFullscreen = false
@@ -75,14 +76,6 @@ class CropView: NSView {
             }
             self.cropBox = frame
             self.updateCropBox()
-//            self.clickDown(at: frame.origin)
-//            self.move(to: frame.origin)
-//            self.clickUp()
-//            self.clickDown(at: frame.origin)
-//            self.selectionResizingIsActive = 2
-//            self.move(to: NSPoint(x: frame.origin.x + frame.size.width, y: frame.origin.y + frame.size.height))
-//            self.clickUp()
-
         }
     }
 
