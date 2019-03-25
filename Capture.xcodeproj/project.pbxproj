@@ -13,9 +13,6 @@
 		0B3276CA2219D9410028F007 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */; };
 		0B3276CC2219DAA30028F007 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CB2219DAA30028F007 /* Preferences.swift */; };
 		0B3276D02219E6810028F007 /* GeneralPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276CF2219E6810028F007 /* GeneralPreferencesViewController.swift */; };
-		0B3276D32219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */; };
-		0B3276D52219F0E10028F007 /* PopUpButtonLikePathControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */; };
-		0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3276DA2219F7360028F007 /* ValueTransformerFactory.swift */; };
 		0B3D7A51223108DF000F8C85 /* AppUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D7A50223108DF000F8C85 /* AppUpdater.swift */; };
 		0B3D7A5322310967000F8C85 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3D7A5222310967000F8C85 /* PromiseKit.framework */; };
 		0B3D7A5A223109CC000F8C85 /* Version+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3D7A55223109CC000F8C85 /* Version+Foundation.swift */; };
@@ -81,6 +78,7 @@
 		0BAACBAE2232670700405ABF /* EULA.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0BAACBAC2232670700405ABF /* EULA.rtf */; };
 		0BBE2D05223D383C00C174CE /* AccessibilityPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBE2D04223D383C00C174CE /* AccessibilityPermission.swift */; };
 		0BBE2D07223D3BAA00C174CE /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBE2D06223D3BAA00C174CE /* Action.swift */; };
+		0BC6006422463EAA00BDB810 /* SandboxDirectoryAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6006322463EAA00BDB810 /* SandboxDirectoryAccess.swift */; };
 		0BD239ED2219A45D003AF068 /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */; };
 		0BD239EF2219A477003AF068 /* ErrorMessageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */; };
 		0BD7501C223AA08000FD2567 /* Cursors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD75014223AA08000FD2567 /* Cursors.swift */; };
@@ -113,9 +111,6 @@
 		0B3276CB2219DAA30028F007 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0B3276CF2219E6810028F007 /* GeneralPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesViewController.swift; sourceTree = "<group>"; };
 		0B3276D12219E94C0028F007 /* Capture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Capture.entitlements; sourceTree = "<group>"; };
-		0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathFromFilePathOrURLTransformer.swift; sourceTree = "<group>"; };
-		0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpButtonLikePathControl.swift; sourceTree = "<group>"; };
-		0B3276DA2219F7360028F007 /* ValueTransformerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformerFactory.swift; sourceTree = "<group>"; };
 		0B3D7A50223108DF000F8C85 /* AppUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdater.swift; sourceTree = "<group>"; };
 		0B3D7A5222310967000F8C85 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		0B3D7A55223109CC000F8C85 /* Version+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Version+Foundation.swift"; sourceTree = "<group>"; };
@@ -181,6 +176,7 @@
 		0BAACBAC2232670700405ABF /* EULA.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = EULA.rtf; sourceTree = "<group>"; };
 		0BBE2D04223D383C00C174CE /* AccessibilityPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPermission.swift; sourceTree = "<group>"; };
 		0BBE2D06223D3BAA00C174CE /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		0BC6006322463EAA00BDB810 /* SandboxDirectoryAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxDirectoryAccess.swift; sourceTree = "<group>"; };
 		0BD239E822199E09003AF068 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = System/Library/Frameworks/Automator.framework; sourceTree = SDKROOT; };
 		0BD239EC2219A45D003AF068 /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		0BD239EE2219A477003AF068 /* ErrorMessageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageProvider.swift; sourceTree = "<group>"; };
@@ -378,24 +374,15 @@
 				0B3276C92219D9410028F007 /* UserDefaultsExtension.swift */,
 				0B64CD902218D9E1004F6321 /* World.swift */,
 				0BC8320B221A087700FD8CF4 /* Error */,
-				0BC8320A221A086E00FD8CF4 /* ValueTransformer */,
 				0B581A29222199EA006EF012 /* HotKeyService.swift */,
 				0B581A2B22219B1E006EF012 /* HotKeyType.swift */,
 				0B581A2D22219C6A006EF012 /* NSCoding+Archive.swift */,
 				0B3151872227C52500025C6B /* OSLog+Definitions.swift */,
 				0B4E8123223BF67800247B63 /* NSImage+CGWindowID.swift */,
 				0BBE2D04223D383C00C174CE /* AccessibilityPermission.swift */,
+				0BC6006322463EAA00BDB810 /* SandboxDirectoryAccess.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		0BC8320A221A086E00FD8CF4 /* ValueTransformer */ = {
-			isa = PBXGroup;
-			children = (
-				0B3276D22219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift */,
-				0B3276DA2219F7360028F007 /* ValueTransformerFactory.swift */,
-			);
-			path = ValueTransformer;
 			sourceTree = "<group>";
 		};
 		0BC8320B221A087700FD8CF4 /* Error */ = {
@@ -414,7 +401,6 @@
 				0BE418BF221AFE9B00B8E85D /* NSViewController+Child.swift */,
 				0B202B20221B263800435657 /* NSView+Animation.swift */,
 				0B64CD882218C936004F6321 /* RecordingButton.swift */,
-				0B3276D42219F0E10028F007 /* PopUpButtonLikePathControl.swift */,
 				0BD7502E223BA83500FD2567 /* FlatButton.swift */,
 				0B8DCAF2224376A300F863A8 /* CutoutView.swift */,
 			);
@@ -543,8 +529,11 @@
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
 						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -646,15 +635,14 @@
 				0B64CD812218BD00004F6321 /* CollectionViewLayoutFactory.swift in Sources */,
 				0B4309A7221916C500766DB0 /* VideoPlayerViewController.swift in Sources */,
 				0B8DCAF12242A23700F863A8 /* AVPlayerItem+Export.swift in Sources */,
+				0BC6006422463EAA00BDB810 /* SandboxDirectoryAccess.swift in Sources */,
 				0B3D7A6E223109DD000F8C85 /* Path+FileManager.swift in Sources */,
 				0B4309A9221926C500766DB0 /* BundleExtension.swift in Sources */,
-				0B3276D32219F01F0028F007 /* PathFromFilePathOrURLTransformer.swift in Sources */,
 				0BD239EF2219A477003AF068 /* ErrorMessageProvider.swift in Sources */,
 				0B64CD832218BD51004F6321 /* WindowListViewModel.swift in Sources */,
 				0B64CD932218DA3F004F6321 /* DirectoryHandler.swift in Sources */,
 				0B3D7A5C223109CC000F8C85 /* Version.swift in Sources */,
 				0B4E8126223BFBDD00247B63 /* NotificationNames.swift in Sources */,
-				0B3276D52219F0E10028F007 /* PopUpButtonLikePathControl.swift in Sources */,
 				6BE514A52126A2410068337E /* AppDelegate.swift in Sources */,
 				0B64CD9C2218DE1B004F6321 /* Result.swift in Sources */,
 				0B3D7A6B223109DD000F8C85 /* Path+ls.swift in Sources */,
@@ -694,7 +682,6 @@
 				0B64CD852218BE38004F6321 /* CollectionViewDataSource.swift in Sources */,
 				0B4E811C223BF45600247B63 /* ContainerViewControllerDelegate.swift in Sources */,
 				0B8DCAF5224376BB00F863A8 /* NSScreen+DirectDisplayID.swift in Sources */,
-				0B3276DB2219F7360028F007 /* ValueTransformerFactory.swift in Sources */,
 				0BF2E7F82240D88700A3F64F /* StatusBarItemController.swift in Sources */,
 				0BBE2D07223D3BAA00C174CE /* Action.swift in Sources */,
 				0B64CD952218DA7D004F6321 /* StringExtension.swift in Sources */,
@@ -858,10 +845,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Capture/Capture.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = UQGQH2VG43;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -883,10 +872,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Capture/Capture.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = UQGQH2VG43;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",

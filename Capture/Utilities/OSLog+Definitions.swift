@@ -12,4 +12,5 @@ extension OSLog {
     static let gifExport = OSLog(subsystem: subsystem, category: "GIFExport")
     static let videoRecorder = OSLog(subsystem: subsystem, category: "VideoRecorder")
     static let windowHandling = OSLog(subsystem: subsystem, category: "WindowHandling")
+    static let sandbox = OSLog(subsystem: subsystem, category: "Sandbox")
 }

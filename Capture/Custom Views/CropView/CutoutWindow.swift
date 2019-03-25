@@ -1,7 +1,7 @@
 import AppKit
 
 class CutoutWindow: NSWindow {
-    private weak var cropView: CropView?
+    private var cropView: CropView?
 
     convenience init(contentRect: NSRect,
                      styleMask style: NSWindow.StyleMask,

@@ -31,8 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         os_log(.info, log: .app, "Application did finish launching")
+        SandboxDirectoryAccess.shared.loadBookmarks()
         setupPreferenceDefaults()
-        ValueTransformerFactory.registerAll()
         Current.hotKeyService.setupDefaultHotKeys()
     }
 
@@ -77,13 +77,12 @@ extension AppDelegate {
     private func setupPreferenceDefaults() {
         os_log(.info, log: .app, "Setting preference defaults")
         Current.defaults.register(defaults: [
-            .exportUrl: DirectoryHandler.desktopUrl!.path,
             .movieQuality: AVAssetExportPresetAppleM4V480pSD,
             .selectedFramerateIndex: 1,
             .showMouseCursor: true,
             .showMouseClicks: true,
             .saveVideo: true
-            ])
+        ])
 
         let keyCombo = KeyCombo(keyCode: 15, carbonModifiers: 4352)
         if let data = keyCombo?.archive() {
