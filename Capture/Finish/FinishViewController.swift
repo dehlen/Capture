@@ -28,7 +28,9 @@ class FinishViewController: NSViewController {
             imageView.image = NSImage(imageLiteralResourceName: "failure")
         case .success(let url):
             revealInFinderButton.isHidden = false
-            messageLabel.stringValue = String(format: "successMessage".localized, url?.path ?? "")
+            var path = url?.standardizedFileURL.path ?? "~/Downloads/Capture"
+            path = (path as NSString).abbreviatingWithTildeInPath
+            messageLabel.stringValue = String(format: "successMessage".localized, path)
             imageView.image = NSImage(imageLiteralResourceName: "success")
         }
     }
