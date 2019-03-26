@@ -72,7 +72,9 @@ extension AppDelegate {
 
     @IBAction private func openVideo(_ sender: Any) {
         Alerts.showOpenDialog { (result) in
-            openExportWindow(file: result)
+            let temporaryFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(result.path.fileNameWithExtension)
+            DirectoryHandler.copy(from: result, to: temporaryFileUrl)
+            openExportWindow(file: temporaryFileUrl)
         }
     }
 }
@@ -80,8 +82,6 @@ extension AppDelegate {
 // MARK: - Functions
 extension AppDelegate {
     private func openExportWindow(file: URL) {
-        let temporaryFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(file.path.fileNameWithExtension)
-        DirectoryHandler.copy(from: file, to: temporaryFileUrl)
         let containerViewController = ContainerViewController.create(videoUrl: file)
         let window = NSWindow(contentViewController: containerViewController)
         window.makeKeyAndOrderFront(NSApp)
