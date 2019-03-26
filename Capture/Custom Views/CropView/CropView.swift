@@ -105,17 +105,22 @@ class CropView: NSView {
 
     private func registerKeyEvents() {
         eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            self.keyDown(with: $0)
-            return $0
+            if self.keyDown(with: $0) {
+                return nil
+            } else {
+                return $0
+            }
         }
     }
 
-    override func keyDown(with event: NSEvent) {
+    func keyDown(with event: NSEvent) -> Bool {
         switch Int(event.keyCode) {
         case kVK_Escape:
             stop()
+            return true
         default:
             super.keyDown(with: event)
+            return false
         }
     }
 
@@ -168,7 +173,6 @@ class CropView: NSView {
     override func mouseDragged(with theEvent: NSEvent) {
         var coordinate = self.convert(theEvent.locationInWindow, from: nil)
         coordinate.constraintToRect(frame)
-
         move(to: coordinate)
     }
 
