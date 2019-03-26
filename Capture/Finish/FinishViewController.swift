@@ -9,10 +9,7 @@ class FinishViewController: NSViewController {
     @IBOutlet private weak var imageView: NSImageView!
 
     static func create(state: FinishState) -> FinishViewController {
-        guard let viewController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "FinishViewController") as? FinishViewController else {
-                fatalError("Could not instantiate FinishViewController")
-        }
+        let viewController = FinishViewController(nibName: nil, bundle: nil)
         viewController.state = state
         return viewController
     }
@@ -31,7 +28,9 @@ class FinishViewController: NSViewController {
             imageView.image = NSImage(imageLiteralResourceName: "failure")
         case .success(let url):
             revealInFinderButton.isHidden = false
-            messageLabel.stringValue = String(format: "successMessage".localized, url?.path ?? "")
+            var path = url?.standardizedFileURL.path ?? "~/Downloads/Capture"
+            path = (path as NSString).abbreviatingWithTildeInPath
+            messageLabel.stringValue = String(format: "successMessage".localized, path)
             imageView.image = NSImage(imageLiteralResourceName: "success")
         }
     }

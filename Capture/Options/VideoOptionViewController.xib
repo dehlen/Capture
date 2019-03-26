@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="VideoOptionViewController" customModule="Capture" customModuleProvider="target">
+            <connections>
+                <outlet property="movieQualityPopUpButton" destination="UDK-Md-Udd" id="qMz-Dh-w74"/>
+                <outlet property="view" destination="URD-ag-8f9" id="VvS-30-Izq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="URD-ag-8f9">
+            <rect key="frame" x="0.0" y="0.0" width="450" height="311"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j91-Nl-dSK">
+                    <rect key="frame" x="18" y="275" width="88" height="18"/>
+                    <buttonCell key="cell" type="check" title="Save video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="45c-yY-8Ec">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Fzw-dC-XMF" name="value" keyPath="values.SaveVideo" id="dgJ-vp-qnQ"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="HaW-DB-dgL">
+                    <rect key="frame" x="18" y="167" width="414" height="28"/>
+                    <textFieldCell key="cell" selectable="YES" title="When selected the mouse cursor will be visible in the exported GIF. Else the mouse cursor will be hidden." id="Tnv-yn-zJc">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="SYs-ZZ-bHn">
+                    <rect key="frame" x="18" y="239" width="414" height="28"/>
+                    <textFieldCell key="cell" selectable="YES" id="Dlq-gU-CRQ">
+                        <font key="font" metaFont="smallSystem"/>
+                        <string key="title">When exporting the GIF and saving it to the selected destination the recorded video will also be exported and saved in that location.</string>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="53n-4H-ja6">
+                    <rect key="frame" x="18" y="203" width="144" height="18"/>
+                    <buttonCell key="cell" type="check" title="Show Mouse Cursor" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rYB-QC-AFe">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Fzw-dC-XMF" name="value" keyPath="values.ShowMouseCursor" id="Pue-M4-yPk"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="otG-1s-ltj">
+                    <rect key="frame" x="18" y="95" width="414" height="28"/>
+                    <textFieldCell key="cell" selectable="YES" title="When selected the mouse clicks made during the video will be visible in the exported GIF. Else the clicks will be hidden." id="Cg4-P9-E2S">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wJj-r2-OpF">
+                    <rect key="frame" x="18" y="131" width="140" height="18"/>
+                    <buttonCell key="cell" type="check" title="Show Mouse Clicks" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7iF-oa-cer">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Fzw-dC-XMF" name="value" keyPath="values.ShowMouseClicks" id="Gta-gH-fwZ"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xfv-GP-qTg">
+                    <rect key="frame" x="18" y="58" width="90" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Movie Quality:" id="42y-FW-etG">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UDK-Md-Udd">
+                    <rect key="frame" x="114" y="53" width="93" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="88" placeholder="YES" id="fSe-ge-tkH"/>
+                    </constraints>
+                    <popUpButtonCell key="cell" type="push" title="480p" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Uz9-RI-Byf" id="hXl-NU-a6H">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="aN2-W1-B3A">
+                            <items>
+                                <menuItem title="480p" state="on" id="Uz9-RI-Byf"/>
+                                <menuItem title="720p" id="o2H-nz-Mc1"/>
+                                <menuItem title="1080p" id="8ox-6y-9LF"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="selectMovieQuality:" target="-2" id="56u-2M-vLu"/>
+                    </connections>
+                </popUpButton>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="SsU-9N-Yob">
+                    <rect key="frame" x="18" y="20" width="414" height="28"/>
+                    <textFieldCell key="cell" selectable="YES" title="You can choose the quality wih which the recorded video will be saved. A lower quality will result in a smaller GIF file size" id="F0S-ye-dMv">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="HaW-DB-dgL" secondAttribute="trailing" constant="20" id="0q5-YV-Pbf"/>
+                <constraint firstItem="wJj-r2-OpF" firstAttribute="leading" secondItem="53n-4H-ja6" secondAttribute="leading" id="7fI-w4-zJq"/>
+                <constraint firstItem="SsU-9N-Yob" firstAttribute="leading" secondItem="Xfv-GP-qTg" secondAttribute="leading" id="A9V-h6-cJy"/>
+                <constraint firstItem="HaW-DB-dgL" firstAttribute="leading" secondItem="53n-4H-ja6" secondAttribute="leading" id="C5Z-DO-fXg"/>
+                <constraint firstItem="SsU-9N-Yob" firstAttribute="top" secondItem="Xfv-GP-qTg" secondAttribute="bottom" constant="10" id="EiX-fa-BJZ"/>
+                <constraint firstItem="wJj-r2-OpF" firstAttribute="top" secondItem="HaW-DB-dgL" secondAttribute="bottom" constant="20" id="G6M-9S-8D5"/>
+                <constraint firstItem="SYs-ZZ-bHn" firstAttribute="top" secondItem="j91-Nl-dSK" secondAttribute="bottom" constant="10" id="GcU-f1-o5e"/>
+                <constraint firstItem="j91-Nl-dSK" firstAttribute="leading" secondItem="URD-ag-8f9" secondAttribute="leading" constant="20" id="Hil-It-B7U"/>
+                <constraint firstItem="j91-Nl-dSK" firstAttribute="top" secondItem="URD-ag-8f9" secondAttribute="top" constant="20" id="J73-AZ-xi8"/>
+                <constraint firstItem="otG-1s-ltj" firstAttribute="top" secondItem="wJj-r2-OpF" secondAttribute="bottom" constant="10" id="MV8-cJ-ajX"/>
+                <constraint firstItem="otG-1s-ltj" firstAttribute="leading" secondItem="wJj-r2-OpF" secondAttribute="leading" id="NtS-5f-k35"/>
+                <constraint firstItem="HaW-DB-dgL" firstAttribute="top" secondItem="53n-4H-ja6" secondAttribute="bottom" constant="10" id="Nus-WQ-XSc"/>
+                <constraint firstItem="Xfv-GP-qTg" firstAttribute="leading" secondItem="wJj-r2-OpF" secondAttribute="leading" id="OWl-aT-uRb"/>
+                <constraint firstItem="SYs-ZZ-bHn" firstAttribute="leading" secondItem="j91-Nl-dSK" secondAttribute="leading" id="PlA-PP-LqQ"/>
+                <constraint firstItem="UDK-Md-Udd" firstAttribute="centerY" secondItem="Xfv-GP-qTg" secondAttribute="centerY" id="TKH-uL-K3K"/>
+                <constraint firstAttribute="trailing" secondItem="SsU-9N-Yob" secondAttribute="trailing" constant="20" id="YbG-Oj-sgS"/>
+                <constraint firstItem="53n-4H-ja6" firstAttribute="leading" secondItem="j91-Nl-dSK" secondAttribute="leading" id="ZWd-SN-HlW"/>
+                <constraint firstAttribute="trailing" secondItem="otG-1s-ltj" secondAttribute="trailing" constant="20" id="baQ-Kl-XuR"/>
+                <constraint firstItem="Xfv-GP-qTg" firstAttribute="top" secondItem="otG-1s-ltj" secondAttribute="bottom" constant="20" id="bvg-Ta-iuT"/>
+                <constraint firstItem="53n-4H-ja6" firstAttribute="top" secondItem="SYs-ZZ-bHn" secondAttribute="bottom" constant="20" id="lg5-eK-j8x"/>
+                <constraint firstAttribute="trailing" secondItem="SYs-ZZ-bHn" secondAttribute="trailing" constant="20" id="rgF-KP-DFJ"/>
+                <constraint firstAttribute="bottom" secondItem="SsU-9N-Yob" secondAttribute="bottom" constant="20" id="tOZ-OA-Bvh"/>
+                <constraint firstItem="UDK-Md-Udd" firstAttribute="leading" secondItem="Xfv-GP-qTg" secondAttribute="trailing" constant="10" id="ymU-he-dSV"/>
+            </constraints>
+        </view>
+        <userDefaultsController representsSharedInstance="YES" id="Fzw-dC-XMF"/>
+    </objects>
+</document>

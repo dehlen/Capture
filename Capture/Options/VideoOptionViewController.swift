@@ -5,6 +5,10 @@ import os
 class VideoOptionViewController: NSViewController {
     @IBOutlet private weak var movieQualityPopUpButton: NSPopUpButton!
 
+    static func create() -> VideoOptionViewController {
+        return VideoOptionViewController(nibName: nil, bundle: nil)
+    }
+
     var movieQualityTitle: String {
         let movieQualityString: String = Current.defaults[.movieQuality] ?? "480p"
         switch movieQualityString {

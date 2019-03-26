@@ -32,11 +32,7 @@ class VideoPlayerViewController: NSViewController {
     @IBOutlet private weak var fpsSegmentedControl: NSSegmentedControl!
 
     static func create(with videoUrl: URL?, delegate: ContainerViewControllerDelegate?) -> VideoPlayerViewController {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        guard let viewController = storyboard.instantiateController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController else {
-            fatalError("Could not instantiate VideoPlayerViewController")
-        }
-
+        let viewController = VideoPlayerViewController(nibName: nil, bundle: nil)
         viewController.videoUrl = videoUrl
         viewController.delegate = delegate
         return viewController
@@ -54,6 +50,10 @@ class VideoPlayerViewController: NSViewController {
         loadVideo(at: videoUrl)
         calculateNaturalVideoSize()
         setupUI()
+    }
+
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        return true
     }
 
     private func loadVideo(at videoUrl: URL) {
@@ -118,19 +118,26 @@ extension VideoPlayerViewController {
     @IBAction func export(_ sender: NSButton) {
         sender.isEnabled = false
         delegate?.requestLoadingIndicator()
+        let frameRate = Int(self.fpsSegmentedControl.label(forSegment: self.fpsSegmentedControl.selectedSegment) ?? "30") ?? 30
+        let width = Int(self.widthTextField.stringValue) ?? 0
+        let height = Int(self.heightTextField.stringValue) ?? 480
+
         exportVideo { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let videoUrl):
-                    self.handleSuccessfulExport(with: videoUrl)
-                case .failure(let error):
-                    self.handleExportFailure(with: error)
-                }
+            switch result {
+            case .success(let videoUrl):
+                self.handleSuccessfulExport(with: videoUrl, width: width, height: height, fps: frameRate)
+            case .failure(let error):
+                self.handleExportFailure(with: error)
             }
         }
     }
 
-    private func convertVideoToGif(progressHandler: @escaping ProgressHandler, then handler: @escaping URLHandler) {
+    private func convertVideoToGif(
+        width: Int,
+        height: Int,
+        fps: Int,
+        progressHandler: @escaping ProgressHandler,
+        then handler: @escaping URLHandler) {
         guard let trimmedVideoOutputUrl = trimmedOutputUrl else { return }
         guard let asset = playerView.player?.currentItem?.asset else {
             handler(.failure(GifConversionError.missingAsset))
@@ -138,41 +145,38 @@ extension VideoPlayerViewController {
         }
         let exportFolderUrl = DirectoryHandler.exportFolder
 
-        DispatchQueue.main.async {
-            let gifOutputUrl = exportFolderUrl.appendingPathComponent(trimmedVideoOutputUrl.path.fileName.gif)
-            let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
-            let frameRate = Int(self.fpsSegmentedControl.label(forSegment: self.fpsSegmentedControl.selectedSegment) ?? "30") ?? 30
-            let width = Int(self.widthTextField.stringValue) ?? 0
-            let height = Int(self.heightTextField.stringValue) ?? 480
-            ConvertGif.convert(at: trimmedVideoOutputUrl,
-                               to: gifOutputUrl,
-                               frameRate: frameRate,
-                               width: width,
-                               maximumHeight: height,
-                               duration: duration,
-                               progressHandler: progressHandler) { (result) in
-                                switch result {
-                                case .success:
-                                    handler(.success(gifOutputUrl))
-                                case .failure(let error):
-                                    handler(.failure(error))
-                                }
-            }
+        let gifOutputUrl = exportFolderUrl.appendingPathComponent(trimmedVideoOutputUrl.path.fileName.gif)
+        let duration = Float(asset.duration.value) / Float(asset.duration.timescale)
+        ConvertGif.convert(at: trimmedVideoOutputUrl,
+                           to: gifOutputUrl,
+                           frameRate: fps,
+                           width: width,
+                           maximumHeight: height,
+                           duration: duration,
+                           progressHandler: progressHandler) { (result) in
+                            switch result {
+                            case .success:
+                                handler(.success(gifOutputUrl))
+                            case .failure(let error):
+                                handler(.failure(error))
+                            }
         }
     }
 
-    private func handleSuccessfulExport(with videoUrl: URL) {
+    private func handleSuccessfulExport(with videoUrl: URL, width: Int, height: Int, fps: Int) {
         if Current.defaults[.saveVideo] == true {
             DirectoryHandler.copy(from: videoUrl)
         }
-        self.convertVideoToGif(progressHandler: { (progress) in
+        self.convertVideoToGif(width: width, height: height, fps: fps, progressHandler: { (progress) in
             self.delegate?.exportProgressDidChange(progress: progress)
         }, then: { convertResult in
-            switch convertResult {
-            case .success(let gifOutputUrl):
-                self.handleSuccesfulGifExport(with: gifOutputUrl)
-            case .failure(let error):
-                self.handleGifExportFailure(with: error)
+            DispatchQueue.main.async {
+                switch convertResult {
+                case .success(let gifOutputUrl):
+                    self.handleSuccesfulGifExport(with: gifOutputUrl)
+                case .failure(let error):
+                    self.handleGifExportFailure(with: error)
+                }
             }
         })
     }
@@ -185,12 +189,16 @@ extension VideoPlayerViewController {
 
     private func handleGifExportFailure(with error: Error) {
         let errorMessage = ErrorMessageProvider.string(for: NSError.create(from: error))
-        self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
+        DispatchQueue.main.async {
+            self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
+        }
     }
 
     private func handleExportFailure(with error: Error) {
         let errorMessage = ErrorMessageProvider.string(for: error)
-        self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
+        DispatchQueue.main.async {
+            self.delegate?.requestReplace(new: FinishViewController.create(state: .failure(errorMessage)))
+        }
     }
 }
 

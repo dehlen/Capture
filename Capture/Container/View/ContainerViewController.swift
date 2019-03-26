@@ -3,10 +3,12 @@ import AppKit
 class ContainerViewController: NSViewController {
     var videoUrl: URL?
 
-    @IBOutlet private weak var containerView: NSView!
     private var currentViewController: NSViewController?
     private var loadingViewController: LoadingViewController?
 
+    override func loadView() {
+        view = NSView(frame: NSRect(x: 0, y: 0, width: 500, height: 500))
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,10 +20,7 @@ class ContainerViewController: NSViewController {
     }
 
     static func create(videoUrl: URL) -> ContainerViewController {
-        guard let containerViewController = NSStoryboard.main?.instantiateController(withIdentifier: "ContainerViewController")
-            as? ContainerViewController else {
-            fatalError("Could not create ContainerViewController")
-        }
+        let containerViewController = ContainerViewController()
         containerViewController.videoUrl = videoUrl
         return containerViewController
     }
@@ -37,15 +36,14 @@ class ContainerViewController: NSViewController {
         }
 
         self.currentViewController = currentViewController
-        embed(self.currentViewController!, container: containerView)
+        embed(self.currentViewController!, container: view)
     }
 
     private func addLoadingIndicator() {
-        loadingViewController = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "LoadingViewController") as? LoadingViewController
+        loadingViewController = LoadingViewController.create()
         loadingViewController?.view.wantsLayer = true
         loadingViewController?.view.layer?.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.5).cgColor
-        embed(loadingViewController!, container: containerView)
+        embed(loadingViewController!, container: view)
         loadingViewController?.view.isHidden = true
     }
 }

@@ -185,7 +185,7 @@ extension WindowListViewController {
 
     @IBAction private func showOptions(_ sender: Any) {
         optionsButton.state = .on
-        performSegue(withIdentifier: "showOptionsPopover", sender: nil)
+        present(VideoOptionViewController.create(), asPopoverRelativeTo: optionsButton.frame, of: view, preferredEdge: .minY, behavior: .transient)
     }
 }
 

@@ -43,8 +43,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         let url = URL(fileURLWithPath: filename)
-        openExportWindow(file: url)
+        let fileExtension = url.pathExtension
+        let fileName = url.path.fileName
+        let temporaryFileUrl = DirectoryHandler.temporaryFileUrl(from: fileName, extension: fileExtension)
+        DirectoryHandler.copy(from: url, to: temporaryFileUrl)
+        openExportWindow(file: temporaryFileUrl)
         return true
+    }
+
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if flag {
+            return false
+        } else {
+            sender.windows.first?.makeKeyAndOrderFront(sender)
+            return true
+        }
     }
 }
 
@@ -61,7 +74,12 @@ extension AppDelegate {
 
     @IBAction private func openVideo(_ sender: Any) {
         Alerts.showOpenDialog { (result) in
-            openExportWindow(file: result)
+            let fileExtension = result.pathExtension
+            let fileName = result.path.fileName
+
+            let temporaryFileUrl = DirectoryHandler.temporaryFileUrl(from: fileName, extension: fileExtension)
+            DirectoryHandler.copy(from: result, to: temporaryFileUrl)
+            openExportWindow(file: temporaryFileUrl)
         }
     }
 }

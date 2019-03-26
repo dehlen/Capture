@@ -24,6 +24,7 @@ class CropView: NSView {
         }
     }
     private var startingPoint: NSPoint = .zero
+    private var eventMonitor: Any?
 
     private lazy var recordingButton: FlatButton = {
         let recordingButton = FlatButton(title: "startRecording".localized, target: self, action: #selector(recordingButtonPressed))
@@ -103,23 +104,35 @@ class CropView: NSView {
     }
 
     private func registerKeyEvents() {
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            self.keyDown(with: $0)
-            return $0
+        eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+            if self.keyDown(with: $0) {
+                return nil
+            } else {
+                return $0
+            }
         }
     }
 
-    override func keyDown(with event: NSEvent) {
+    func keyDown(with event: NSEvent) -> Bool {
         switch Int(event.keyCode) {
         case kVK_Escape:
             stop()
+            return true
         default:
             super.keyDown(with: event)
+            return false
         }
     }
 
     private func stop() {
+        removeEventMonitor()
         delegate?.shouldCancelSelection()
+    }
+
+    private func removeEventMonitor() {
+        if let eventMonitor = eventMonitor {
+            NSEvent.removeMonitor(eventMonitor)
+        }
     }
 
     func cancel() {
@@ -160,7 +173,6 @@ class CropView: NSView {
     override func mouseDragged(with theEvent: NSEvent) {
         var coordinate = self.convert(theEvent.locationInWindow, from: nil)
         coordinate.constraintToRect(frame)
-
         move(to: coordinate)
     }
 
