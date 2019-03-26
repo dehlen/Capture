@@ -33,9 +33,10 @@ struct DirectoryHandler {
         }
     }
 
-    static func copy(from videoUrl: URL) {
+    static func copy(from videoUrl: URL, to destination: URL? = nil) {
+        let destinationUrl = destination ?? exportFolder.appendingPathComponent(videoUrl.path.fileName.mov)
         do {
-            try FileManager.default.copyItem(at: videoUrl, to: exportFolder.appendingPathComponent(videoUrl.path.fileName.mov))
+            try FileManager.default.copyItem(at: videoUrl, to: destinationUrl)
         } catch let error {
             os_log(.error, log: .app, "Could not copy file from %{public}@, %{public}@", videoUrl.path, error.localizedDescription)
         }

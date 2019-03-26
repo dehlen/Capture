@@ -43,7 +43,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         let url = URL(fileURLWithPath: filename)
-        openExportWindow(file: url)
+        let temporaryFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(url.path.fileNameWithExtension)
+        DirectoryHandler.copy(from: url, to: temporaryFileUrl)
+        openExportWindow(file: temporaryFileUrl)
         return true
     }
 
@@ -78,6 +80,8 @@ extension AppDelegate {
 // MARK: - Functions
 extension AppDelegate {
     private func openExportWindow(file: URL) {
+        let temporaryFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(file.path.fileNameWithExtension)
+        DirectoryHandler.copy(from: file, to: temporaryFileUrl)
         let containerViewController = ContainerViewController.create(videoUrl: file)
         let window = NSWindow(contentViewController: containerViewController)
         window.makeKeyAndOrderFront(NSApp)
