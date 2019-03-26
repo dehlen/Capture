@@ -43,4 +43,11 @@ struct DirectoryHandler {
             os_log(.error, log: .app, "Could not copy file from %{public}@, %{public}@", videoUrl.path, error.localizedDescription)
         }
     }
+
+    static func temporaryFileUrl(from filename: String, `extension`: String) -> URL {
+        let dateFormatter = Current.dateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH.mm.ss"
+        let timestamp = dateFormatter.string(from: Current.date())
+        return FileManager.default.temporaryDirectory.appendingPathComponent("\(filename) \(timestamp)").appendingPathExtension(`extension`)
+    }
 }

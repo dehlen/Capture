@@ -5,7 +5,6 @@ extension String {
     var gif: String { return "\(self).gif" }
 
     var fileName: String { return URL(fileURLWithPath: self).deletingPathExtension().lastPathComponent }
-    var fileNameWithExtension: String { return URL(fileURLWithPath: self).lastPathComponent }
 
     var isNumeric: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil

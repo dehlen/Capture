@@ -43,7 +43,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         let url = URL(fileURLWithPath: filename)
-        let temporaryFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(url.path.fileNameWithExtension)
+        let fileExtension = url.pathExtension
+        let fileName = url.path.fileName
+        let temporaryFileUrl = DirectoryHandler.temporaryFileUrl(from: fileName, extension: fileExtension)
         DirectoryHandler.copy(from: url, to: temporaryFileUrl)
         openExportWindow(file: temporaryFileUrl)
         return true
@@ -72,7 +74,10 @@ extension AppDelegate {
 
     @IBAction private func openVideo(_ sender: Any) {
         Alerts.showOpenDialog { (result) in
-            let temporaryFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(result.path.fileNameWithExtension)
+            let fileExtension = result.pathExtension
+            let fileName = result.path.fileName
+
+            let temporaryFileUrl = DirectoryHandler.temporaryFileUrl(from: fileName, extension: fileExtension)
             DirectoryHandler.copy(from: result, to: temporaryFileUrl)
             openExportWindow(file: temporaryFileUrl)
         }
