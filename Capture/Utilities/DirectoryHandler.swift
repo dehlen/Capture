@@ -10,7 +10,6 @@ struct DirectoryHandler {
     }
 
     static var exportFolder: URL {
-        #warning("set downloads directory as default in preference ui, provide open dialog in settings to change directory sandbox compatible")
         guard let exportUrlPath: String = Current.defaults[.exportUrl] else {
             return createDefaultExportDirectory()
         }
