@@ -52,6 +52,10 @@ class VideoPlayerViewController: NSViewController {
         setupUI()
     }
 
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        return true
+    }
+
     private func loadVideo(at videoUrl: URL) {
         let player = AVPlayer(url: videoUrl)
         playerView.player = player
