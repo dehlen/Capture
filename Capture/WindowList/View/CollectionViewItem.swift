@@ -5,25 +5,20 @@ class CollectionViewItem: NSCollectionViewItem {
     @IBOutlet private weak var titleLabel: NSTextField!
     @IBOutlet private weak var appIconImageView: NSImageView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    private var typedView: CollectionViewItemView {
+        //swiftlint:disable:next force_cast
+        return self.view as! CollectionViewItemView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         appIconImageView.alphaValue = 0.5
-        view.wantsLayer = true
-    }
-
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        view.layer?.cornerRadius = 10
     }
 
     override var isSelected: Bool {
-        willSet {
-            view.layer?.backgroundColor = newValue ? NSColor.unemphasizedSelectedContentBackgroundColor.cgColor : NSColor.clear.cgColor
+        didSet {
+            typedView.selected = isSelected
         }
     }
 
