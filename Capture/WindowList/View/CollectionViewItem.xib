@@ -5,14 +5,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="CollectionViewItem" customModule="Annie" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="CollectionViewItem" customModule="Capture" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
+        <customView id="Hz6-mo-xeY" customClass="CollectionViewItemView" customModule="Capture" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="212" height="197"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -61,7 +61,7 @@
             </constraints>
             <point key="canvasLocation" x="-140.5" y="117.5"/>
         </customView>
-        <collectionViewItem id="gQD-Xw-fl6" customClass="CollectionViewItem" customModule="Annie" customModuleProvider="target">
+        <collectionViewItem id="gQD-Xw-fl6" customClass="CollectionViewItem" customModule="Capture" customModuleProvider="target">
             <connections>
                 <outlet property="appIconImageView" destination="EB8-2y-orq" id="plG-4w-FxF"/>
                 <outlet property="iconImageView" destination="oQd-dH-lG8" id="pFl-2S-ccV"/>
