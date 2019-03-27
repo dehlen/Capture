@@ -31,7 +31,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     internal var iconLayer = CAShapeLayer()
     internal var alternateIconLayer = CAShapeLayer()
     internal var titleLayer = CATextLayer()
-    internal var mouseDown = Bool()
+    var mouseDown = Bool()
     @IBInspectable public var momentary: Bool = true {
         didSet {
             animateColor(state == .on)
@@ -306,6 +306,7 @@ open class FlatButton: NSButton, CALayerDelegate {
     }
 
     override open func mouseDown(with event: NSEvent) {
+        print("mouse down")
         if isEnabled {
             mouseDown = true
             setOn(state == .on ? false : true)

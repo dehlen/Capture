@@ -173,6 +173,9 @@ class CropView: NSView {
     override func mouseDragged(with theEvent: NSEvent) {
         var coordinate = self.convert(theEvent.locationInWindow, from: nil)
         coordinate.constraintToRect(frame)
+        if mouseOnButtons(coordinate) {
+            return
+        }
         move(to: coordinate)
     }
 
@@ -320,7 +323,7 @@ class CropView: NSView {
     }
 
     private func mouseOnButtons(_ coordinate: NSPoint) -> Bool {
-        if !buttonStackView.isHidden && buttonStackView.frame.insetBy(dx: -50, dy: -50).contains(coordinate) {
+        if fullscreenButton.mouseDown || recordingButton.mouseDown || (!buttonStackView.isHidden && buttonStackView.frame.insetBy(dx: -50, dy: -50).contains(coordinate)) {
             return true
         }
 
