@@ -36,7 +36,7 @@ alt="Capture Screen Video" width="480" border="10" /></a>
 If you find a bug or have an idea for an enhancement don't hesitate to file an issue. I am very grateful for every contribution you can make to improve Capture. You can help the most by providing a reproducible bug report or even better by filing a pull request to make sure Capture gets even better. I will do my best to help you with that if you need support. Please note that this application is at the moment free to use and fully open-source.
 
 ## Installation
-Please go to https://captureapp.dev and download the latest version or simply go to the releases tab and download the version you want. If you have macOS Developer account you can also build the application from source of course.
+Please go to https://captureapp.dev and download the latest version or simply go to the releases tab and download the version you want. If you have a macOS Developer account you can also build the application from source of course.
 
 ## Build
 To setup the project just run rake setup. This will install all the needed dependencies. After that you can open the Xcode project. There is also rake setup_with_unit_test which executes the unit tests after installing the needed tools. 
