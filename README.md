@@ -12,8 +12,6 @@ I wrote this application because at my workplace we often attach a GIF to a Pull
 alt="Capture Screen Video" width="480" border="10" /></a>
 
 ## Caveats
-- You can only select an open window. The selected recording frame is not resizable. [👨‍💻 not released yet]
-- Stopping a recording is not possible via a menu item [👨‍💻 not released yet]
 - Currently only GIF export is allowed
 - There is no way to specify audio sources
 
