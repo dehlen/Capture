@@ -1,6 +1,6 @@
 github "Clipy/KeyHolder"
 github "Clipy/Magnet"
-github "dehlen/Regift" ~> 1.5.1
+github "dehlen/Regift" ~> 1.5.3
 github "mxcl/PromiseKit"
 github "PromiseKit/Foundation" ~> 3.0
 github "dehlen/AboutWindowController" ~> 1.5.7

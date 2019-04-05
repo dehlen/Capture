@@ -1,9 +1,7 @@
 Pod::Spec.new do |s|
   s.name = "PromiseKit"
 
-  `xcodebuild -project PromiseKit.xcodeproj -showBuildSettings` =~ /CURRENT_PROJECT_VERSION = ((\d\.)+\d)/
-  abort("No version detected") if $1.nil?
-  s.version = $1
+  s.version = '0.0.1'
 
   s.source = {
     :git => "https://github.com/mxcl/#{s.name}.git",
@@ -13,17 +11,15 @@ Pod::Spec.new do |s|
 
   s.license = 'MIT'
   s.summary = 'Promises for Swift & ObjC.'
-  s.homepage = 'http://promisekit.org'
+  s.homepage = 'http://mxcl.dev/PromiseKit/'
   s.description = 'A thoughtful and complete implementation of promises for iOS, macOS, watchOS and tvOS with first-class support for both Objective-C and Swift.'
   s.social_media_url = 'https://twitter.com/mxcl'
   s.authors  = { 'Max Howell' => 'mxcl@me.com' }
-  s.documentation_url = 'http://promisekit.org/docs/'
+  s.documentation_url = 'http://mxcl.dev/PromiseKit/reference/v6/Classes/Promise.html'
   s.default_subspecs = 'CorePromise', 'UIKit', 'Foundation'
   s.requires_arc = true
   
-  # CocoaPods documentation (like usual) is unclear about the
-  # consequences of setting this; we support 3.2 THROUGH 4.2
-  # s.swift_version = '4.0'
+  s.swift_versions = ['3.1', '3.2', '3.3', '3.4', '4.0', '4.1', '4.2', '5.0']
 
   # CocoaPods requires us to specify the root deployment targets
   # even though for us it is nonsense. Our root spec has no
